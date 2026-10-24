@@ -152,22 +152,23 @@ body[data-desafio="0"] [data-v~="0"],body[data-desafio="A"] [data-v~="A"],body[d
 
 /* Faixa do que entregamos (sempre visível) */
 .entregas{background:var(--tinta-2);border-top:1px solid var(--linha-esc);border-bottom:1px solid var(--linha-esc);padding:26px 0;color:#DCE6E2}
-/* As 4 mensagens ocupam a mesma célula: a altura é a da maior, sem pulo */
-.rota{display:grid;max-width:34rem;margin:0 auto}
-.slide{grid-area:1/1;display:flex;gap:14px;align-items:center;opacity:0;transform:translateY(14px);transition:opacity .5s var(--ease),transform .5s var(--ease);pointer-events:none}
-.slide.on{opacity:1;transform:none;pointer-events:auto}
-.slide.sai{opacity:0;transform:translateY(-14px)}
+/* Roda de cartões (como a barra do Falcon): o do centro em tamanho normal,
+   os vizinhos menores e apagados nas laterais. Todos na mesma célula do grid. */
+.entregas{overflow:hidden}
+.rota{display:grid;justify-items:center;touch-action:pan-y;user-select:none;-webkit-user-select:none}
+.slide{grid-area:1/1;width:min(80%,25rem);display:flex;gap:14px;align-items:center;background:var(--tinta);border:1px solid var(--linha-esc);border-radius:16px;padding:16px 18px;opacity:0;transform:translateX(0) scale(.78);transition:transform .6s var(--ease),opacity .6s var(--ease),border-color .3s;cursor:pointer}
+.slide.on{border-color:rgba(37,211,102,.4);cursor:default}
 .slide .ic{flex:none;width:46px;height:46px;border-radius:12px;display:grid;place-items:center}
 .slide strong{color:#fff;display:block;font-size:1.08rem}
 .slide span{font-size:.92rem;color:var(--cinza-claro)}
-.slide.intro{justify-content:center}
-.slide.intro strong{font-size:clamp(1.25rem,5vw,1.5rem);letter-spacing:-.02em}
+.slide.intro{justify-content:center;align-self:stretch}
+.slide.intro strong{font-size:clamp(1.15rem,4.6vw,1.4rem);letter-spacing:-.02em}
 .slide .seta{color:var(--verde-vivo);font-weight:800;font-size:1.4rem}
 .rota-pts{display:flex;justify-content:center;gap:6px;margin-top:16px}
 .rota-pts i{width:18px;height:4px;border-radius:99px;background:rgba(255,255,255,.14);transition:background .3s,width .3s}
 .rota-pts i.on{background:var(--verde-vivo);width:30px}
 /* Sem movimento: as 4 mensagens aparecem em lista */
-@media (prefers-reduced-motion:reduce){.rota{gap:14px}.slide{grid-area:auto;opacity:1;transform:none;transition:none}.slide.intro{justify-content:flex-start}.rota-pts{display:none}}
+@media (prefers-reduced-motion:reduce){.rota{gap:12px}.slide{grid-area:auto;opacity:1!important;transform:none!important;transition:none}.rota-pts{display:none}}
 
 /* ═══════════════════════════════════════════════════════════════
    BLOCO 5: PORTÕES (perguntas que liberam a página)
@@ -693,22 +694,34 @@ footer a{color:var(--verde-vivo);font-weight:700}
     setTimeout(passo, 500);
   }
 
-  // Faixa "o que entregamos": troca de mensagem a cada 4,5 s, pausa com o dedo/mouse em cima
+  // Faixa "o que entregamos": roda pros lados a cada 4,5 s; arrastar ou tocar no vizinho também gira
   const slides = $$("#rota .slide"), pts = $$(".rota-pts i");
-  if(!reduz() && slides.length){
+  if(slides.length){
+    const rota = $("#rota"), n = slides.length;
     let atual = 0, pausa = false;
-    const rota = $("#rota");
-    ["mouseenter","touchstart"].forEach(ev => rota.addEventListener(ev, () => pausa = true, { passive:true }));
-    ["mouseleave","touchend"].forEach(ev => rota.addEventListener(ev, () => pausa = false, { passive:true }));
-    setInterval(() => {
-      if(pausa || document.hidden) return;
-      const velho = slides[atual];
-      atual = (atual + 1) % slides.length;
-      velho.classList.remove("on"); velho.classList.add("sai");
-      setTimeout(() => velho.classList.remove("sai"), 520);
-      slides[atual].classList.add("on");
-      pts.forEach((p, k) => p.classList.toggle("on", k === atual));
-    }, 4500);
+    const posicionar = () => slides.forEach((sl, k) => {
+      let d = k - atual;
+      if(d > n / 2) d -= n;
+      if(d < -n / 2) d += n;
+      sl.style.transform = `translateX(${d * 74}%) scale(${d ? .78 : 1})`;
+      sl.style.opacity = Math.abs(d) > 1 ? 0 : (d ? .4 : 1);
+      sl.style.zIndex = 10 - Math.abs(d);
+      sl.classList.toggle("on", d === 0);
+      sl.setAttribute("aria-hidden", String(d !== 0));
+      pts[k] && pts[k].classList.toggle("on", d === 0);
+    });
+    const ir = k => { atual = (k + n) % n; posicionar(); };
+    slides.forEach((sl, k) => sl.addEventListener("click", () => { if(k !== atual) ir(k); }));
+    let x0 = null;
+    rota.addEventListener("pointerdown", e => { x0 = e.clientX; pausa = true; });
+    rota.addEventListener("pointerup", e => {
+      if(x0 !== null && Math.abs(e.clientX - x0) > 40) ir(atual + (e.clientX < x0 ? 1 : -1));
+      x0 = null; pausa = false;
+    });
+    rota.addEventListener("pointerleave", () => { x0 = null; pausa = false; });
+    rota.addEventListener("mouseenter", () => pausa = true);
+    posicionar();
+    if(!reduz()) setInterval(() => { if(!pausa && !document.hidden) ir(atual + 1); }, 4500);
   }
 
   // ═══════════════════════════════════════════════════════════════
