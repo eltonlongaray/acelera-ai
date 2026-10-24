@@ -122,6 +122,8 @@ body[data-desafio="0"] [data-v~="0"],body[data-desafio="A"] [data-v~="A"],body[d
 
 /* Personalização por quem cuida das vendas (sozinho x equipe) */
 [data-t]{display:none}
+[data-f]{display:none}
+body[data-fora="sim"] [data-f="sim"],body[data-fora="nao"] [data-f="nao"]{display:revert}
 body[data-time="so"] [data-t~="so"],body[data-time="eq"] [data-t~="eq"]{display:block}
 
 /* Aparecer ao rolar */
@@ -344,7 +346,7 @@ footer a{color:var(--verde-vivo);font-weight:700}
 </style>
 </head>
 
-<body data-desafio="0" data-time="eq">
+<body data-desafio="0" data-time="eq" data-fora="nao">
 
 <!-- ═══════════════════════════════════════════════════════════════
      BLOCO 7: TOPO (logo + etapas)
@@ -445,12 +447,13 @@ footer a{color:var(--verde-vivo);font-weight:700}
       <!-- D: captação + qualificação + venda -->
       <div data-v="D">
         <div data-t="so">
-          <h2>Você faz tudo sozinho. <span class="vivo">E a venda não acompanha.</span></h2>
-          <p>Tem que trazer cliente novo, responder o WhatsApp de manhã, de tarde e de noite, negociar e fechar. Não sobra tempo pra cuidar da empresa.</p>
+          <h2><span data-f="nao">Você faz tudo sozinho.</span><span data-f="sim">Você cuida das vendas sozinho.</span> <span class="vivo">E a venda não acompanha.</span></h2>
+          <p data-f="nao">Tem que trazer cliente novo, responder o WhatsApp de manhã, de tarde e de noite, negociar e fechar. Não sobra tempo pra cuidar da empresa.</p>
+          <p data-f="sim">A agência traz os contatos, mas é você quem responde o WhatsApp de manhã, de tarde e de noite, negocia e fecha. Não sobra tempo pra empresa.</p>
         </div>
         <div data-t="eq">
           <h2>Sua equipe corre o dia inteiro. <span class="vivo">E a venda não acompanha.</span></h2>
-          <p>Um traz cliente novo, outro responde o WhatsApp, outro negocia. Cada um faz um pedaço, ninguém acompanha o contato do começo ao fim, e você não sabe onde a venda se perde.</p>
+          <p><span data-f="nao">Um traz cliente novo, outro responde</span><span data-f="sim">A agência de tráfego traz os contatos, um responde</span> o WhatsApp, outro negocia. Cada um faz um pedaço, ninguém acompanha o contato do começo ao fim, e você não sabe onde a venda se perde.</p>
         </div>
         <p>Enquanto isso, quem queria comprar ficou esperando, esfriou e <strong style="color:#fff">comprou do concorrente que respondeu primeiro.</strong></p>
       </div>
@@ -466,19 +469,23 @@ footer a{color:var(--verde-vivo);font-weight:700}
         <div>
           <div data-t="eq">
             <div class="culpa">
-              <div class="balao"><small>Marketing</small>"Eu entreguei os contatos."</div>
+              <div class="balao"><small><span data-f="nao">Marketing</span><span data-f="sim">Agência de tráfego</span></small>"Eu entreguei os contatos."</div>
               <div class="balao"><small>Time comercial</small>"Os contatos eram ruins."</div>
             </div>
             <p>E os dois têm um pouco de razão: <strong>no meio do caminho, ninguém filtra quem quer comprar.</strong></p>
-            <p class="muted" style="margin:0">Aí quem vende gasta o dia com curioso, o comprador cansa de esperar, e você paga o anúncio, a equipe e a venda que não veio.</p>
+            <p class="muted" style="margin:0">Aí quem vende gasta o dia com curioso, o comprador cansa de esperar, e você paga o anúncio, <span data-f="sim">a agência, </span>a equipe e a venda que não veio.</p>
           </div>
           <div data-t="so">
-            <div class="culpa">
+            <div data-f="nao"><div class="culpa">
               <div class="balao"><small>Você, de manhã</small>"Hoje eu respondo todo mundo."</div>
               <div class="balao"><small>Você, à noite</small>"Não deu tempo de voltar em quem queria comprar."</div>
-            </div>
-            <p>E não é falta de vontade: <strong>no meio do caminho, ninguém filtra quem quer comprar.</strong></p>
-            <p class="muted" style="margin:0">Aí você gasta o dia com curioso, o comprador cansa de esperar, e você paga o anúncio, o seu tempo e a venda que não veio.</p>
+            </div></div>
+            <div data-f="sim"><div class="culpa">
+              <div class="balao"><small>Agência de tráfego</small>"Eu entreguei os contatos."</div>
+              <div class="balao"><small>Você</small>"Os contatos eram ruins."</div>
+            </div></div>
+            <p><span data-f="nao">E não é falta de vontade</span><span data-f="sim">E os dois têm um pouco de razão</span>: <strong>no meio do caminho, ninguém filtra quem quer comprar.</strong></p>
+            <p class="muted" style="margin:0">Aí você gasta o dia com curioso, o comprador cansa de esperar, e você paga o anúncio, <span data-f="sim">a agência, </span>o seu tempo e a venda que não veio.</p>
           </div>
         </div>
         <div class="stat">
@@ -824,10 +831,11 @@ footer a{color:var(--verde-vivo);font-weight:700}
     reducao:{ tipo:"um", q:"Se a gente pudesse reduzir esse gasto, quanto seria o ideal?", ops:["10% a menos","20% a menos","30% ou mais a menos","Não sei, quero ajuda pra ver"] },
     canais:{ tipo:"varios", q:"Como você vende hoje?", dica:"Pode marcar mais de um.", ops:["WhatsApp","Instagram","Loja física","Site","Indicação"] },
     atende:{ tipo:"um", q:"Hoje, quantas pessoas cuidam das suas vendas?", dica:"Conte só quem traz clientes, atende no WhatsApp e fecha a venda.", ops:["Faço tudo sozinho","Eu e mais 1 a 3 pessoas","De 4 a 10 pessoas","Mais de 10 pessoas"] },
+    trafego:{ tipo:"um", q:"Quem cuida do seu tráfego pago?", dica:"No Instagram, Facebook ou Google.", ops:["Eu mesmo","Alguém da minha equipe","Agência ou gestor de fora","Não faço anúncio"] },
     whats:{ tipo:"fone", q:"Qual o seu WhatsApp?", campos:[["whats","(51) 99999-9999","tel"]] }
   };
   const PORTOES = {
-    1:{ ids:["desafio","atende"], nome:"Sua necessidade" },
+    1:{ ids:["desafio","atende","trafego"], nome:"Sua necessidade" },
     2:{ ids:["publico","base"], nome:"Seu negócio" },
     3:{ ids:["escolha"], nome:"Seu teste" },
     4:{ ids:["nome","empresa","vende","ticket","fatHoje","meta6","gasto","reducao","canais","whats"], nome:"Sua proposta" }
@@ -974,6 +982,7 @@ footer a{color:var(--verde-vivo);font-weight:700}
     const d = estado.r.desafio || "0";
     document.body.dataset.desafio = d;
     document.body.dataset.time = estado.r.atende === "Faço tudo sozinho" ? "so" : "eq";
+    document.body.dataset.fora = estado.r.trafego === "Agência ou gestor de fora" ? "sim" : "nao";
     const cam = estado.r.escolha || CAMINHO_POR_DESAFIO[d] || "quentes";
     $$("[data-cam]").forEach(c => c.classList.toggle("destaque", c.dataset.cam === estado.r.escolha));
     $("#precisaTxt").textContent = PRECISA[cam];
@@ -1041,7 +1050,7 @@ footer a{color:var(--verde-vivo);font-weight:700}
       `Precisa de: ${DESAFIOS[d].replace(/^Preciso (somente )?de /, "")} · Base: ${r.base} contatos · Ticket: ${r.ticket}`,
       `Faturamento/mês hoje: ${r.fatHoje} · Meta em 6 meses: ${r.meta6}/mês`,
       `Gasto/mês pra vender: ${r.gasto} · Redução ideal: ${r.reducao}`,
-      `Vende por: ${(r.canais || []).join(", ")} · Operação: ${r.atende}`,
+      `Vende por: ${(r.canais || []).join(", ")} · Operação: ${r.atende} · Tráfego pago: ${r.trafego}`,
       `Quero testar: ${ESCOLHAS[r.escolha]}`,
       `Meu WhatsApp: ${r.whats}`
     ].join("\n");
