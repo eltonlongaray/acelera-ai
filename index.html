@@ -165,7 +165,7 @@ body[data-desafio="0"] [data-v~="0"],body[data-desafio="A"] [data-v~="A"],body[d
 .slide.intro strong{font-size:clamp(1.15rem,4.6vw,1.4rem);letter-spacing:-.02em}
 .slide .seta{color:var(--verde-vivo);font-weight:800;font-size:1.4rem}
 .slide strong span{font-size:inherit;color:inherit}
-.slide.fim.on{border-color:var(--verde-vivo);background:rgba(37,211,102,.1)}
+.slide.fim.on{border-color:var(--verde-vivo);background:#0E2A1B}
 .slide.fim strong{color:var(--verde-vivo)}
 .rota-pts{display:flex;justify-content:center;gap:6px;margin-top:16px}
 .rota-pts i{width:18px;height:4px;border-radius:99px;background:rgba(255,255,255,.14);transition:background .3s,width .3s}
@@ -707,7 +707,9 @@ footer a{color:var(--verde-vivo);font-weight:700}
       let d = k - atual;
       if(d > n / 2) d -= n;
       if(d < -n / 2) d += n;
-      sl.style.transform = `translateX(${d * 74}%) scale(${d ? .78 : 1})`;
+      // no celular os vizinhos ficam atrás do central; na tela larga, lado a lado sem encostar
+      const passo = rota.clientWidth > 700 ? 102 : 74;
+      sl.style.transform = `translateX(${d * passo}%) scale(${d ? .78 : 1})`;
       sl.style.opacity = Math.abs(d) > 1 ? 0 : (d ? .4 : 1);
       sl.style.zIndex = 10 - Math.abs(d);
       sl.classList.toggle("on", d === 0);
@@ -725,6 +727,7 @@ footer a{color:var(--verde-vivo);font-weight:700}
     rota.addEventListener("pointerleave", () => { x0 = null; pausa = false; });
     rota.addEventListener("mouseenter", () => pausa = true);
     posicionar();
+    addEventListener("resize", posicionar);
     if(!reduz()) setInterval(() => { if(!pausa && !document.hidden) ir(atual + 1); }, 4500);
   }
 
