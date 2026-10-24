@@ -139,6 +139,9 @@ body[data-desafio="0"] [data-v~="0"],body[data-desafio="A"] [data-v~="A"],body[d
 .etapas .pts i.on{background:var(--verde-vivo)}
 .logo{white-space:nowrap}
 @media (max-width:420px){.etapas .pts{display:none}}
+/* TEMPORÁRIO: seta pra voltar etapa enquanto testa as respostas (tirar depois) */
+.volta-temp{width:30px;height:30px;border-radius:99px;border:1px solid rgba(255,255,255,.25);background:rgba(255,255,255,.08);color:#fff;font:700 1rem/1 "Plus Jakarta Sans",sans-serif;opacity:.55;cursor:pointer;display:grid;place-items:center;padding:0}
+.volta-temp:hover,.volta-temp:focus-visible{opacity:1}
 
 .heroi{padding:28px 0 56px}
 .heroi .in{display:grid;gap:40px;align-items:center}
@@ -348,7 +351,7 @@ footer a{color:var(--verde-vivo);font-weight:700}
       <i aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="#06231A" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 6l6 6-6 6M13 6l6 6-6 6"/></svg></i>
       ACELERA AÍ
     </a>
-    <div class="etapas" aria-label="Seu progresso"><span id="etapaTxt">Etapa 1 de 4</span><span class="pts"><i></i><i></i><i></i><i></i></span></div>
+    <div class="etapas" aria-label="Seu progresso"><button type="button" class="volta-temp" id="voltaTemp" aria-label="Voltar uma etapa">←</button><span id="etapaTxt">Etapa 1 de 4</span><span class="pts"><i></i><i></i><i></i><i></i></span></div>
   </div>
 </header>
 
@@ -1067,6 +1070,8 @@ footer a{color:var(--verde-vivo);font-weight:700}
     simTocado = false; personalizar(); aplicarLiberado(0, false);
     scrollTo({ top:0, behavior: reduz() ? "auto" : "smooth" });
   }
+  // TEMPORÁRIO: seta do topo volta uma etapa (tirar depois dos testes)
+  $("#voltaTemp").addEventListener("click", voltarEtapa);
   if(!/github\.io$/.test(location.hostname)){
     $("#barraTeste").hidden = false;
     $("#tVoltar").addEventListener("click", voltarEtapa);
