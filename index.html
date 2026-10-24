@@ -208,12 +208,8 @@ body[data-desafio="0"] [data-v~="0"],body[data-desafio="A"] [data-v~="A"],body[d
 .acoes-p{display:flex;justify-content:space-between;align-items:center;margin-top:14px;min-height:40px}
 .voltar{background:none;border:0;color:var(--verde-escuro);font:700 .92rem "Plus Jakarta Sans";cursor:pointer;padding:8px 0;visibility:hidden}
 .voltar.on{visibility:visible}
-.ver-tudo{background:none;border:0;color:var(--cinza);font:600 .85rem "Plus Jakarta Sans";text-decoration:underline;cursor:pointer;padding:8px 0}
-.resolvido{display:none;max-width:40rem;margin:0 auto;text-align:center;color:var(--cinza);font-size:.9rem}
-.resolvido b{color:var(--verde-escuro)}
 .portao.feito .caixa{display:none}
-.portao.feito .resolvido{display:block}
-.portao.feito{padding:22px 0}
+.portao.feito{display:none}
 
 /* Partes trancadas */
 .parte[hidden],.portao[hidden]{display:none!important}
@@ -390,7 +386,6 @@ footer a{color:var(--verde-vivo);font-weight:700}
 <section class="portao" id="p1" data-portao="1">
   <div class="wrap">
     <div class="caixa" data-quiz="1"></div>
-    <p class="resolvido">✓ <b>Etapa 1 respondida.</b> Continue descendo.</p>
   </div>
 </section>
 
@@ -462,7 +457,6 @@ footer a{color:var(--verde-vivo);font-weight:700}
 <section class="portao" id="p2" data-portao="2" hidden>
   <div class="wrap">
     <div class="caixa" data-quiz="2"></div>
-    <p class="resolvido">✓ <b>Etapa 2 respondida.</b> Veja como a gente resolve isso.</p>
   </div>
 </section>
 
@@ -516,7 +510,6 @@ footer a{color:var(--verde-vivo);font-weight:700}
 <section class="portao" id="p3" data-portao="3" hidden>
   <div class="wrap">
     <div class="caixa" data-quiz="3"></div>
-    <p class="resolvido">✓ <b>Etapa 3 respondida.</b> Veja o que entra no seu teste.</p>
   </div>
 </section>
 
@@ -778,21 +771,21 @@ footer a{color:var(--verde-vivo);font-weight:700}
   };
 
   const P = {
-    desafio:{ tipo:"um", q:"Do que você precisa hoje?", dica:"Um toque, e a página passa a falar do seu caso.", ops:["B","A","C","D"].map(k => [k, DESAFIOS[k]]) },
+    desafio:{ tipo:"um", q:"Do que você precisa hoje?", ops:["B","A","C","D"].map(k => [k, DESAFIOS[k]]) },
     publico:{ tipo:"um", q:"Pra quem você vende?", ops:["Consumidor final","Empresas","Os dois"] },
     base:{ tipo:"um", q:"Quantos contatos você tem na sua base?", dica:"Clientes, ex-clientes, orçamentos, interessados.", ops:["Até 200","201 a 500","501 a 1.000","Mais de 1.000"] },
     escolha:{ tipo:"um", q:"O que você quer receber no teste?", ops:[["quentes","1 · Contatos quentes no meu WhatsApp"],["reunioes","2 · Reuniões agendadas para eu fechar"],["vende","3 · A venda feita por vocês"]] },
     nome:{ tipo:"texto", q:"Como você se chama?", campos:[["nome","Seu nome","given-name"]] },
     empresa:{ tipo:"texto", q:"Qual o nome da sua empresa e a cidade?", campos:[["empresa","Nome da empresa","organization"],["cidade","Cidade","address-level2"]] },
     vende:{ tipo:"texto", q:"O que a sua empresa vende?", campos:[["vende","Ex.: energia solar, planos de academia…",""]] },
-    ticket:{ tipo:"um", q:"Qual o valor médio de cada venda?", dica:"O famoso ticket médio.", ops:["Até R$ 500","R$ 501 a R$ 1.500","Acima de R$ 1.500"] },
+    ticket:{ tipo:"um", q:"Qual o valor médio de cada venda?", ops:["Até R$ 500","R$ 501 a R$ 1.500","Acima de R$ 1.500"] },
     fatHoje:{ tipo:"um", q:"Quanto você fatura por mês hoje, em média?", ops:["Até R$ 10 mil","R$ 10 a 30 mil","R$ 30 a 100 mil","Acima de R$ 100 mil"] },
-    meta6:{ tipo:"um", anima:"Boa, agora a gente sabe onde você quer chegar.", q:"Daqui a 6 meses, quanto você quer estar faturando por mês?", ops:["Até R$ 20 mil","R$ 20 a 50 mil","R$ 50 a 150 mil","Acima de R$ 150 mil"] },
+    meta6:{ tipo:"um", q:"Daqui a 6 meses, quanto você quer estar faturando por mês?", ops:["Até R$ 20 mil","R$ 20 a 50 mil","R$ 50 a 150 mil","Acima de R$ 150 mil"] },
     gasto:{ tipo:"um", q:"Quanto você gasta por mês hoje pra vender?", dica:"Anúncio, agência, equipe de atendimento e vendas.", ops:["Até R$ 5 mil","R$ 5 a 20 mil","R$ 20 a 50 mil","Acima de R$ 50 mil"] },
     reducao:{ tipo:"um", q:"Se a gente pudesse reduzir esse gasto, quanto seria o ideal?", ops:["10% a menos","20% a menos","30% ou mais a menos","Não sei, quero ajuda pra ver"] },
     canais:{ tipo:"varios", q:"Como você vende hoje?", dica:"Pode marcar mais de um.", ops:["WhatsApp","Instagram","Loja física","Site","Indicação"] },
-    atende:{ tipo:"um", anima:"Falta pouco.", q:"Quem atende os seus clientes?", ops:["Eu mesmo","Tenho equipe"] },
-    whats:{ tipo:"fone", anima:"Último passo!", q:"Qual o seu WhatsApp?", dica:"É por lá que a gente continua.", campos:[["whats","(51) 99999-9999","tel"]] }
+    atende:{ tipo:"um", q:"Quem atende os seus clientes?", ops:["Eu mesmo","Tenho equipe"] },
+    whats:{ tipo:"fone", q:"Qual o seu WhatsApp?", campos:[["whats","(51) 99999-9999","tel"]] }
   };
   const PORTOES = {
     1:{ ids:["desafio"], nome:"Sua necessidade" },
@@ -845,7 +838,7 @@ footer a{color:var(--verde-vivo);font-weight:700}
       h += `</div>`;
       if(q.tipo === "varios") h += `<p class="erro"></p><button type="button" class="btn" data-seguir>Continuar →</button>`;
     }
-    h += `</div><div class="acoes-p"><button type="button" class="voltar${idx > 0 ? " on" : ""}" data-voltar>← Voltar</button>${g === 1 && estado.liberado < 3 ? '<button type="button" class="ver-tudo" data-tudo>Prefiro ver a página inteira</button>' : ""}</div>`;
+    h += `</div><div class="acoes-p"><button type="button" class="voltar${idx > 0 ? " on" : ""}" data-voltar>← Voltar</button></div>`;
     box.innerHTML = h;
     ligar(g, box, id, q);
   }
@@ -853,8 +846,6 @@ footer a{color:var(--verde-vivo);font-weight:700}
   function ligar(g, box, id, q){
     const erro = m => { const e = $(".erro", box); if(e) e.textContent = m; };
     $("[data-voltar]", box).addEventListener("click", () => { if(estado.passo[g] > 0){ estado.passo[g]--; salvar(); render(g, "volta"); } });
-    const t = $("[data-tudo]", box);
-    if(t) t.addEventListener("click", liberarTudo);
 
     if(q.tipo === "um") $$(".opt", box).forEach(b => b.addEventListener("click", () => {
       estado.r[id] = b.dataset.val;
@@ -926,11 +917,6 @@ footer a{color:var(--verde-vivo);font-weight:700}
       const alvo = recente === 4 ? $("#proposta") : $(`[data-parte="${recente}"]`);
       setTimeout(() => alvo.scrollIntoView({ behavior: reduz() ? "auto" : "smooth", block:"start" }), 120);
     }
-  }
-
-  function liberarTudo(){
-    estado.liberado = Math.max(estado.liberado, 3);
-    salvar(); personalizar(); aplicarLiberado(1, true);
   }
 
   function atualizarEtapas(){
