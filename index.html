@@ -694,7 +694,7 @@ footer a{color:var(--verde-vivo);font-weight:700}
     setTimeout(passo, 500);
   }
 
-  // Faixa "o que entregamos": troca de mensagem a cada 2,8 s, pausa com o dedo/mouse em cima
+  // Faixa "o que entregamos": troca de mensagem a cada 4,5 s, pausa com o dedo/mouse em cima
   const slides = $$("#rota .slide"), pts = $$(".rota-pts i");
   if(!reduz() && slides.length){
     let atual = 0, pausa = false;
@@ -709,7 +709,7 @@ footer a{color:var(--verde-vivo);font-weight:700}
       setTimeout(() => velho.classList.remove("sai"), 520);
       slides[atual].classList.add("on");
       pts.forEach((p, k) => p.classList.toggle("on", k === atual));
-    }, 2800);
+    }, 4500);
   }
 
   // ═══════════════════════════════════════════════════════════════
