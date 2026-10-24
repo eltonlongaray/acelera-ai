@@ -105,7 +105,7 @@ section{padding:72px 0}
 
 /* Personalização pelo desafio */
 [data-v]{display:none}
-body[data-desafio="0"] [data-v~="0"],body[data-desafio="A"] [data-v~="A"],body[data-desafio="B"] [data-v~="B"],body[data-desafio="C"] [data-v~="C"]{display:block}
+body[data-desafio="0"] [data-v~="0"],body[data-desafio="A"] [data-v~="A"],body[data-desafio="B"] [data-v~="B"],body[data-desafio="C"] [data-v~="C"],body[data-desafio="D"] [data-v~="D"]{display:block}
 
 /* Aparecer ao rolar */
 .rv{opacity:0;transform:translateY(20px);transition:opacity .6s var(--ease),transform .6s var(--ease)}
@@ -398,13 +398,37 @@ footer a{color:var(--verde-vivo);font-weight:700}
   <section class="escuro dor">
     <div class="wrap estreito rv">
       <span class="rotulo">O que está acontecendo</span>
-      <h2>Tem dinheiro parado no seu WhatsApp. <span class="vivo">E ele esfria a cada hora.</span></h2>
-      <p>Se você sente que está se esforçando pra caramba e a venda não acompanha… a gente entende.</p>
-      <p>Você responde cliente de manhã, de tarde e de noite. Manda preço, manda foto, manda áudio. Metade some. A outra metade "vai pensar".</p>
-      <p>Enquanto isso, quem queria comprar de verdade ficou esperando, esfriou e <strong style="color:#fff">comprou do concorrente que respondeu primeiro.</strong></p>
-      <p data-v="A">E pra piorar, cliente novo não chega. O movimento depende de indicação e de sorte.</p>
-      <p data-v="B">E pra piorar, você tem centenas de contatos de quem já comprou ou pediu orçamento, e ninguém fala com eles há meses.</p>
-      <p data-v="C">E pra piorar, quem chega interessado pede preço e desaparece. Você nem sabe em que momento perdeu a venda.</p>
+      <!-- Sem escolha ("ver página inteira"): texto geral -->
+      <div data-v="0">
+        <h2>Tem dinheiro parado no seu WhatsApp. <span class="vivo">E ele esfria a cada hora.</span></h2>
+        <p>Se você sente que está se esforçando pra caramba e a venda não acompanha… a gente entende.</p>
+        <p>Você responde cliente de manhã, de tarde e de noite. Manda preço, manda foto, manda áudio. Metade some. A outra metade "vai pensar".</p>
+        <p>Enquanto isso, quem queria comprar de verdade ficou esperando, esfriou e <strong style="color:#fff">comprou do concorrente que respondeu primeiro.</strong></p>
+      </div>
+      <!-- A: captação + qualificação -->
+      <div data-v="A">
+        <h2>Cliente novo não chega. <span class="vivo">E quando chega, só quer saber o preço.</span></h2>
+        <p>O movimento depende de indicação e de sorte. Quando você paga anúncio, o WhatsApp enche de gente perguntando preço, e quase ninguém compra.</p>
+        <p>Sua equipe passa o dia respondendo curioso. Enquanto isso, quem queria comprar de verdade ficou esperando, esfriou e <strong style="color:#fff">comprou do concorrente que respondeu primeiro.</strong></p>
+      </div>
+      <!-- B: só qualificação da lista -->
+      <div data-v="B">
+        <h2>Tem dinheiro parado na sua lista de contatos. <span class="vivo">E ele esfria a cada dia.</span></h2>
+        <p>São centenas de pessoas que já compraram de você ou pediram orçamento. E ninguém fala com elas há meses.</p>
+        <p>No meio dessa lista tem gente pronta pra comprar de novo. Só que ninguém sabe quem é, e quem não é lembrado <strong style="color:#fff">acaba comprando do concorrente.</strong></p>
+      </div>
+      <!-- C: qualificação + venda -->
+      <div data-v="C">
+        <h2>O interessado chega. <span class="vivo">Mas a venda não fecha.</span></h2>
+        <p>Ele pede preço, você manda. Ele diz que vai pensar. E some.</p>
+        <p>Ninguém volta a chamar, ninguém conduz a conversa até o fim, e você nem sabe em que momento <strong style="color:#fff">perdeu a venda.</strong></p>
+      </div>
+      <!-- D: captação + qualificação + venda -->
+      <div data-v="D">
+        <h2>Você faz tudo sozinho. <span class="vivo">E a venda não acompanha.</span></h2>
+        <p>Tem que trazer cliente novo, responder o WhatsApp de manhã, de tarde e de noite, negociar e fechar. Não sobra tempo pra cuidar da empresa.</p>
+        <p>Enquanto isso, quem queria comprar ficou esperando, esfriou e <strong style="color:#fff">comprou do concorrente que respondeu primeiro.</strong></p>
+      </div>
       <p class="fecho">Não é falta de esforço. <em>É falta de processo.</em></p>
     </div>
   </section>
@@ -457,6 +481,7 @@ footer a{color:var(--verde-vivo);font-weight:700}
       <div class="seucaso" data-v="A">No seu caso, começamos pela <b>captação + filtro</b>: gente nova chegando já filtrada.</div>
       <div class="seucaso" data-v="B">No seu caso, começamos pelo <b>filtro da sua lista</b>: acordar quem já te conhece e achar quem quer comprar agora.</div>
       <div class="seucaso" data-v="C">No seu caso, começamos pelo <b>filtro + fechamento</b>: o interessado é atendido na hora e conduzido até a venda.</div>
+      <div class="seucaso" data-v="D">No seu caso, é o <b>processo completo</b>: a gente traz gente nova, filtra no WhatsApp e fecha a venda por você.</div>
       <div class="card curioso">
         <h3>E você para de pagar por curioso.</h3>
         <p style="margin:0">Com o filtro na entrada, você descobre qual anúncio traz comprador e qual só traz curioso. Sua equipe para de gastar o dia com quem não vai comprar. <strong style="color:#fff">Menos gasto pra vender, mais venda com o mesmo time.</strong></p>
@@ -733,7 +758,12 @@ footer a{color:var(--verde-vivo);font-weight:700}
   // ═══════════════════════════════════════════════════════════════
   // BLOCO 20: PERGUNTAS (agrupadas por portão)
   // ═══════════════════════════════════════════════════════════════
-  const DESAFIOS = { A:"Preciso de clientes novos", B:"Tenho uma lista de contatos parada", C:"Chegam interessados, mas não consigo fechar" };
+  const DESAFIOS = {
+    A:"Preciso de captação e qualificação de clientes novos",
+    B:"Preciso somente de qualificação na minha lista de contatos",
+    C:"Preciso de qualificação e venda feita por vocês",
+    D:"Preciso de captação, qualificação e venda feita por vocês"
+  };
   const ESCOLHAS = { quentes:"Contatos quentes no seu WhatsApp", reunioes:"Reuniões agendadas para você fechar", vende:"A venda feita por nós" };
   const PRECISA = {
     reunioes:"Alguém da sua empresa para participar das reuniões nos horários combinados.",
@@ -743,11 +773,12 @@ footer a{color:var(--verde-vivo);font-weight:700}
   const SERVICO = {
     A:"Captação + filtro: conteúdo e anúncio que levam gente nova pro seu WhatsApp (a verba de anúncio é sua), e a IA separa quem quer comprar.",
     B:"Filtro da sua lista: a IA chama quem já te conhece, descobre quem quer comprar agora e te entrega pronto.",
-    C:"Filtro + fechamento: o interessado é atendido na hora e conduzido até a venda."
+    C:"Filtro + fechamento: o interessado é atendido na hora e conduzido até a venda.",
+    D:"Processo completo: captação (a verba de anúncio é sua), filtro no WhatsApp com IA e fechamento feito por nós."
   };
 
   const P = {
-    desafio:{ tipo:"um", q:"Qual é o seu maior desafio hoje?", dica:"Um toque, e a página passa a falar do seu caso.", ops:[["A","🎯 "+DESAFIOS.A],["B","📋 "+DESAFIOS.B],["C","💬 "+DESAFIOS.C]] },
+    desafio:{ tipo:"um", q:"Do que você precisa hoje?", dica:"Um toque, e a página passa a falar do seu caso.", ops:["B","A","C","D"].map(k => [k, DESAFIOS[k]]) },
     publico:{ tipo:"um", q:"Pra quem você vende?", ops:["Consumidor final","Empresas","Os dois"] },
     base:{ tipo:"um", q:"Quantos contatos você tem na sua base?", dica:"Clientes, ex-clientes, orçamentos, interessados.", ops:["Até 200","201 a 500","501 a 1.000","Mais de 1.000"] },
     escolha:{ tipo:"um", q:"O que você quer receber no teste?", ops:[["quentes","1 · Contatos quentes no meu WhatsApp"],["reunioes","2 · Reuniões agendadas para eu fechar"],["vende","3 · A venda feita por vocês"]] },
@@ -764,7 +795,7 @@ footer a{color:var(--verde-vivo);font-weight:700}
     whats:{ tipo:"fone", anima:"Último passo!", q:"Qual o seu WhatsApp?", dica:"É por lá que a gente continua.", campos:[["whats","(51) 99999-9999","tel"]] }
   };
   const PORTOES = {
-    1:{ ids:["desafio"], nome:"Seu desafio" },
+    1:{ ids:["desafio"], nome:"Sua necessidade" },
     2:{ ids:["publico","base"], nome:"Seu negócio" },
     3:{ ids:["escolha"], nome:"Seu teste" },
     4:{ ids:["nome","empresa","vende","ticket","fatHoje","meta6","gasto","reducao","canais","atende","whats"], nome:"Sua proposta" }
@@ -911,7 +942,7 @@ footer a{color:var(--verde-vivo);font-weight:700}
   // ═══════════════════════════════════════════════════════════════
   // BLOCO 23: PERSONALIZAÇÃO (desafio, caminho escolhido, base)
   // ═══════════════════════════════════════════════════════════════
-  const CAMINHO_POR_DESAFIO = { A:"quentes", B:"reunioes", C:"vende" };
+  const CAMINHO_POR_DESAFIO = { A:"quentes", B:"quentes", C:"vende", D:"vende" };
   const MAPA_BASE = { "Até 200":150, "201 a 500":350, "501 a 1.000":750, "Mais de 1.000":1500 };
   let simTocado = false;
   function personalizar(){
@@ -960,7 +991,7 @@ footer a{color:var(--verde-vivo);font-weight:700}
         <header><span class="chip"><b></b>Proposta sob medida</span><h2>${esc(primeiro)}, aqui está a proposta da ${esc(r.empresa)}</h2></header>
         <dl>
           <dt>Onde você quer chegar</dt><dd>De <strong>${esc(r.fatHoje)}</strong> para <strong>${esc(r.meta6)}</strong> por mês, em 6 meses.</dd>
-          <dt>Seu desafio</dt><dd>${esc(DESAFIOS[d])}</dd>
+          <dt>Do que você precisa</dt><dd>${esc(DESAFIOS[d])}</dd>
           <dt>Onde dá pra economizar</dt><dd>Hoje você gasta <strong>${esc(minus(r.gasto))}</strong> por mês pra vender. No teste, a gente mostra quanto disso vai para curioso, ${esc(reducao)}.</dd>
           <dt>O que a gente faz</dt><dd>${esc(SERVICO[d])}</dd>
           <dt>O que você vai testar</dt><dd><strong>${esc(ESCOLHAS[r.escolha])}</strong> → meta: <strong>${esc(C.entrega[r.escolha])}</strong>${folego}</dd>
@@ -980,7 +1011,7 @@ footer a{color:var(--verde-vivo);font-weight:700}
       `Oi! Vim da página do teste de ${C.diasTeste} dias.`,
       `Nome: ${r.nome} · Empresa: ${r.empresa}, ${r.cidade}`,
       `Vende: ${r.vende} · Para: ${r.publico}`,
-      `Desafio: ${DESAFIOS[d]} · Base: ${r.base} contatos · Ticket: ${r.ticket}`,
+      `Precisa de: ${DESAFIOS[d].replace(/^Preciso (somente )?de /, "")} · Base: ${r.base} contatos · Ticket: ${r.ticket}`,
       `Faturamento/mês hoje: ${r.fatHoje} · Meta em 6 meses: ${r.meta6}/mês`,
       `Gasto/mês pra vender: ${r.gasto} · Redução ideal: ${r.reducao}`,
       `Vende por: ${(r.canais || []).join(", ")} · Atendimento: ${r.atende}`,
