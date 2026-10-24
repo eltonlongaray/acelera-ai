@@ -240,6 +240,8 @@ body[data-desafio="0"] [data-v~="0"],body[data-desafio="A"] [data-v~="A"],body[d
 
 .cam{position:relative;transition:border-color .2s,box-shadow .2s}
 .cam .ic{font-size:1.8rem;line-height:1;margin-bottom:12px}
+.ic.num{font-weight:800;font-size:1.1rem;color:var(--verde-vivo);background:rgba(37,211,102,.12)}
+.cam .ic.num{display:grid;place-items:center;width:40px;height:40px;border-radius:12px;color:var(--verde);background:#EEF8F2}
 .cam .meta{margin-top:14px;padding-top:12px;border-top:1px dashed var(--linha);font-size:.9em}
 .cam .meta b{color:var(--verde-escuro)}
 .cam.destaque{border-color:var(--verde);box-shadow:0 0 0 2px var(--verde),0 18px 40px rgba(18,140,74,.14)}
@@ -300,6 +302,11 @@ footer a{color:var(--verde-vivo);font-weight:700}
 .fixa.on{transform:none}
 .fixa .btn{width:100%;min-height:52px}
 @media (min-width:900px){.fixa{display:none}}
+
+/* Barra de teste (só fora do site oficial) */
+.teste{position:fixed;right:max(12px, env(safe-area-inset-right, 0px));top:calc(72px + env(safe-area-inset-top, 0px));z-index:50;display:flex;gap:6px;align-items:center;background:rgba(255,200,20,.96);color:#1B1400;border-radius:99px;padding:6px 6px 6px 12px;font:800 .72rem/1 "Plus Jakarta Sans",sans-serif;letter-spacing:.06em;box-shadow:0 8px 24px rgba(0,0,0,.25)}
+.teste button{border:0;border-radius:99px;background:#1B1400;color:#FFE27A;font:700 .78rem/1 "Plus Jakarta Sans",sans-serif;padding:8px 10px;cursor:pointer}
+.teste button:focus-visible{outline:2px solid #fff;outline-offset:2px}
 </style>
 </head>
 
@@ -329,7 +336,7 @@ footer a{color:var(--verde-vivo);font-weight:700}
       <span class="chip"><b></b>Teste por <span class="js-dias">20</span> dias, sem mensalidade</span>
       <h1>Afaste quem não vai comprar e transforme pessoas decididas em <em>compradores fiéis.</em></h1>
       <p class="sub">A gente traz gente nova ou acorda a sua lista parada, filtra no WhatsApp quem quer comprar e entrega o cliente pronto pra fechar.</p>
-      <a class="btn btn--vivo" href="#p1">Montar minha proposta em 2 minutos →</a>
+      <a class="btn btn--vivo" href="#p1">Mapear minha necessidade em 2 minutos →</a>
       <div class="prova"><span>IA responde na hora</span><span>Só contatos legítimos</span><span>Fechamento por reunião, WhatsApp ou página de vendas</span></div>
     </div>
     <div class="fone" aria-label="Exemplo: a IA conversando com dois contatos no WhatsApp">
@@ -352,9 +359,9 @@ footer a{color:var(--verde-vivo);font-weight:700}
      ═══════════════════════════════════════════════════════════════ -->
 <div class="entregas">
   <div class="wrap grid g3">
-    <div class="ent"><span class="ic" aria-hidden="true">📅</span><div><strong>Reuniões agendadas</strong><span>com quem tem interesse de verdade</span></div></div>
-    <div class="ent"><span class="ic" aria-hidden="true">🔥</span><div><strong>Contatos quentes</strong><span>no seu WhatsApp, prontos pra comprar</span></div></div>
-    <div class="ent"><span class="ic" aria-hidden="true">🤝</span><div><strong>A venda feita</strong><span>com a gente fechando por você</span></div></div>
+    <div class="ent"><span class="ic num" aria-hidden="true">1</span><div><strong>Contatos quentes</strong><span>no seu WhatsApp, prontos pra comprar</span></div></div>
+    <div class="ent"><span class="ic num" aria-hidden="true">2</span><div><strong>Reuniões agendadas para você fechar</strong><span>com quem tem interesse de verdade</span></div></div>
+    <div class="ent"><span class="ic num" aria-hidden="true">3</span><div><strong>A venda feita</strong><span>com a gente fechando por você</span></div></div>
   </div>
 </div>
 
@@ -475,9 +482,9 @@ footer a{color:var(--verde-vivo);font-weight:700}
       <span class="rotulo">O seu teste</span>
       <h2 class="estreito">Três caminhos. Você escolhe qual quer provar.</h2>
       <div class="grid g3" style="margin-top:26px">
-        <div class="card cam" data-cam="reunioes"><div class="ic" aria-hidden="true">📅</div><h3>Reuniões agendadas</h3><p style="margin:0">Marcamos conversas com interessados da sua base. Você só aparece na hora marcada.</p><div class="meta">Meta do teste: <b class="js-entrega" data-k="reunioes"></b></div></div>
-        <div class="card cam" data-cam="quentes"><div class="ic" aria-hidden="true">🔥</div><h3>Contatos quentes</h3><p style="margin:0">A IA conversa, filtra e te entrega quem já quer comprar, com o resumo da conversa.</p><div class="meta">Meta do teste: <b class="js-entrega" data-k="quentes"></b></div></div>
-        <div class="card cam" data-cam="vende"><div class="ic" aria-hidden="true">🤝</div><h3>A gente vende por você</h3><p style="margin:0">A gente conduz até o fechamento, do jeito que funcionar melhor pro seu produto: reunião, WhatsApp ou página de vendas.</p><div class="meta">Meta do teste: <b class="js-entrega" data-k="vende"></b></div></div>
+        <div class="card cam" data-cam="quentes"><div class="ic num" aria-hidden="true">1</div><h3>Contatos quentes</h3><p style="margin:0">A IA conversa, filtra e te entrega quem já quer comprar, com o resumo da conversa.</p><div class="meta">Meta do teste: <b class="js-entrega" data-k="quentes"></b></div></div>
+        <div class="card cam" data-cam="reunioes"><div class="ic num" aria-hidden="true">2</div><h3>Reuniões agendadas para você fechar</h3><p style="margin:0">Marcamos conversas com interessados da sua base. Você só aparece na hora marcada.</p><div class="meta">Meta do teste: <b class="js-entrega" data-k="reunioes"></b></div></div>
+        <div class="card cam" data-cam="vende"><div class="ic num" aria-hidden="true">3</div><h3>A venda feita</h3><p style="margin:0">A gente conduz até o fechamento, do jeito que funcionar melhor pro seu produto: reunião, WhatsApp ou página de vendas.</p><div class="meta">Meta do teste: <b class="js-entrega" data-k="vende"></b></div></div>
       </div>
 
       <h3 style="margin-top:44px">Como funcionam os <span class="js-dias">20</span> dias</h3>
@@ -609,7 +616,7 @@ footer a{color:var(--verde-vivo);font-weight:700}
   <div class="wrap estreito rv">
     <h2>Você não abriu uma empresa pra viver <span class="vivo">correndo atrás de cliente.</span></h2>
     <p class="muted">Teste por <span class="js-dias">20</span> dias. Se funcionar, você vai se perguntar por que não fez isso antes.</p>
-    <a class="btn btn--vivo" href="#" id="ctaFinal">Montar minha proposta →</a>
+    <a class="btn btn--vivo" href="#" id="ctaFinal">Mapear minha necessidade →</a>
     <div class="garantias"><span>Só <span class="js-vagas">3</span> vagas por mês</span><span>Sem setup e sem mensalidade no teste</span><span>+<span class="js-ext">10</span> dias se a venda não sair</span></div>
   </div>
 </section>
@@ -622,7 +629,8 @@ footer a{color:var(--verde-vivo);font-weight:700}
 <footer>
   <div class="wrap"><strong style="color:#fff">Acelera Aí</strong> · aceleradora de vendas<br>Contato: <a class="js-wa-duvida" href="#" target="_blank" rel="noopener">WhatsApp <span id="numFmt"></span></a> · © 2026</div>
 </footer>
-<div class="fixa" id="fixa"><a class="btn btn--vivo" href="#" id="ctaFixa">Continuar minha proposta</a></div>
+<div class="teste" id="barraTeste" hidden aria-label="Ferramentas de teste">TESTE<button type="button" id="tVoltar">← Etapa</button><button type="button" id="tZerar">↺ Recomeçar</button></div>
+<div class="fixa" id="fixa"><a class="btn btn--vivo" href="#" id="ctaFixa">Continuar o mapeamento</a></div>
 
 <script>
 (function(){
@@ -674,7 +682,7 @@ footer a{color:var(--verde-vivo);font-weight:700}
   // BLOCO 20: PERGUNTAS (agrupadas por portão)
   // ═══════════════════════════════════════════════════════════════
   const DESAFIOS = { A:"Preciso de clientes novos", B:"Tenho uma lista de contatos parada", C:"Chegam interessados, mas não consigo fechar" };
-  const ESCOLHAS = { reunioes:"Reuniões agendadas", quentes:"Contatos quentes no WhatsApp", vende:"Que vocês vendam por mim" };
+  const ESCOLHAS = { quentes:"Contatos quentes no seu WhatsApp", reunioes:"Reuniões agendadas para você fechar", vende:"A venda feita por nós" };
   const PRECISA = {
     reunioes:"Alguém da sua empresa para participar das reuniões nos horários combinados.",
     quentes:"Uma pessoa para atender os compradores em até 1 hora, no horário comercial. Quente esfria rápido.",
@@ -690,7 +698,7 @@ footer a{color:var(--verde-vivo);font-weight:700}
     desafio:{ tipo:"um", q:"Qual é o seu maior desafio hoje?", dica:"Um toque, e a página passa a falar do seu caso.", ops:[["A","🎯 "+DESAFIOS.A],["B","📋 "+DESAFIOS.B],["C","💬 "+DESAFIOS.C]] },
     publico:{ tipo:"um", q:"Pra quem você vende?", ops:["Consumidor final","Empresas","Os dois"] },
     base:{ tipo:"um", q:"Quantos contatos você tem na sua base?", dica:"Clientes, ex-clientes, orçamentos, interessados.", ops:["Até 200","201 a 500","501 a 1.000","Mais de 1.000"] },
-    escolha:{ tipo:"um", q:"O que você quer receber no teste?", ops:[["reunioes","📅 "+ESCOLHAS.reunioes],["quentes","🔥 "+ESCOLHAS.quentes],["vende","🤝 "+ESCOLHAS.vende]] },
+    escolha:{ tipo:"um", q:"O que você quer receber no teste?", ops:[["quentes","1 · Contatos quentes no meu WhatsApp"],["reunioes","2 · Reuniões agendadas para eu fechar"],["vende","3 · A venda feita por vocês"]] },
     nome:{ tipo:"texto", q:"Como você se chama?", campos:[["nome","Seu nome","given-name"]] },
     empresa:{ tipo:"texto", q:"Qual o nome da sua empresa e a cidade?", campos:[["empresa","Nome da empresa","organization"],["cidade","Cidade","address-level2"]] },
     vende:{ tipo:"texto", q:"O que a sua empresa vende?", campos:[["vende","Ex.: energia solar, planos de academia…",""]] },
@@ -822,6 +830,7 @@ footer a{color:var(--verde-vivo);font-weight:700}
       portao.hidden = !alcancado || (g === 4 && feito);
       portao.classList.toggle("feito", feito && g < 4);
       if(alcancado && !feito && !$(`[data-quiz="${g}"]`).innerHTML) render(g, "vai");
+      if(estado.liberado < g && !parte.hidden){ parte.hidden = true; parte.classList.remove("abre"); }
       if(estado.liberado >= g && parte.hidden){
         parte.hidden = false;
         if(g === recente) parte.classList.add("abre");
@@ -960,7 +969,34 @@ footer a{color:var(--verde-vivo);font-weight:700}
   $$(".portao .caixa, #proposta").forEach(el => obsPortao.observe(el));
 
   // ═══════════════════════════════════════════════════════════════
-  // BLOCO 27: INÍCIO
+  // BLOCO 27: MODO TESTE (voltar uma etapa, recomeçar)
+  // ═══════════════════════════════════════════════════════════════
+  const CHAVES_EXTRAS = { 4:["cidade"] };
+  function voltarEtapa(){
+    const n = estado.liberado;
+    if(n < 1) return;
+    PORTOES[n].ids.concat(CHAVES_EXTRAS[n] || []).forEach(id => delete estado.r[id]);
+    estado.passo[n] = 0; estado.liberado = n - 1; estado.fim = false; salvar();
+    $(`[data-quiz="${n}"]`).innerHTML = "";
+    if(n === 4) $("#propostaBox").innerHTML = "";
+    personalizar(); aplicarLiberado(0, false);
+    const alvo = $(`[data-portao="${n}"]`);
+    setTimeout(() => alvo.scrollIntoView({ behavior: reduz() ? "auto" : "smooth" }), 60);
+  }
+  function recomecar(){
+    estado = { r:{}, liberado:0, passo:{1:0,2:0,3:0,4:0}, fim:false }; salvar();
+    $$("[data-quiz]").forEach(b => b.innerHTML = ""); $("#propostaBox").innerHTML = "";
+    simTocado = false; personalizar(); aplicarLiberado(0, false);
+    scrollTo({ top:0, behavior: reduz() ? "auto" : "smooth" });
+  }
+  if(!/github\.io$/.test(location.hostname)){
+    $("#barraTeste").hidden = false;
+    $("#tVoltar").addEventListener("click", voltarEtapa);
+    $("#tZerar").addEventListener("click", recomecar);
+  }
+
+  // ═══════════════════════════════════════════════════════════════
+  // BLOCO 28: INÍCIO
   // ═══════════════════════════════════════════════════════════════
   personalizar();
   aplicarLiberado(0, false);
