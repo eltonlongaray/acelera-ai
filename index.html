@@ -316,6 +316,8 @@ footer a{color:var(--verde-vivo);font-weight:700}
 
 /* Barra de teste (só fora do site oficial) */
 .teste{position:fixed;right:max(12px, env(safe-area-inset-right, 0px));top:calc(72px + env(safe-area-inset-top, 0px));z-index:50;display:flex;gap:6px;align-items:center;background:rgba(255,200,20,.96);color:#1B1400;border-radius:99px;padding:6px 6px 6px 12px;font:800 .72rem/1 "Plus Jakarta Sans",sans-serif;letter-spacing:.06em;box-shadow:0 8px 24px rgba(0,0,0,.25)}
+/* display:flex acima venceria o atributo hidden; isso garante que some no site oficial */
+.teste[hidden]{display:none!important}
 .teste button{border:0;border-radius:99px;background:#1B1400;color:#FFE27A;font:700 .78rem/1 "Plus Jakarta Sans",sans-serif;padding:8px 10px;cursor:pointer}
 .teste button:focus-visible{outline:2px solid #fff;outline-offset:2px}
 </style>
