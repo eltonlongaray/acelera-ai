@@ -72,7 +72,7 @@ html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;scroll-padding-top:70p
 body{margin:0;background:var(--gelo);color:var(--texto);font-family:"Plus Jakarta Sans",system-ui,sans-serif;font-size:18px;line-height:1.6;overflow-x:hidden;-webkit-font-smoothing:antialiased}
 @media (min-width:768px){body{font-size:19px}}
 img{max-width:100%;display:block}
-h1,h2,h3{line-height:1.12;letter-spacing:-.025em;margin:0 0 .55em;font-weight:800}
+h1,h2,h3{line-height:1.25;letter-spacing:-.025em;margin:0 0 .55em;font-weight:800}
 h2{font-size:clamp(1.75rem,6vw,2.6rem)}
 h3{font-size:1.15rem;letter-spacing:-.01em}
 p{margin:0 0 1em}
@@ -146,7 +146,7 @@ body[data-desafio="0"] [data-v~="0"],body[data-desafio="A"] [data-v~="A"],body[d
 .heroi h1{font-size:clamp(2rem,7vw,3.1rem);color:#fff;margin:0 0 16px;text-wrap:balance}
 .heroi h1 em{font-style:normal;color:var(--verde-vivo)}
 .heroi .sub{color:var(--cinza-claro);font-size:1.05em;max-width:36rem;margin-bottom:24px}
-.heroi .btn{font-size:1.35rem;min-height:66px;padding:18px 32px}
+.heroi .btn,.final .btn{font-size:1.35rem;min-height:66px;padding:18px 32px}
 .heroi .prova{display:flex;gap:10px 18px;flex-wrap:wrap;margin-top:20px;font-size:.84rem;color:#93A59E}
 .heroi .prova > span::before{content:"✓ ";color:var(--verde-vivo);font-weight:800}
 
@@ -322,13 +322,9 @@ body[data-desafio="0"] [data-v~="0"],body[data-desafio="A"] [data-v~="A"],body[d
 .final .garantias > div{padding:14px 6px 12px;border:1px solid rgba(255,255,255,.12);border-radius:14px;background:rgba(255,255,255,.04)}
 .final .garantias b{display:block;font-size:1.7rem;line-height:1;font-weight:800;color:var(--verde-vivo);letter-spacing:-.02em}
 .final .garantias small{display:block;margin-top:6px;font-size:.78rem;line-height:1.3;color:var(--cinza-claro)}
-footer{background:var(--tinta);color:#7E918A;padding:26px 0 100px;text-align:center;font-size:.85rem;border-top:1px solid var(--linha-esc)}
+footer{background:var(--tinta);color:#7E918A;padding:28px 0 calc(28px + env(safe-area-inset-bottom));text-align:center;font-size:.85rem;border-top:1px solid var(--linha-esc)}
 footer a{color:var(--verde-vivo);font-weight:700}
 
-.fixa{position:fixed;left:0;right:0;bottom:0;z-index:30;padding:10px 20px calc(10px + env(safe-area-inset-bottom));background:rgba(10,20,17,.94);backdrop-filter:blur(8px);border-top:1px solid var(--linha-esc);transform:translateY(110%);transition:transform .3s var(--ease)}
-.fixa.on{transform:none}
-.fixa .btn{width:100%;min-height:52px}
-@media (min-width:900px){.fixa{display:none}}
 
 /* Barra de teste (só fora do site oficial) */
 .teste{position:fixed;right:max(12px, env(safe-area-inset-right, 0px));top:calc(72px + env(safe-area-inset-top, 0px));z-index:50;display:flex;gap:6px;align-items:center;background:rgba(255,200,20,.96);color:#1B1400;border-radius:99px;padding:6px 6px 6px 12px;font:800 .72rem/1 "Plus Jakarta Sans",sans-serif;letter-spacing:.06em;box-shadow:0 8px 24px rgba(0,0,0,.25)}
@@ -671,7 +667,7 @@ footer a{color:var(--verde-vivo);font-weight:700}
   <div class="wrap estreito rv">
     <h2>Você não abriu uma empresa pra viver <span class="vivo">correndo atrás de cliente.</span></h2>
     <p class="muted">Teste por <span class="js-dias">20</span> dias. Se funcionar, você vai se perguntar por que não fez isso antes.</p>
-    <a class="btn btn--vivo" href="#" id="ctaFinal">Mapear minha necessidade →</a>
+    <a class="btn btn--vivo" href="#" id="ctaFinal">Quero Vender Mais</a>
     <div class="garantias"><div><b class="js-vagas">3</b><small>vagas por mês</small></div><div><b class="js-dias">20</b><small>dias de teste</small></div><div><b>+<span class="js-ext">10</span></b><small>dias se a venda não sair</small></div></div>
   </div>
 </section>
@@ -685,7 +681,6 @@ footer a{color:var(--verde-vivo);font-weight:700}
   <div class="wrap"><strong style="color:#fff">Acelera Aí</strong> · aceleradora de vendas · © 2026<br>Página desenvolvida por Elton Longaray</div>
 </footer>
 <div class="teste" id="barraTeste" hidden aria-label="Ferramentas de teste">TESTE<button type="button" id="tVoltar">← Etapa</button><button type="button" id="tZerar">↺ Recomeçar</button></div>
-<div class="fixa" id="fixa"><a class="btn btn--vivo" href="#" id="ctaFixa">Continuar o mapeamento</a></div>
 
 <script>
 (function(){
@@ -1043,17 +1038,10 @@ footer a{color:var(--verde-vivo);font-weight:700}
     }
     return $("#proposta");
   };
-  ["#ctaFinal","#ctaFixa"].forEach(s => $(s).addEventListener("click", e => {
+  ["#ctaFinal"].forEach(s => $(s).addEventListener("click", e => {
     e.preventDefault(); const a = proximoAlvo(); a && a.scrollIntoView({ behavior: reduz() ? "auto" : "smooth" });
   }));
 
-  const fixa = $("#fixa");
-  let heroiFora = false;
-  const vistos = new Set();
-  const atualizaFixa = () => fixa.classList.toggle("on", heroiFora && vistos.size === 0);
-  new IntersectionObserver(([e]) => { heroiFora = !e.isIntersecting; atualizaFixa(); }).observe($(".heroi"));
-  const obsPortao = new IntersectionObserver(es => { es.forEach(e => e.isIntersecting ? vistos.add(e.target) : vistos.delete(e.target)); atualizaFixa(); }, { threshold:0.1 });
-  $$(".portao .caixa, #proposta").forEach(el => obsPortao.observe(el));
 
   // ═══════════════════════════════════════════════════════════════
   // BLOCO 27: MODO TESTE (voltar uma etapa, recomeçar)
