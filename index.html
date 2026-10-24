@@ -127,14 +127,14 @@ body[data-desafio="0"] [data-v~="0"],body[data-desafio="A"] [data-v~="A"],body[d
 .logo{white-space:nowrap}
 @media (max-width:420px){.etapas .pts{display:none}}
 
-.heroi{padding:44px 0 64px}
+.heroi{padding:28px 0 56px}
 .heroi .in{display:grid;gap:40px;align-items:center}
-@media (min-width:960px){.heroi .in{grid-template-columns:1.1fr .9fr}.heroi{padding:80px 0 96px}}
-.heroi h1{font-size:clamp(2.05rem,7.6vw,3.6rem);color:#fff;margin:18px 0 18px}
+@media (min-width:960px){.heroi .in{grid-template-columns:1.1fr .9fr}.heroi{padding:40px 0 72px}}
+.heroi h1{font-size:clamp(2rem,7vw,3.1rem);color:#fff;margin:0 0 16px;text-wrap:balance}
 .heroi h1 em{font-style:normal;color:var(--verde-vivo)}
-.heroi .sub{color:var(--cinza-claro);font-size:1.08em;max-width:36rem;margin-bottom:28px}
+.heroi .sub{color:var(--cinza-claro);font-size:1.05em;max-width:36rem;margin-bottom:24px}
 .heroi .prova{display:flex;gap:10px 18px;flex-wrap:wrap;margin-top:20px;font-size:.84rem;color:#93A59E}
-.heroi .prova span::before{content:"✓ ";color:var(--verde-vivo);font-weight:800}
+.heroi .prova > span::before{content:"✓ ";color:var(--verde-vivo);font-weight:800}
 
 /* Celular com a conversa da IA */
 .fone{background:#0E1A16;border:1px solid var(--linha-esc);border-radius:28px;padding:14px;max-width:360px;width:100%;margin:0 auto;box-shadow:0 30px 80px rgba(0,0,0,.45)}
@@ -345,11 +345,10 @@ footer a{color:var(--verde-vivo);font-weight:700}
 <section class="escuro brilho heroi">
   <div class="wrap in">
     <div>
-      <span class="chip"><b></b>Teste por <span class="js-dias">20</span> dias, sem mensalidade</span>
       <h1>Afaste quem não vai comprar e transforme pessoas decididas em <em>compradores fiéis.</em></h1>
       <p class="sub">A gente traz gente nova ou acorda a sua lista parada, filtra no WhatsApp quem quer comprar e entrega o cliente pronto pra fechar.</p>
       <a class="btn btn--vivo" href="#p1">Mapear minha necessidade em 2 minutos →</a>
-      <div class="prova"><span>IA responde na hora</span><span>Só contatos legítimos</span><span>Fechamento por reunião, WhatsApp ou página de vendas</span></div>
+      <div class="prova"><span><span class="js-dias">20</span> dias de teste sem mensalidade</span><span>IA responde na hora</span><span>Só contatos legítimos</span><span>Fechamento por reunião, WhatsApp ou página de vendas</span></div>
     </div>
     <div class="fone" aria-label="Exemplo: a IA conversando com dois contatos no WhatsApp">
       <div class="bar"><span class="av">AA</span><div><strong>Solar Sul</strong><small>assistente digital · online</small></div></div>
