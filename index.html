@@ -823,7 +823,7 @@ footer a{color:var(--verde-vivo);font-weight:700}
     gasto:{ tipo:"um", q:"Quanto você gasta por mês hoje pra vender?", dica:"Anúncio, agência, equipe de atendimento e vendas.", ops:["Até R$ 5 mil","R$ 5 a 20 mil","R$ 20 a 50 mil","Acima de R$ 50 mil"] },
     reducao:{ tipo:"um", q:"Se a gente pudesse reduzir esse gasto, quanto seria o ideal?", ops:["10% a menos","20% a menos","30% ou mais a menos","Não sei, quero ajuda pra ver"] },
     canais:{ tipo:"varios", q:"Como você vende hoje?", dica:"Pode marcar mais de um.", ops:["WhatsApp","Instagram","Loja física","Site","Indicação"] },
-    atende:{ tipo:"um", q:"Hoje, quem cuida das vendas da sua empresa?", ops:["Eu mesmo","Tenho equipe"] },
+    atende:{ tipo:"um", q:"Hoje, como está a sua operação de vendas?", dica:"Contando quem atrai, atende e vende.", ops:["Faço tudo sozinho","Eu e mais 1 a 3 pessoas","Equipe de 4 a 10 pessoas","Mais de 10 pessoas"] },
     whats:{ tipo:"fone", q:"Qual o seu WhatsApp?", campos:[["whats","(51) 99999-9999","tel"]] }
   };
   const PORTOES = {
@@ -973,7 +973,7 @@ footer a{color:var(--verde-vivo);font-weight:700}
   function personalizar(){
     const d = estado.r.desafio || "0";
     document.body.dataset.desafio = d;
-    document.body.dataset.time = estado.r.atende === "Eu mesmo" ? "so" : "eq";
+    document.body.dataset.time = estado.r.atende === "Faço tudo sozinho" ? "so" : "eq";
     const cam = estado.r.escolha || CAMINHO_POR_DESAFIO[d] || "quentes";
     $$("[data-cam]").forEach(c => c.classList.toggle("destaque", c.dataset.cam === estado.r.escolha));
     $("#precisaTxt").textContent = PRECISA[cam];
@@ -1041,7 +1041,7 @@ footer a{color:var(--verde-vivo);font-weight:700}
       `Precisa de: ${DESAFIOS[d].replace(/^Preciso (somente )?de /, "")} · Base: ${r.base} contatos · Ticket: ${r.ticket}`,
       `Faturamento/mês hoje: ${r.fatHoje} · Meta em 6 meses: ${r.meta6}/mês`,
       `Gasto/mês pra vender: ${r.gasto} · Redução ideal: ${r.reducao}`,
-      `Vende por: ${(r.canais || []).join(", ")} · Atendimento: ${r.atende}`,
+      `Vende por: ${(r.canais || []).join(", ")} · Operação: ${r.atende}`,
       `Quero testar: ${ESCOLHAS[r.escolha]}`,
       `Meu WhatsApp: ${r.whats}`
     ].join("\n");
