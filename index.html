@@ -322,6 +322,8 @@ body[data-desafio="0"] [data-v~="0"],body[data-desafio="A"] [data-v~="A"],body[d
 .final .garantias > div{padding:14px 6px 12px;border:1px solid rgba(255,255,255,.12);border-radius:14px;background:rgba(255,255,255,.04)}
 .final .garantias b{display:block;font-size:1.7rem;line-height:1;font-weight:800;color:var(--verde-vivo);letter-spacing:-.02em}
 .final .garantias small{display:block;margin-top:6px;font-size:.78rem;line-height:1.3;color:var(--cinza-claro)}
+.aviso-priv{text-align:center;font-size:.8rem;color:var(--cinza);margin:10px 0 0}
+.aviso-priv a{color:inherit}
 footer{background:var(--tinta);color:#7E918A;padding:28px 0 calc(28px + env(safe-area-inset-bottom));text-align:center;font-size:.85rem;border-top:1px solid var(--linha-esc)}
 footer a{color:var(--verde-vivo);font-weight:700}
 
@@ -678,7 +680,7 @@ footer a{color:var(--verde-vivo);font-weight:700}
      BLOCO 16: RODAPÉ + BARRA FIXA (celular)
      ═══════════════════════════════════════════════════════════════ -->
 <footer>
-  <div class="wrap"><strong style="color:#fff">Acelera Aí</strong> · aceleradora de vendas · © 2026<br>Página desenvolvida por Elton Longaray</div>
+  <div class="wrap"><strong style="color:#fff">Acelera Aí</strong> · aceleradora de vendas · © 2026<br>Página desenvolvida por Elton Longaray<br><a href="privacidade.html">Política de Privacidade</a></div>
 </footer>
 <div class="teste" id="barraTeste" hidden aria-label="Ferramentas de teste">TESTE<button type="button" id="tVoltar">← Etapa</button><button type="button" id="tZerar">↺ Recomeçar</button></div>
 
@@ -1004,7 +1006,8 @@ footer a{color:var(--verde-vivo);font-weight:700}
           <a class="btn btn--fantasma js-wa-duvida2" target="_blank" rel="noopener">Tenho dúvidas</a>
         </div>
       </article>
-      <button type="button" class="refazer" id="refazer">Refazer as respostas</button>`;
+      <button type="button" class="refazer" id="refazer">Refazer as respostas</button>
+      <p class="aviso-priv">Ao enviar, você concorda com a nossa <a href="privacidade.html" target="_blank" rel="noopener">Política de Privacidade</a>.</p>`;
 
     const msg = [
       `Oi! Vim da página do teste de ${C.diasTeste} dias.`,
