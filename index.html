@@ -152,10 +152,22 @@ body[data-desafio="0"] [data-v~="0"],body[data-desafio="A"] [data-v~="A"],body[d
 
 /* Faixa do que entregamos (sempre visível) */
 .entregas{background:var(--tinta-2);border-top:1px solid var(--linha-esc);border-bottom:1px solid var(--linha-esc);padding:26px 0;color:#DCE6E2}
-.ent{display:flex;gap:14px;align-items:flex-start}
-.ent .ic{flex:none;width:44px;height:44px;border-radius:12px;background:rgba(37,211,102,.12);display:grid;place-items:center;font-size:1.3rem}
-.ent strong{color:#fff;display:block;font-size:.98rem}
-.ent span{font-size:.86rem;color:var(--cinza-claro)}
+/* As 4 mensagens ocupam a mesma célula: a altura é a da maior, sem pulo */
+.rota{display:grid;max-width:34rem;margin:0 auto}
+.slide{grid-area:1/1;display:flex;gap:14px;align-items:center;opacity:0;transform:translateY(14px);transition:opacity .5s var(--ease),transform .5s var(--ease);pointer-events:none}
+.slide.on{opacity:1;transform:none;pointer-events:auto}
+.slide.sai{opacity:0;transform:translateY(-14px)}
+.slide .ic{flex:none;width:46px;height:46px;border-radius:12px;display:grid;place-items:center}
+.slide strong{color:#fff;display:block;font-size:1.08rem}
+.slide span{font-size:.92rem;color:var(--cinza-claro)}
+.slide.intro{justify-content:center}
+.slide.intro strong{font-size:clamp(1.25rem,5vw,1.5rem);letter-spacing:-.02em}
+.slide .seta{color:var(--verde-vivo);font-weight:800;font-size:1.4rem}
+.rota-pts{display:flex;justify-content:center;gap:6px;margin-top:16px}
+.rota-pts i{width:18px;height:4px;border-radius:99px;background:rgba(255,255,255,.14);transition:background .3s,width .3s}
+.rota-pts i.on{background:var(--verde-vivo);width:30px}
+/* Sem movimento: as 4 mensagens aparecem em lista */
+@media (prefers-reduced-motion:reduce){.rota{gap:14px}.slide{grid-area:auto;opacity:1;transform:none;transition:none}.slide.intro{justify-content:flex-start}.rota-pts{display:none}}
 
 /* ═══════════════════════════════════════════════════════════════
    BLOCO 5: PORTÕES (perguntas que liberam a página)
@@ -358,10 +370,14 @@ footer a{color:var(--verde-vivo);font-weight:700}
      BLOCO 9: O QUE ENTREGAMOS (sempre visível)
      ═══════════════════════════════════════════════════════════════ -->
 <div class="entregas">
-  <div class="wrap grid g3">
-    <div class="ent"><span class="ic num" aria-hidden="true">1</span><div><strong>Contatos quentes</strong><span>no seu WhatsApp, prontos pra comprar</span></div></div>
-    <div class="ent"><span class="ic num" aria-hidden="true">2</span><div><strong>Reuniões agendadas para você fechar</strong><span>com quem tem interesse de verdade</span></div></div>
-    <div class="ent"><span class="ic num" aria-hidden="true">3</span><div><strong>A venda feita</strong><span>com a gente fechando por você</span></div></div>
+  <div class="wrap">
+    <div class="rota" id="rota" aria-roledescription="carrossel" aria-label="O que entregamos">
+      <div class="slide intro on"><span class="seta" aria-hidden="true">→</span><strong>Você decide como vai ser</strong></div>
+      <div class="slide"><span class="ic num" aria-hidden="true">1</span><div><strong>Contatos quentes</strong><span>no seu WhatsApp, prontos pra comprar</span></div></div>
+      <div class="slide"><span class="ic num" aria-hidden="true">2</span><div><strong>Reuniões agendadas</strong><span>para você ou a gente fechar, com quem tem interesse de verdade</span></div></div>
+      <div class="slide"><span class="ic num" aria-hidden="true">3</span><div><strong>Tudo com a gente</strong><span>você descansa e a gente faz todo o processo</span></div></div>
+    </div>
+    <div class="rota-pts" aria-hidden="true"><i class="on"></i><i></i><i></i><i></i></div>
   </div>
 </div>
 
@@ -676,6 +692,24 @@ footer a{color:var(--verde-vivo);font-weight:700}
       else setTimeout(() => { msgs.forEach(m => m.classList.remove("on")); i = 0; setTimeout(passo, 700); }, 4200);
     };
     setTimeout(passo, 500);
+  }
+
+  // Faixa "o que entregamos": troca de mensagem a cada 2,8 s, pausa com o dedo/mouse em cima
+  const slides = $$("#rota .slide"), pts = $$(".rota-pts i");
+  if(!reduz() && slides.length){
+    let atual = 0, pausa = false;
+    const rota = $("#rota");
+    ["mouseenter","touchstart"].forEach(ev => rota.addEventListener(ev, () => pausa = true, { passive:true }));
+    ["mouseleave","touchend"].forEach(ev => rota.addEventListener(ev, () => pausa = false, { passive:true }));
+    setInterval(() => {
+      if(pausa || document.hidden) return;
+      const velho = slides[atual];
+      atual = (atual + 1) % slides.length;
+      velho.classList.remove("on"); velho.classList.add("sai");
+      setTimeout(() => velho.classList.remove("sai"), 520);
+      slides[atual].classList.add("on");
+      pts.forEach((p, k) => p.classList.toggle("on", k === atual));
+    }, 2800);
   }
 
   // ═══════════════════════════════════════════════════════════════
