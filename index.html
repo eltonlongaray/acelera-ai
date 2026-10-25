@@ -682,7 +682,7 @@ footer a{color:var(--verde-vivo);font-weight:700}
     <span class="rotulo">Dúvidas</span>
     <h2>Dúvidas frequentes</h2>
     <details><summary>O teste é grátis mesmo?</summary><p>Os <span class="js-dias">20</span> dias não têm setup nem mensalidade. Se você escolher que a gente venda por você, as vendas que a gente fechar têm comissão, combinada antes de começar.</p></details>
-    <details><summary>E depois do teste?</summary><p>Se fizer sentido seguir, montamos um plano com setup, mensalidade e comissão sobre as vendas que passam pelo nosso processo. Os valores dependem do plano e são combinados na conversa de início. Se não quiser seguir, cada um segue seu caminho.</p></details>
+    <details><summary>E depois do teste?</summary><p>Se fizer sentido seguir, montamos um plano com setup, mensalidade e comissão sobre as vendas que passam pelo nosso processo. Os valores dependem do plano e são combinados na reunião de alinhamento. Se não quiser seguir, cada um segue seu caminho.</p></details>
     <details><summary>Como vocês sabem quais vendas vieram de vocês?</summary><p>Cada contato que a gente filtra e entrega fica registrado com a conversa. As vendas que a gente fecha passam pelo link de pagamento ou pela página de vendas combinada. Assim, os dois lados enxergam os mesmos números.</p></details>
     <details><summary>O resultado é garantido?</summary><p>A meta do teste é sair venda. Se em <span class="js-dias">20</span> dias a venda não sair, a gente estende por mais <span class="js-ext">10</span> dias, sem custo, e entra para vender junto com você.</p></details>
     <details><summary>Vou ter que mexer em tecnologia?</summary><p>Não. A gente monta tudo. Você só recebe os compradores ou a venda.</p></details>
@@ -1018,7 +1018,7 @@ footer a{color:var(--verde-vivo);font-weight:700}
     const reducao = r.reducao === "Não sei, quero ajuda pra ver" ? "e a gente te ajuda a ver quanto dá pra cortar" : `pra você chegar perto dos ${String(r.reducao).replace(" a menos", "")} que quer cortar`;
     const folego = r.escolha === "quentes" && ["501 a 1.000","Mais de 1.000"].includes(r.base) ? `<br><strong>Com ${esc(r.base.toLowerCase())} contatos, a sua lista tem fôlego de sobra para o teste.</strong>` : "";
     const invest = r.escolha === "vende"
-      ? `<span class="zero"><b style="font-size:2rem">R$ 0</b> de setup e mensalidade</span><span class="small muted">As vendas que a gente fechar por você têm comissão, combinada na conversa de início.</span>`
+      ? `<span class="zero"><b style="font-size:2rem">R$ 0</b> de setup e mensalidade</span><span class="small muted">As vendas que a gente fechar por você têm comissão, combinada na reunião de alinhamento.</span>`
       : `<span class="zero"><b style="font-size:2rem">R$ 0</b> de setup e mensalidade nos ${C.diasTeste} dias</span>`;
 
     $("#propostaBox").innerHTML = `
@@ -1030,13 +1030,13 @@ footer a{color:var(--verde-vivo);font-weight:700}
           <dt>Onde dá pra economizar</dt><dd>Hoje você gasta <strong>${esc(minus(r.gasto))}</strong> por mês pra vender. No teste, a gente mostra quanto disso vai para curioso, ${esc(reducao)}.</dd>
           <dt>O que a gente faz</dt><dd>${esc(SERVICO[d])}</dd>
           <dt>O que você vai testar</dt><dd><strong>${esc(ESCOLHAS[r.escolha])}</strong> → meta: <strong>${esc(C.entrega[r.escolha])}</strong>${folego}</dd>
-          <dt>Prazo</dt><dd>${C.diasTeste} dias a partir da conversa de início. Se a venda não sair, mais ${C.diasExtensao} dias sem custo.</dd>
+          <dt>Prazo</dt><dd>${C.diasTeste} dias a partir da reunião de alinhamento. Se a venda não sair, mais ${C.diasExtensao} dias sem custo.</dd>
           <dt>O que precisamos de você</dt><dd>Sua lista · informações do produto · ${esc(PRECISA[r.escolha].replace(/\.$/, "").replace(/^./, c => c.toLowerCase()))}</dd>
           <dt>Investimento no teste</dt><dd style="display:grid;gap:6px">${invest}</dd>
-          <dt>Depois</dt><dd>Só se fizer sentido pra você: plano com setup, mensalidade e comissão sobre as vendas que passam pelo nosso processo, combinado na conversa de início.</dd>
+          <dt>Depois</dt><dd>Só se fizer sentido pra você: plano com setup, mensalidade e comissão sobre as vendas que passam pelo nosso processo, combinado na reunião de alinhamento.</dd>
         </dl>
         <div class="acoes">
-          <a class="btn btn--vivo" id="waComecar" target="_blank" rel="noopener">Quero começar meu teste</a>
+          <a class="btn btn--vivo" id="waComecar" target="_blank" rel="noopener">Agendar Meu Alinhamento</a>
           <a class="btn btn--fantasma js-wa-duvida2" target="_blank" rel="noopener">Tenho dúvidas</a>
         </div>
       </article>
@@ -1044,7 +1044,8 @@ footer a{color:var(--verde-vivo);font-weight:700}
       <p class="aviso-priv">Ao enviar, você concorda com a nossa <a href="privacidade.html" target="_blank" rel="noopener">Política de Privacidade</a>.</p>`;
 
     const msg = [
-      `Oi! Vim da página do teste de ${C.diasTeste} dias.`,
+      `Oi! Terminei a página e quero agendar o alinhamento pra começar meus ${C.diasTeste} dias grátis.`,
+      `Minhas respostas:`,
       `Nome: ${r.nome} · Empresa: ${r.empresa}, ${r.cidade}`,
       `Vende: ${r.vende} · Para: ${r.publico}`,
       `Precisa de: ${DESAFIOS[d].replace(/^Preciso (somente )?de /, "")} · Base: ${r.base} contatos · Ticket: ${r.ticket}`,
