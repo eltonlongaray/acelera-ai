@@ -820,7 +820,7 @@ footer a{color:var(--verde-vivo);font-weight:700}
     desafio:{ tipo:"um", q:"Do que você precisa hoje?", ops:["B","A","C","D"].map(k => [k, DESAFIOS[k]]) },
     publico:{ tipo:"um", q:"Pra quem você vende?", ops:["Consumidor final","Empresas","Os dois"] },
     base:{ tipo:"um", q:"Quantos contatos você tem na sua base?", dica:"Clientes, ex-clientes, orçamentos, interessados.", ops:["Até 200","201 a 500","501 a 1.000","Mais de 1.000"] },
-    escolha:{ tipo:"um", q:"O que você quer receber no teste?", ops:[["quentes","1 · Contatos quentes no meu WhatsApp"],["reunioes","2 · Reuniões agendadas para eu fechar"],["vende","3 · A venda feita por vocês"]] },
+    escolha:{ tipo:"um", q:"Como você quer receber esses clientes?", ops:[["quentes","1 · Contatos quentes no meu WhatsApp"],["reunioes","2 · Reuniões agendadas para eu fechar"]] },
     nome:{ tipo:"texto", q:"Como você se chama?", campos:[["nome","Seu nome","given-name"]] },
     empresa:{ tipo:"texto", q:"Qual o nome da sua empresa e a cidade?", campos:[["empresa","Nome da empresa","organization"],["cidade","Cidade","address-level2"]] },
     vende:{ tipo:"texto", q:"O que a sua empresa vende?", campos:[["vende","Ex.: energia solar, planos de academia…",""]] },
@@ -837,10 +837,12 @@ footer a{color:var(--verde-vivo);font-weight:700}
   const PORTOES = {
     1:{ ids:["desafio","atende","trafego"], nome:"Sua necessidade" },
     2:{ ids:["publico","base"], nome:"Seu negócio" },
-    3:{ ids:["escolha"], nome:"Seu teste" },
+    3:{ get ids(){ return pulaTeste() ? [] : ["escolha"]; }, nome:"Seu teste" },
     4:{ ids:["nome","empresa","vende","ticket","fatHoje","meta6","gasto","reducao","canais","whats"], nome:"Sua proposta" }
   };
-  const TOTAL = Object.values(PORTOES).reduce((n, g) => n + g.ids.length, 0);
+  // Quem pediu "venda feita por vocês" na 1ª pergunta já escolheu o teste: a pergunta do teste some
+  function pulaTeste(){ return ["C","D"].includes(estado.r.desafio); }
+  const total = () => Object.values(PORTOES).reduce((n, g) => n + g.ids.length, 0);
   const antesDe = g => Object.keys(PORTOES).filter(k => +k < g).reduce((n, k) => n + PORTOES[k].ids.length, 0);
 
   // ═══════════════════════════════════════════════════════════════
@@ -862,8 +864,8 @@ footer a{color:var(--verde-vivo);font-weight:700}
     const idx = Math.min(estado.passo[g] || 0, ids.length - 1);
     const id = ids[idx], q = P[id];
     const feitos = antesDe(g) + idx;
-    let h = `<div class="topo-p"><span class="etq">Etapa ${g} de 4 · ${PORTOES[g].nome}</span><span class="cont">${feitos + 1} de ${TOTAL}</span></div>
-      <div class="barra"><i style="width:${feitos / TOTAL * 100}%"></i></div>
+    let h = `<div class="topo-p"><span class="etq">Etapa ${g} de 4 · ${PORTOES[g].nome}</span><span class="cont">${feitos + 1} de ${total()}</span></div>
+      <div class="barra"><i style="width:${feitos / total() * 100}%"></i></div>
       <div class="cartao${dir === "volta" ? " volta" : ""}">`;
     if(q.anima) h += `<span class="anima">${esc(q.anima)}</span>`;
     h += `<h3>${esc(q.q)}</h3>`;
@@ -944,6 +946,7 @@ footer a{color:var(--verde-vivo);font-weight:700}
   const respondido = g => PORTOES[g].ids.every(id => estado.r[id] !== undefined && estado.r[id] !== "" && !(Array.isArray(estado.r[id]) && !estado.r[id].length));
 
   function aplicarLiberado(recente, rolar){
+    if(estado.liberado === 2 && pulaTeste()){ estado.liberado = 3; salvar(); }
     for(let g = 1; g <= 4; g++){
       const portao = $(`[data-portao="${g}"]`), parte = $(`[data-parte="${g}"]`);
       const alcancado = g === 1 || estado.liberado >= g - 1;
@@ -967,7 +970,7 @@ footer a{color:var(--verde-vivo);font-weight:700}
   }
 
   function atualizarEtapas(){
-    const n = [1,2,3,4].filter(g => g < 4 ? respondido(g) : estado.liberado >= 4).length;
+    const n = [1,2,3,4].filter(g => g < 4 ? respondido(g) && estado.liberado >= g : estado.liberado >= 4).length;
     $("#etapaTxt").textContent = n >= 4 ? "Proposta pronta" : `Etapa ${n + 1} de 4`;
     $$(".etapas .pts i").forEach((i, k) => i.classList.toggle("on", k < n));
   }
@@ -981,6 +984,8 @@ footer a{color:var(--verde-vivo);font-weight:700}
   function personalizar(){
     const d = estado.r.desafio || "0";
     document.body.dataset.desafio = d;
+    if(pulaTeste()) estado.r.escolha = "vende";
+    else if(estado.r.escolha === "vende") delete estado.r.escolha;
     document.body.dataset.time = estado.r.atende === "Faço tudo sozinho" ? "so" : "eq";
     document.body.dataset.fora = estado.r.trafego === "Agência ou gestor de fora" ? "sim" : "nao";
     const cam = estado.r.escolha || CAMINHO_POR_DESAFIO[d] || "quentes";
@@ -1086,8 +1091,9 @@ footer a{color:var(--verde-vivo);font-weight:700}
   // ═══════════════════════════════════════════════════════════════
   const CHAVES_EXTRAS = { 4:["cidade"] };
   function voltarEtapa(){
-    const n = estado.liberado;
+    let n = estado.liberado;
     if(n < 1) return;
+    if(n === 3 && pulaTeste()) estado.liberado = n = 2;
     PORTOES[n].ids.concat(CHAVES_EXTRAS[n] || []).forEach(id => delete estado.r[id]);
     estado.passo[n] = 0; estado.liberado = n - 1; estado.fim = false; salvar();
     $(`[data-quiz="${n}"]`).innerHTML = "";
