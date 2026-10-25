@@ -123,6 +123,8 @@ body[data-desafio="0"] [data-v~="0"],body[data-desafio="A"] [data-v~="A"],body[d
 /* Personalização por quem cuida das vendas (sozinho x equipe) */
 [data-t]{display:none}
 [data-f]{display:none}
+[data-vd]{display:none}
+body[data-vende="sim"] [data-vd="sim"],body[data-vende="nao"] [data-vd="nao"]{display:revert}
 body[data-fora="sim"] [data-f="sim"],body[data-fora="nao"] [data-f="nao"]{display:revert}
 body[data-time="so"] [data-t~="so"],body[data-time="eq"] [data-t~="eq"]{display:block}
 
@@ -346,7 +348,7 @@ footer a{color:var(--verde-vivo);font-weight:700}
 </style>
 </head>
 
-<body data-desafio="0" data-time="eq" data-fora="nao">
+<body data-desafio="0" data-time="eq" data-fora="nao" data-vende="nao">
 
 <!-- ═══════════════════════════════════════════════════════════════
      BLOCO 7: TOPO (logo + etapas)
@@ -614,7 +616,7 @@ footer a{color:var(--verde-vivo);font-weight:700}
         <div>
           <span class="rotulo">Nosso compromisso</span>
           <h2>O teste é pra sair venda.</h2>
-          <p style="margin:0">O objetivo dos <span class="js-dias">20</span> dias é sair <strong style="color:#fff">pelo menos 1 ou 2 vendas.</strong> Chegou no dia <span class="js-dias">20</span> e a venda ainda não saiu? <strong style="color:#fff">A gente estende o teste por mais <span class="js-ext">10</span> dias, sem custo</strong>, e entra pra vender junto com você.</p>
+          <p style="margin:0">O objetivo dos <span class="js-dias">20</span> dias é sair <strong style="color:#fff">pelo menos 1 ou 2 vendas.</strong> Chegou no dia <span class="js-dias">20</span> e a venda ainda não saiu? <strong style="color:#fff">A gente estende o teste por mais <span class="js-ext">10</span> dias, sem custo</strong>, <span data-vd="nao">e entra pra vender junto com você.</span><span data-vd="sim">e segue vendendo por&nbsp;você.</span></p>
         </div>
       </div>
 
@@ -684,7 +686,7 @@ footer a{color:var(--verde-vivo);font-weight:700}
     <details><summary>O teste é grátis mesmo?</summary><p>Os <span class="js-dias">20</span> dias não têm setup nem mensalidade. Se você escolher que a gente venda por você, as vendas que a gente fechar têm comissão, combinada antes de começar.</p></details>
     <details><summary>E depois do teste?</summary><p>Se fizer sentido seguir, montamos um plano com setup, mensalidade e comissão sobre as vendas que passam pelo nosso processo. Os valores dependem do plano e são combinados na reunião de alinhamento. Se não quiser seguir, cada um segue seu caminho.</p></details>
     <details><summary>Como vocês sabem quais vendas vieram de vocês?</summary><p>Cada contato que a gente filtra e entrega fica registrado com a conversa. As vendas que a gente fecha passam pelo link de pagamento ou pela página de vendas combinada. Assim, os dois lados enxergam os mesmos números.</p></details>
-    <details><summary>O resultado é garantido?</summary><p>A meta do teste é sair venda. Se em <span class="js-dias">20</span> dias a venda não sair, a gente estende por mais <span class="js-ext">10</span> dias, sem custo, e entra para vender junto com você.</p></details>
+    <details><summary>O resultado é garantido?</summary><p>A meta do teste é sair venda. Se em <span class="js-dias">20</span> dias a venda não sair, a gente estende por mais <span class="js-ext">10</span> dias, sem custo, <span data-vd="nao">e entra para vender junto com você.</span><span data-vd="sim">e segue vendendo por&nbsp;você.</span></p></details>
     <details><summary>Vou ter que mexer em tecnologia?</summary><p>Não. A gente monta tudo. Você só recebe os compradores ou a venda.</p></details>
     <details><summary>Vocês vão mandar mensagem em massa pros meus clientes?</summary><p>Não. A gente só fala com quem já é seu cliente, pediu orçamento, veio de anúncio ou foi indicado. Nada de lista comprada.</p></details>
     <details><summary>Eu já pago agência e tenho equipe de vendas. Vocês substituem?</summary><p>Não precisa. A gente entra no meio: filtra os contatos que a agência traz e entrega só os compradores pra sua equipe. Aí fica claro o que funciona e o que dá pra cortar.</p></details>
@@ -984,6 +986,7 @@ footer a{color:var(--verde-vivo);font-weight:700}
   function personalizar(){
     const d = estado.r.desafio || "0";
     document.body.dataset.desafio = d;
+    document.body.dataset.vende = pulaTeste() ? "sim" : "nao";
     if(pulaTeste()) estado.r.escolha = "vende";
     else if(estado.r.escolha === "vende") delete estado.r.escolha;
     document.body.dataset.time = estado.r.atende === "Faço tudo sozinho" ? "so" : "eq";
