@@ -123,6 +123,8 @@ body[data-desafio="0"] [data-v~="0"],body[data-desafio="A"] [data-v~="A"],body[d
 /* Personalização por quem cuida das vendas (sozinho x equipe) */
 [data-t]{display:none}
 [data-f]{display:none}
+[data-vd]{display:none}
+body[data-vende="sim"] [data-vd="sim"],body[data-vende="nao"] [data-vd="nao"]{display:revert}
 body[data-fora="sim"] [data-f="sim"],body[data-fora="nao"] [data-f="nao"]{display:revert}
 body[data-time="so"] [data-t~="so"],body[data-time="eq"] [data-t~="eq"]{display:block}
 
@@ -346,7 +348,7 @@ footer a{color:var(--verde-vivo);font-weight:700}
 </style>
 </head>
 
-<body data-desafio="0" data-time="eq" data-fora="nao">
+<body data-desafio="0" data-time="eq" data-fora="nao" data-vende="nao">
 
 <!-- ═══════════════════════════════════════════════════════════════
      BLOCO 7: TOPO (logo + etapas)
@@ -614,7 +616,7 @@ footer a{color:var(--verde-vivo);font-weight:700}
         <div>
           <span class="rotulo">Nosso compromisso</span>
           <h2>O teste é pra sair venda.</h2>
-          <p style="margin:0">O objetivo dos <span class="js-dias">20</span> dias é sair <strong style="color:#fff">pelo menos 1 ou 2 vendas.</strong> Chegou no dia <span class="js-dias">20</span> e a venda ainda não saiu? <strong style="color:#fff">A gente estende o teste por mais <span class="js-ext">10</span> dias, sem custo</strong>, e entra pra vender junto com você.</p>
+          <p style="margin:0">O objetivo dos <span class="js-dias">20</span> dias é sair <strong style="color:#fff">pelo menos 1 ou 2 vendas.</strong> Chegou no dia <span class="js-dias">20</span> e a venda ainda não saiu? <strong style="color:#fff">A gente estende o teste por mais <span class="js-ext">10</span> dias, sem custo</strong>, <span data-vd="nao">e entra pra vender junto com você.</span><span data-vd="sim">e segue vendendo por&nbsp;você.</span></p>
         </div>
       </div>
 
@@ -684,7 +686,7 @@ footer a{color:var(--verde-vivo);font-weight:700}
     <details><summary>O teste é grátis mesmo?</summary><p>Os <span class="js-dias">20</span> dias não têm setup nem mensalidade. Se você escolher que a gente venda por você, as vendas que a gente fechar têm comissão, combinada antes de começar.</p></details>
     <details><summary>E depois do teste?</summary><p>Se fizer sentido seguir, montamos um plano com setup, mensalidade e comissão sobre as vendas que passam pelo nosso processo. Os valores dependem do plano e são combinados na reunião de alinhamento. Se não quiser seguir, cada um segue seu caminho.</p></details>
     <details><summary>Como vocês sabem quais vendas vieram de vocês?</summary><p>Cada contato que a gente filtra e entrega fica registrado com a conversa. As vendas que a gente fecha passam pelo link de pagamento ou pela página de vendas combinada. Assim, os dois lados enxergam os mesmos números.</p></details>
-    <details><summary>O resultado é garantido?</summary><p>A meta do teste é sair venda. Se em <span class="js-dias">20</span> dias a venda não sair, a gente estende por mais <span class="js-ext">10</span> dias, sem custo, e entra para vender junto com você.</p></details>
+    <details><summary>O resultado é garantido?</summary><p>A meta do teste é sair venda. Se em <span class="js-dias">20</span> dias a venda não sair, a gente estende por mais <span class="js-ext">10</span> dias, sem custo, <span data-vd="nao">e entra para vender junto com você.</span><span data-vd="sim">e segue vendendo por&nbsp;você.</span></p></details>
     <details><summary>Vou ter que mexer em tecnologia?</summary><p>Não. A gente monta tudo. Você só recebe os compradores ou a venda.</p></details>
     <details><summary>Vocês vão mandar mensagem em massa pros meus clientes?</summary><p>Não. A gente só fala com quem já é seu cliente, pediu orçamento, veio de anúncio ou foi indicado. Nada de lista comprada.</p></details>
     <details><summary>Eu já pago agência e tenho equipe de vendas. Vocês substituem?</summary><p>Não precisa. A gente entra no meio: filtra os contatos que a agência traz e entrega só os compradores pra sua equipe. Aí fica claro o que funciona e o que dá pra cortar.</p></details>
@@ -820,7 +822,7 @@ footer a{color:var(--verde-vivo);font-weight:700}
     desafio:{ tipo:"um", q:"Do que você precisa hoje?", ops:["B","A","C","D"].map(k => [k, DESAFIOS[k]]) },
     publico:{ tipo:"um", q:"Pra quem você vende?", ops:["Consumidor final","Empresas","Os dois"] },
     base:{ tipo:"um", q:"Quantos contatos você tem na sua base?", dica:"Clientes, ex-clientes, orçamentos, interessados.", ops:["Até 200","201 a 500","501 a 1.000","Mais de 1.000"] },
-    escolha:{ tipo:"um", q:"O que você quer receber no teste?", ops:[["quentes","1 · Contatos quentes no meu WhatsApp"],["reunioes","2 · Reuniões agendadas para eu fechar"],["vende","3 · A venda feita por vocês"]] },
+    escolha:{ tipo:"um", q:"Como você quer receber esses clientes?", ops:[["quentes","1 · Contatos quentes no meu WhatsApp"],["reunioes","2 · Reuniões agendadas para eu fechar"]] },
     nome:{ tipo:"texto", q:"Como você se chama?", campos:[["nome","Seu nome","given-name"]] },
     empresa:{ tipo:"texto", q:"Qual o nome da sua empresa e a cidade?", campos:[["empresa","Nome da empresa","organization"],["cidade","Cidade","address-level2"]] },
     vende:{ tipo:"texto", q:"O que a sua empresa vende?", campos:[["vende","Ex.: energia solar, planos de academia…",""]] },
@@ -837,10 +839,12 @@ footer a{color:var(--verde-vivo);font-weight:700}
   const PORTOES = {
     1:{ ids:["desafio","atende","trafego"], nome:"Sua necessidade" },
     2:{ ids:["publico","base"], nome:"Seu negócio" },
-    3:{ ids:["escolha"], nome:"Seu teste" },
+    3:{ get ids(){ return pulaTeste() ? [] : ["escolha"]; }, nome:"Seu teste" },
     4:{ ids:["nome","empresa","vende","ticket","fatHoje","meta6","gasto","reducao","canais","whats"], nome:"Sua proposta" }
   };
-  const TOTAL = Object.values(PORTOES).reduce((n, g) => n + g.ids.length, 0);
+  // Quem pediu "venda feita por vocês" na 1ª pergunta já escolheu o teste: a pergunta do teste some
+  function pulaTeste(){ return ["C","D"].includes(estado.r.desafio); }
+  const total = () => Object.values(PORTOES).reduce((n, g) => n + g.ids.length, 0);
   const antesDe = g => Object.keys(PORTOES).filter(k => +k < g).reduce((n, k) => n + PORTOES[k].ids.length, 0);
 
   // ═══════════════════════════════════════════════════════════════
@@ -862,8 +866,8 @@ footer a{color:var(--verde-vivo);font-weight:700}
     const idx = Math.min(estado.passo[g] || 0, ids.length - 1);
     const id = ids[idx], q = P[id];
     const feitos = antesDe(g) + idx;
-    let h = `<div class="topo-p"><span class="etq">Etapa ${g} de 4 · ${PORTOES[g].nome}</span><span class="cont">${feitos + 1} de ${TOTAL}</span></div>
-      <div class="barra"><i style="width:${feitos / TOTAL * 100}%"></i></div>
+    let h = `<div class="topo-p"><span class="etq">Etapa ${g} de 4 · ${PORTOES[g].nome}</span><span class="cont">${feitos + 1} de ${total()}</span></div>
+      <div class="barra"><i style="width:${feitos / total() * 100}%"></i></div>
       <div class="cartao${dir === "volta" ? " volta" : ""}">`;
     if(q.anima) h += `<span class="anima">${esc(q.anima)}</span>`;
     h += `<h3>${esc(q.q)}</h3>`;
@@ -944,6 +948,7 @@ footer a{color:var(--verde-vivo);font-weight:700}
   const respondido = g => PORTOES[g].ids.every(id => estado.r[id] !== undefined && estado.r[id] !== "" && !(Array.isArray(estado.r[id]) && !estado.r[id].length));
 
   function aplicarLiberado(recente, rolar){
+    if(estado.liberado === 2 && pulaTeste()){ estado.liberado = 3; salvar(); }
     for(let g = 1; g <= 4; g++){
       const portao = $(`[data-portao="${g}"]`), parte = $(`[data-parte="${g}"]`);
       const alcancado = g === 1 || estado.liberado >= g - 1;
@@ -967,7 +972,7 @@ footer a{color:var(--verde-vivo);font-weight:700}
   }
 
   function atualizarEtapas(){
-    const n = [1,2,3,4].filter(g => g < 4 ? respondido(g) : estado.liberado >= 4).length;
+    const n = [1,2,3,4].filter(g => g < 4 ? respondido(g) && estado.liberado >= g : estado.liberado >= 4).length;
     $("#etapaTxt").textContent = n >= 4 ? "Proposta pronta" : `Etapa ${n + 1} de 4`;
     $$(".etapas .pts i").forEach((i, k) => i.classList.toggle("on", k < n));
   }
@@ -981,6 +986,9 @@ footer a{color:var(--verde-vivo);font-weight:700}
   function personalizar(){
     const d = estado.r.desafio || "0";
     document.body.dataset.desafio = d;
+    document.body.dataset.vende = pulaTeste() ? "sim" : "nao";
+    if(pulaTeste()) estado.r.escolha = "vende";
+    else if(estado.r.escolha === "vende") delete estado.r.escolha;
     document.body.dataset.time = estado.r.atende === "Faço tudo sozinho" ? "so" : "eq";
     document.body.dataset.fora = estado.r.trafego === "Agência ou gestor de fora" ? "sim" : "nao";
     const cam = estado.r.escolha || CAMINHO_POR_DESAFIO[d] || "quentes";
@@ -1086,8 +1094,9 @@ footer a{color:var(--verde-vivo);font-weight:700}
   // ═══════════════════════════════════════════════════════════════
   const CHAVES_EXTRAS = { 4:["cidade"] };
   function voltarEtapa(){
-    const n = estado.liberado;
+    let n = estado.liberado;
     if(n < 1) return;
+    if(n === 3 && pulaTeste()) estado.liberado = n = 2;
     PORTOES[n].ids.concat(CHAVES_EXTRAS[n] || []).forEach(id => delete estado.r[id]);
     estado.passo[n] = 0; estado.liberado = n - 1; estado.fim = false; salvar();
     $(`[data-quiz="${n}"]`).innerHTML = "";
