@@ -123,8 +123,6 @@ body[data-desafio="0"] [data-v~="0"],body[data-desafio="A"] [data-v~="A"],body[d
 /* Personalização por quem cuida das vendas (sozinho x equipe) */
 [data-t]{display:none}
 [data-f]{display:none}
-[data-vd]{display:none}
-body[data-vende="sim"] [data-vd="sim"],body[data-vende="nao"] [data-vd="nao"]{display:revert}
 body[data-fora="sim"] [data-f="sim"],body[data-fora="nao"] [data-f="nao"]{display:revert}
 body[data-time="so"] [data-t~="so"],body[data-time="eq"] [data-t~="eq"]{display:block}
 
@@ -348,7 +346,7 @@ footer a{color:var(--verde-vivo);font-weight:700}
 </style>
 </head>
 
-<body data-desafio="0" data-time="eq" data-fora="nao" data-vende="nao">
+<body data-desafio="0" data-time="eq" data-fora="nao">
 
 <!-- ═══════════════════════════════════════════════════════════════
      BLOCO 7: TOPO (logo + etapas)
@@ -399,8 +397,8 @@ footer a{color:var(--verde-vivo);font-weight:700}
     <div class="rota" id="rota" aria-roledescription="carrossel" aria-label="O que entregamos">
       <div class="slide intro on"><span class="seta" aria-hidden="true">→</span><strong>Você decide como vai ser</strong></div>
       <div class="slide"><span class="ic num" aria-hidden="true">1</span><div><strong>Contatos quentes</strong><span>no seu WhatsApp, prontos pra comprar</span></div></div>
-      <div class="slide"><span class="ic num" aria-hidden="true">2</span><div><strong>Reuniões agendadas</strong><span>para você ou a gente fechar, com quem tem interesse de verdade</span></div></div>
-      <div class="slide"><span class="ic num" aria-hidden="true">3</span><div><strong>Tudo com a gente</strong><span>você descansa e a gente faz todo o processo</span></div></div>
+      <div class="slide"><span class="ic num" aria-hidden="true">2</span><div><strong>Reuniões agendadas</strong><span>para você fechar, com quem tem interesse de verdade</span></div></div>
+      <div class="slide"><span class="ic num" aria-hidden="true">3</span><div><strong>Venda preparada</strong><span>página, checkout e roteiro pra você só fechar</span></div></div>
       <div class="slide intro fim"><span class="seta" aria-hidden="true">✓</span><strong>Teste gratuitamente por <span class="js-dias">20</span> dias</strong></div>
     </div>
     <div class="rota-pts" aria-hidden="true"><i class="on"></i><i></i><i></i><i></i><i></i></div>
@@ -518,13 +516,13 @@ footer a{color:var(--verde-vivo);font-weight:700}
       <div class="passos">
         <div class="card passo"><span class="n">1</span><h3>Captação</h3><p>Conteúdo e anúncio que trazem gente nova direto pro seu WhatsApp. A verba de anúncio é sua.</p></div>
         <div class="card passo"><span class="n">2</span><h3>Filtro</h3><p>Nossa IA conversa com cada contato, na hora, a qualquer hora, e separa quem quer comprar de quem é só curioso.</p></div>
-        <div class="card passo"><span class="n">3</span><h3>Fechamento</h3><p>Você recebe só os compradores, com o resumo da conversa. Ou a gente fecha por você: em reunião, pelo WhatsApp ou com uma página de vendas do seu produto.</p></div>
+        <div class="card passo"><span class="n">3</span><h3>Fechamento</h3><p>Você recebe só os compradores, com o resumo da conversa. Se precisar, a gente monta a página de vendas e o checkout, e acompanha as suas reuniões pra você fechar mais.</p></div>
         <div class="card passo"><span class="n">4</span><h3>Fidelização</h3><p>Quem comprou volta a ser chamado no momento certo. Comprador vira comprador fiel.</p></div>
       </div>
       <div class="seucaso" data-v="A">No seu caso, começamos pela <b>captação + filtro</b>: gente nova chegando já filtrada.</div>
       <div class="seucaso" data-v="B">No seu caso, começamos pelo <b>filtro da sua lista</b>: acordar quem já te conhece e achar quem quer comprar agora.</div>
-      <div class="seucaso" data-v="C">No seu caso, começamos pelo <b>filtro + fechamento</b>: o interessado é atendido na hora e conduzido até a venda.</div>
-      <div class="seucaso" data-v="D">No seu caso, é o <b>processo completo</b>: a gente traz gente nova, filtra no WhatsApp e fecha a venda por você.</div>
+      <div class="seucaso" data-v="C">No seu caso, começamos pelo <b>filtro + fechamento</b>: o interessado é atendido na hora, e a gente prepara tudo pra você fechar a venda.</div>
+      <div class="seucaso" data-v="D">No seu caso, é o <b>processo completo</b>: a gente traz gente nova, filtra no WhatsApp e prepara tudo pra você fechar a venda.</div>
       <div class="card curioso">
         <h3>E você para de pagar por curioso.</h3>
         <p style="margin:0">Com o filtro na entrada, você descobre qual anúncio traz comprador e qual só traz curioso. Sua equipe para de gastar o dia com quem não vai comprar. <strong style="color:#fff">Menos gasto pra vender, mais venda com o mesmo time.</strong></p>
@@ -570,7 +568,7 @@ footer a{color:var(--verde-vivo);font-weight:700}
       <div class="grid g3" style="margin-top:26px">
         <div class="card cam" data-cam="quentes"><div class="ic num" aria-hidden="true">1</div><h3>Contatos quentes</h3><p style="margin:0">A IA conversa, filtra e te entrega quem já quer comprar, com o resumo da conversa.</p><div class="meta">Meta do teste: <b class="js-entrega" data-k="quentes"></b></div></div>
         <div class="card cam" data-cam="reunioes"><div class="ic num" aria-hidden="true">2</div><h3>Reuniões agendadas para você fechar</h3><p style="margin:0">Marcamos conversas com interessados da sua base. Você só aparece na hora marcada.</p><div class="meta">Meta do teste: <b class="js-entrega" data-k="reunioes"></b></div></div>
-        <div class="card cam" data-cam="vende"><div class="ic num" aria-hidden="true">3</div><h3>A venda feita</h3><p style="margin:0">A gente conduz até o fechamento, do jeito que funcionar melhor pro seu produto: reunião, WhatsApp ou página de vendas.</p><div class="meta">Meta do teste: <b class="js-entrega" data-k="vende"></b></div></div>
+        <div class="card cam" data-cam="vende"><div class="ic num" aria-hidden="true">3</div><h3>A venda preparada</h3><p style="margin:0">Página de vendas e checkout prontos, roteiro da reunião de fechamento e acompanhamento das suas reuniões, ao vivo ou pela gravação. Quem fecha é você. Se não fechar, você recebe um relatório do que funcionou e do que melhorar.</p><div class="meta">Meta do teste: <b class="js-entrega" data-k="vende"></b></div></div>
       </div>
 
       <h3 style="margin-top:44px">Como funcionam os <span class="js-dias">20</span> dias</h3>
@@ -593,14 +591,14 @@ footer a{color:var(--verde-vivo);font-weight:700}
             <li>Assistente de IA configurado para o seu produto</li>
             <li>Filtro dos seus contatos</li>
             <li>A entrega que você escolheu</li>
-            <li>Reunião de resultado no dia <span class="js-dias">20</span></li>
+            <li>Reunião de resultado no dia&nbsp;<span class="js-dias">20</span></li>
           </ul>
-          <p class="muted small" style="margin:10px 0 0">Se precisar, a gente cria também página de vendas, link de pagamento ou faz a reunião com o seu cliente.</p>
+          <p class="muted small" style="margin:10px 0 0">Se precisar, a gente cria também a página de vendas e o checkout, e acompanha as suas reuniões de&nbsp;venda.</p>
         </div>
         <div class="card">
           <span class="rotulo">Investimento nos <span class="js-dias">20</span> dias</span>
           <div class="zero"><b>R$ 0</b><span>de setup e de mensalidade</span></div>
-          <p class="small muted" style="margin:12px 0 0">Se você escolher que a gente venda por você, as vendas que a gente fechar têm comissão, combinada antes de começar.</p>
+          <p class="small muted" style="margin:12px 0 0">Se o teste incluir página de vendas e checkout, as vendas que passarem por eles têm comissão, combinada antes de começar.</p>
           <hr style="border:0;border-top:1px solid var(--linha);margin:18px 0">
           <p style="margin:0"><strong>Depois do teste, só se fizer sentido pra você:</strong> um plano com setup, mensalidade e comissão sobre as vendas que passam pelo nosso processo. Quanto mais completo o plano, mais a gente faz por você.</p>
           <p id="transferencia" class="small muted" style="margin:12px 0 0;display:none">Em até 6 meses, o processo é seu: sua equipe toca tudo o que a gente construiu junto, e você paga só a manutenção do sistema.</p>
@@ -616,7 +614,7 @@ footer a{color:var(--verde-vivo);font-weight:700}
         <div>
           <span class="rotulo">Nosso compromisso</span>
           <h2>O teste é pra sair venda.</h2>
-          <p style="margin:0">O objetivo dos <span class="js-dias">20</span> dias é sair <strong style="color:#fff">pelo menos 1 ou 2 vendas.</strong> Chegou no dia <span class="js-dias">20</span> e a venda ainda não saiu? <strong style="color:#fff">A gente estende o teste por mais <span class="js-ext">10</span> dias, sem custo</strong>, <span data-vd="nao">e entra pra vender junto com você.</span><span data-vd="sim">e segue vendendo por&nbsp;você.</span></p>
+          <p style="margin:0">O objetivo dos <span class="js-dias">20</span> dias é sair <strong style="color:#fff">pelo menos 1 ou 2 vendas.</strong> Chegou no dia <span class="js-dias">20</span> e a venda ainda não saiu? <strong style="color:#fff">A gente estende o teste por mais <span class="js-ext">10</span> dias, sem custo</strong>, e entra pra vender junto com você.</p>
         </div>
       </div>
 
@@ -683,11 +681,11 @@ footer a{color:var(--verde-vivo);font-weight:700}
   <div class="wrap estreito">
     <span class="rotulo">Dúvidas</span>
     <h2>Dúvidas frequentes</h2>
-    <details><summary>O teste é grátis mesmo?</summary><p>Os <span class="js-dias">20</span> dias não têm setup nem mensalidade. Se você escolher que a gente venda por você, as vendas que a gente fechar têm comissão, combinada antes de começar.</p></details>
+    <details><summary>O teste é grátis mesmo?</summary><p>Os <span class="js-dias">20</span> dias não têm setup nem mensalidade. Se o teste incluir página de vendas e checkout, as vendas que passarem por eles têm comissão, combinada antes de começar.</p></details>
     <details><summary>E depois do teste?</summary><p>Se fizer sentido seguir, montamos um plano com setup, mensalidade e comissão sobre as vendas que passam pelo nosso processo. Os valores dependem do plano e são combinados na reunião de alinhamento. Se não quiser seguir, cada um segue seu caminho.</p></details>
-    <details><summary>Como vocês sabem quais vendas vieram de vocês?</summary><p>Cada contato que a gente filtra e entrega fica registrado com a conversa. As vendas que a gente fecha passam pelo link de pagamento ou pela página de vendas combinada. Assim, os dois lados enxergam os mesmos números.</p></details>
-    <details><summary>O resultado é garantido?</summary><p>A meta do teste é sair venda. Se em <span class="js-dias">20</span> dias a venda não sair, a gente estende por mais <span class="js-ext">10</span> dias, sem custo, <span data-vd="nao">e entra para vender junto com você.</span><span data-vd="sim">e segue vendendo por&nbsp;você.</span></p></details>
-    <details><summary>Vou ter que mexer em tecnologia?</summary><p>Não. A gente monta tudo. Você só recebe os compradores ou a venda.</p></details>
+    <details><summary>Como vocês sabem quais vendas vieram de vocês?</summary><p>Cada contato que a gente filtra e entrega fica registrado com a conversa. As vendas que saem pela página de vendas ou pelo checkout que a gente monta ficam registradas lá. Assim, os dois lados enxergam os mesmos números.</p></details>
+    <details><summary>O resultado é garantido?</summary><p>A meta do teste é sair venda. Se em <span class="js-dias">20</span> dias a venda não sair, a gente estende por mais <span class="js-ext">10</span> dias, sem custo, e entra para vender junto com você.</p></details>
+    <details><summary>Vou ter que mexer em tecnologia?</summary><p>Não. A gente monta tudo. Você só recebe os compradores, as reuniões ou a página pronta.</p></details>
     <details><summary>Vocês vão mandar mensagem em massa pros meus clientes?</summary><p>Não. A gente só fala com quem já é seu cliente, pediu orçamento, veio de anúncio ou foi indicado. Nada de lista comprada.</p></details>
     <details><summary>Eu já pago agência e tenho equipe de vendas. Vocês substituem?</summary><p>Não precisa. A gente entra no meio: filtra os contatos que a agência traz e entrega só os compradores pra sua equipe. Aí fica claro o que funciona e o que dá pra cortar.</p></details>
     <details><summary>Preciso de verba de anúncio?</summary><p>Só se o seu desafio for cliente novo e você quiser captação. Se você já tem lista, não precisa.</p></details>
@@ -805,17 +803,17 @@ footer a{color:var(--verde-vivo);font-weight:700}
     C:"Preciso de qualificação e venda feita por vocês",
     D:"Preciso de captação, qualificação e venda feita por vocês"
   };
-  const ESCOLHAS = { quentes:"Contatos quentes no seu WhatsApp", reunioes:"Reuniões agendadas para você fechar", vende:"A venda feita por nós" };
+  const ESCOLHAS = { quentes:"Contatos quentes no seu WhatsApp", reunioes:"Reuniões agendadas para você fechar", vende:"A venda preparada pra você fechar" };
   const PRECISA = {
     reunioes:"Alguém da sua empresa para participar das reuniões nos horários combinados.",
     quentes:"Uma pessoa para atender os compradores em até 1 hora, no horário comercial. Quente esfria rápido.",
-    vende:"As regras da negociação (preço, até quanto pode dar de desconto, condições), o seu link de pagamento ou Pix, e quem faz a entrega depois da venda."
+    vende:"As regras da negociação (preço, até quanto pode dar de desconto, condições), quem faz a entrega depois da venda, e a gravação ou o acompanhamento das suas reuniões de venda."
   };
   const SERVICO = {
     A:"Captação + filtro: conteúdo e anúncio que levam gente nova pro seu WhatsApp (a verba de anúncio é sua), e a IA separa quem quer comprar.",
     B:"Filtro da sua lista: a IA chama quem já te conhece, descobre quem quer comprar agora e te entrega pronto.",
-    C:"Filtro + fechamento: o interessado é atendido na hora e conduzido até a venda.",
-    D:"Processo completo: captação (a verba de anúncio é sua), filtro no WhatsApp com IA e fechamento feito por nós."
+    C:"Filtro + fechamento: o interessado é atendido na hora, a gente monta a página de vendas e o checkout, e você fecha com o nosso roteiro e acompanhamento das reuniões.",
+    D:"Processo completo: captação (a verba de anúncio é sua), filtro no WhatsApp com IA, página de vendas e checkout, e acompanhamento das suas reuniões de fechamento."
   };
 
   const P = {
@@ -986,7 +984,6 @@ footer a{color:var(--verde-vivo);font-weight:700}
   function personalizar(){
     const d = estado.r.desafio || "0";
     document.body.dataset.desafio = d;
-    document.body.dataset.vende = pulaTeste() ? "sim" : "nao";
     if(pulaTeste()) estado.r.escolha = "vende";
     else if(estado.r.escolha === "vende") delete estado.r.escolha;
     document.body.dataset.time = estado.r.atende === "Faço tudo sozinho" ? "so" : "eq";
@@ -1026,7 +1023,7 @@ footer a{color:var(--verde-vivo);font-weight:700}
     const reducao = r.reducao === "Não sei, quero ajuda pra ver" ? "e a gente te ajuda a ver quanto dá pra cortar" : `pra você chegar perto dos ${String(r.reducao).replace(" a menos", "")} que quer cortar`;
     const folego = r.escolha === "quentes" && ["501 a 1.000","Mais de 1.000"].includes(r.base) ? `<br><strong>Com ${esc(r.base.toLowerCase())} contatos, a sua lista tem fôlego de sobra para o teste.</strong>` : "";
     const invest = r.escolha === "vende"
-      ? `<span class="zero"><b style="font-size:2rem">R$ 0</b> de setup e mensalidade</span><span class="small muted">As vendas que a gente fechar por você têm comissão, combinada na reunião de alinhamento.</span>`
+      ? `<span class="zero"><b style="font-size:2rem">R$ 0</b> de setup e mensalidade</span><span class="small muted">As vendas que passarem pela página e pelo checkout que a gente montar têm comissão, combinada na reunião de alinhamento.</span>`
       : `<span class="zero"><b style="font-size:2rem">R$ 0</b> de setup e mensalidade nos ${C.diasTeste} dias</span>`;
 
     $("#propostaBox").innerHTML = `
