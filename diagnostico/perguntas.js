@@ -14,7 +14,7 @@ window.DIAG = {
     {id:"whatsapp", grupo:"Sobre você", tipo:"tel", q:"Qual é o seu WhatsApp?", ph:"(51) 9 9999-9999", ajuda:"É por ele que eu te mando a proposta."},
     {id:"instagram", grupo:"Sobre você", tipo:"texto", q:"Qual é o @ do seu Instagram?", ph:"@seuperfil", opcional:true},
     {id:"prioridade", grupo:"Sobre você", tipo:"escolha", q:"O que é prioridade pra você agora?",
-      ops:["Vender mais, dinheiro no bolso","Ter um Instagram bonito","Os dois"]},
+      ops:["Vender mais, dinheiro no bolso","Ter um Instagram bonito"]},
 
     // Seu trabalho
     {id:"servicos", grupo:"Seu trabalho", tipo:"longo", q:"Quais serviços e produtos você oferece, e o valor de cada um?",
@@ -28,19 +28,18 @@ window.DIAG = {
 
     // Sua agenda e seus números
     {id:"horarios", grupo:"Sua agenda", tipo:"texto", q:"Quais dias e horários você atende?", ph:"Ex.: terça a sábado, das 9h às 18h"},
-    {id:"atend_semana", grupo:"Sua agenda", tipo:"escolha", q:"Quantos atendimentos você faz por semana, em média?",
-      ops:["Até 3","De 4 a 8","De 9 a 15","Mais de 15"]},
+    {id:"atend_semana", grupo:"Sua agenda", tipo:"escolha", q:"Quantos atendimentos você faz por dia, em média?",
+      ops:["Até 1","De 2 a 3","De 4 a 5","Mais de 5"]},
     {id:"vagos", grupo:"Sua agenda", tipo:"escolha", q:"Quantos horários costumam ficar vagos por semana?",
       ops:["Quase nenhum","Até 5","De 6 a 10","Mais de 10"]},
-    {id:"faturamento", grupo:"Sua agenda", tipo:"escolha", q:"Quanto você fatura por mês, em média?", opcional:true,
+    {id:"faturamento", grupo:"Sua agenda", tipo:"escolha", q:"Quanto você fatura por semana, em média?", opcional:true,
       ajuda:"Fica só entre nós. É pra eu montar uma proposta que caiba no seu bolso.",
-      ops:["Até R$ 1.500","De R$ 1.500 a 3 mil","De R$ 3 a 6 mil","Mais de R$ 6 mil"]},
+      ops:["Até R$ 300","De R$ 300 a 800","De R$ 800 a 1.500","Mais de R$ 1.500"]},
     {id:"ano_passado", grupo:"Sua agenda", tipo:"longo", q:"No ano passado, você fez alguma promoção de Black Friday ou de Natal? Como foi?", opcional:true},
 
     // A campanha
-    {id:"vender_agora", grupo:"A campanha", tipo:"longo", q:"Qual serviço ou produto você mais quer vender agora?"},
-    {id:"oferta", grupo:"A campanha", tipo:"escolha", outro:true, q:"Você topa fazer uma oferta especial pra campanha?",
-      ops:["Sim, um pacote de sessões","Sim, um kit de produtos","Sim, um valor promocional","Prefiro não dar desconto"]},
+    {id:"vender_agora", grupo:"A campanha", tipo:"longo", q:"Qual serviço ou produto você mais quer vender agora?",
+      ajuda:"Pode ser uma oferta especial pra campanha. Ex.: um pacote de sessões, um kit de produtos ou um valor promocional."},
     {id:"cliente_pronta", grupo:"A campanha", tipo:"escolha", q:"Quando chegar uma cliente interessada, o que você prefere?",
       ops:["Que ela fale comigo no WhatsApp pra agendar","Que ela já pague direto por um link","Os dois"]},
     {id:"origem", grupo:"A campanha", tipo:"escolha", outro:true, q:"Hoje, de onde vem a maioria das suas clientes?",
@@ -52,8 +51,8 @@ window.DIAG = {
     {id:"cartao", grupo:"A campanha", tipo:"escolha", q:"Você tem cartão de crédito pra pagar o anúncio direto no Instagram e no Google?",
       ajuda:"O dinheiro do anúncio não passa pela gente: você paga direto pra plataforma.",
       ops:["Sim","Não, só Pix ou boleto","Não sei"]},
-    {id:"investimento", grupo:"A campanha", tipo:"escolha", q:"Quanto você ficaria confortável em investir por mês, somando o serviço e o anúncio?",
-      ops:["Até R$ 500","De R$ 500 a 1.000","De R$ 1.000 a 2.000","Mais de R$ 2.000"]},
+    {id:"investimento", grupo:"A campanha", tipo:"escolha", q:"Tirando seus gastos fixos, quanto sobra pra investir por mês no marketing do seu negócio?",
+      ops:["Até R$ 300","De R$ 300 a 600","De R$ 600 a 1.000","Mais de R$ 1.000"]},
     {id:"obs", grupo:"A campanha", tipo:"longo", q:"Quer me contar mais alguma coisa?", opcional:true}
   ]
 };
