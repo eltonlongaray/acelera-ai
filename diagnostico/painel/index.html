@@ -76,7 +76,7 @@ dd.vazio{color:var(--cinza-claro)}
 <main class="wrap" id="app"><p class="vazio-lista">Carregando…</p></main>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="../perguntas.js?v=3"></script>
+<script src="../perguntas.js?v=4"></script>
 <script>
 // ═══════════════════════════════════════════════════════════════
 // BLOCO 2: CONFIG DA PROPOSTA (mude os números aqui)
@@ -251,7 +251,7 @@ function montarProposta(l){
         <div><label for="cDesc">Desconto a partir de 2 semanas (%)</label><input id="cDesc" type="number" min="0" max="50" inputmode="numeric" value="${cfg.desconto||0}"></div>
         <div><label for="cTicket">Valor médio de cada venda dela (R$)</label><input id="cTicket" type="number" min="0" step="5" inputmode="numeric" value="${cfg.ticket||""}" placeholder="Ex.: 70"></div>
       </div>
-      ${r.investimento ? `<p class="aviso">Sobra pra investir no negócio: <b>${esc(r.investimento)}</b> por mês.</p>` : ""}
+      ${r.investimento ? `<p class="aviso">Sobra pra investir no negócio, por mês: <b>${esc(r.investimento)}</b></p>` : ""}
       ${!cfg.servico ? `<p class="aviso">Defina o valor do serviço por semana pra liberar o link da proposta.</p>` : ""}
       <div class="grade tres" style="margin-top:.8rem">${calc.map((o, i) => `
         <div class="op ${o.rec?"rec":""}">
