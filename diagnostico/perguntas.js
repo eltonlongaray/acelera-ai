@@ -51,7 +51,7 @@ window.DIAG = {
     {id:"cartao", grupo:"A campanha", tipo:"escolha", q:"Você tem cartão de crédito pra pagar o anúncio direto no Instagram e no Google?",
       ajuda:"O dinheiro do anúncio não passa pela gente: você paga direto pra plataforma.",
       ops:["Sim","Não, só Pix ou boleto","Não sei"]},
-    {id:"investimento", grupo:"A campanha", tipo:"escolha", q:"Tirando seus gastos fixos, quanto sobra pra investir por mês no marketing do seu negócio?",
+    {id:"investimento", grupo:"A campanha", tipo:"escolha", q:"Tirando seus gastos fixos, quanto sobra pra você investir no seu negócio por mês?",
       ops:["Até R$ 300","De R$ 300 a 600","De R$ 600 a 1.000","Mais de R$ 1.000"]},
     {id:"obs", grupo:"A campanha", tipo:"longo", q:"Quer me contar mais alguma coisa?", opcional:true}
   ]
