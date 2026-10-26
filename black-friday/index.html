@@ -95,6 +95,12 @@ p{margin:0 0 14px}
 .comp-fecho{font-size:20px;text-align:center;margin:30px auto 8px;max-width:720px;color:var(--cinza)}
 .comp-fecho b{color:var(--verde)}
 #quentes .legenda{text-align:center}
+.depende{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin:26px 0 10px}
+.dep-item{display:flex;gap:14px;background:var(--tinta-2);border:1px solid var(--linha);border-radius:var(--raio);padding:20px}
+.dep-item .ico{font-size:28px;line-height:1}
+.dep-item b{display:block;font-size:17px;margin-bottom:6px}
+.dep-item p{color:var(--cinza);margin:0;font-size:15px}
+
 .estimativa{margin:14px 0 0;color:var(--cinza);font-size:15px}
 .estimativa b{color:var(--verde)}
 /* === BLOCO 6: 5 PASSOS === */
@@ -232,7 +238,7 @@ footer a:hover{text-decoration:underline}
   .opcoes.col-3{grid-template-columns:1fr}
   .opcoes.col-4{grid-template-columns:1fr 1fr}
   .celular{margin:0 auto}
-  .grade-3,.grade-pac,.quem,.duas,.tempo,.compara{grid-template-columns:1fr}
+  .grade-3,.grade-pac,.quem,.duas,.tempo,.compara,.depende{grid-template-columns:1fr}
   .tempo{gap:22px}
   .pac.destaque{order:-1}
   .caminhos{grid-template-columns:1fr}
@@ -323,6 +329,10 @@ footer a:hover{text-decoration:underline}
       </div>
     </div>
     <p class="comp-fecho">O que faz vender não é a quantidade de gente. <b>É a quantidade de clientes prontos.</b> E é isso que a gente entrega pra você.</p>
+    <div class="depende">
+      <div class="dep-item"><div class="ico">🧩</div><div><b>O resultado também depende de você.</b><p>A gente entrega o cliente pronto. Daí pra frente, quem fecha é a sua página de vendas e o seu vendedor: uma página lenta ou um atendimento demorado fazem cliente pronto desistir.</p></div></div>
+      <div class="dep-item"><div class="ico">📋</div><div><b>Parecer depois da 1ª semana.</b><p>Com os números da primeira semana, a gente te mostra o que funcionou e o que ajustar nas próximas, na oferta, na página e no atendimento, pra dar cada vez mais certo.</p></div></div>
+    </div>
     <p class="legenda">Visitantes: média de conversão do e-commerce brasileiro segundo levantamentos de mercado (Experian Hitwise), cerca de 1,5% a 2%. Clientes prontos: estimativa da Acelera Aí; o número real depende da sua oferta e do seu atendimento.</p>
   </div>
 </section>
@@ -555,11 +565,11 @@ const CONFIG = {
   blackFriday: "2026-11-27T00:00:00-03:00",
   pacotes: [
     { id: "week", nome: "Black Week", duracao: "1 semana · você escolhe quando", valor: 2000, anuncio: 543, meta: 20,
-      itens: ["Análise do produto e da oferta", "Anúncio isca por 1 semana", "Atendimento inteligente 24h", "Clientes prontos pro vendedor ou pra página", "Relatório a cada 2 dias"] },
+      itens: ["Análise do produto e da oferta", "Anúncio isca por 1 semana", "Atendimento inteligente 24h", "Clientes prontos pro vendedor ou pra página", "Relatório a cada 2 dias", "Parecer final com o que melhorar"] },
     { id: "turbo", nome: "Black Turbo", duracao: "2 semanas · você escolhe quando", valor: 2400, anuncio: 1103, meta: 40, destaque: true,
-      itens: ["Tudo do Black Week", "1 semana de aquecimento com Lista VIP", "Anúncio mais barato no aquecimento", "Sua Lista VIP recebe a oferta primeiro"] },
+      itens: ["Tudo do Black Week", "Parecer da 1ª semana com ajustes pra próxima", "1 semana de aquecimento com Lista VIP", "Anúncio mais barato no aquecimento", "Sua Lista VIP recebe a oferta primeiro"] },
     { id: "completa", nome: "Black Completa", duracao: "4 semanas · você escolhe quando", valor: 3700, anuncio: 2225, meta: 80,
-      itens: ["Tudo do Black Turbo", "2 semanas de aquecimento com Lista VIP", "Mensagem pra sua base de clientes", "Repescagem no fim da campanha", "Menor custo por cliente pronto"] }
+      itens: ["Tudo do Black Turbo", "Parecer toda semana com ajustes", "2 semanas de aquecimento com Lista VIP", "Mensagem pra sua base de clientes", "Repescagem no fim da campanha", "Menor custo por cliente pronto"] }
   ]
 };
 
