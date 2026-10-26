@@ -78,6 +78,25 @@ p{margin:0 0 14px}
 .card .ico{font-size:28px;margin-bottom:10px}
 .card p{color:var(--cinza);margin:0}
 
+/* === BLOCO 5B: QUEM COMPRA SÃO OS QUENTES === */
+.compara{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:34px}
+.comp-card{background:var(--tinta-2);border:1px solid var(--linha);border-radius:var(--raio);padding:26px}
+.comp-card.bom{border:2px solid var(--verde);box-shadow:0 0 0 6px rgba(37,211,102,.06)}
+.comp-tag{display:inline-block;font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;padding:5px 12px;border-radius:999px;background:rgba(37,211,102,.14);color:var(--verde);margin-bottom:18px}
+.comp-tag.ruim{background:rgba(255,90,90,.12);color:var(--vermelho)}
+.pontos{display:grid;grid-template-columns:repeat(20,1fr);gap:5px;margin-bottom:18px;min-height:64px;align-content:start}
+#pontos-10{grid-template-columns:repeat(10,1fr);gap:8px}
+.pto{aspect-ratio:1;border-radius:50%;background:var(--linha)}
+.pto.compra{background:var(--verde);box-shadow:0 0 10px rgba(37,211,102,.6)}
+.comp-num{font-size:20px;color:var(--gelo);margin-bottom:8px}
+.comp-num b{color:var(--verde);font-size:24px}
+.comp-card p{color:var(--cinza)}
+.comp-card p b{color:var(--gelo)}
+.comp-fecho{font-size:20px;text-align:center;margin:30px auto 8px;max-width:720px;color:var(--cinza)}
+.comp-fecho b{color:var(--verde)}
+#quentes .legenda{text-align:center}
+.estimativa{margin:14px 0 0;color:var(--cinza);font-size:15px}
+.estimativa b{color:var(--verde)}
 /* === BLOCO 6: 5 PASSOS === */
 .passos{display:grid;gap:14px;margin-top:34px}
 .passo{display:grid;grid-template-columns:56px 1fr;gap:18px;align-items:start;background:var(--tinta-2);border:1px solid var(--linha);border-left:4px solid var(--verde);border-radius:var(--raio);padding:22px}
@@ -120,7 +139,7 @@ p{margin:0 0 14px}
 .nota{color:var(--cinza-2);font-size:14px;margin-top:22px;max-width:820px}
 
 /* === BLOCO 9: DESCUBRA SEU PLANO === */
-.entradas{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:34px;background:var(--tinta);border:1px solid var(--linha);border-radius:var(--raio);padding:22px 22px 6px}
+.entradas{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:34px;background:var(--tinta);border:1px solid var(--linha);border-radius:var(--raio);padding:22px 22px 6px}
 .titulo-bloco{margin:38px 0 16px;font-size:22px}
 .grade-pac{margin-top:26px}
 .indisp{margin-top:18px;background:rgba(255,90,90,.06);border:1px solid rgba(255,90,90,.3);border-radius:14px;padding:16px 18px;color:var(--cinza);font-size:15px}
@@ -213,7 +232,7 @@ footer a:hover{text-decoration:underline}
   .opcoes.col-3{grid-template-columns:1fr}
   .opcoes.col-4{grid-template-columns:1fr 1fr}
   .celular{margin:0 auto}
-  .grade-3,.grade-pac,.quem,.duas,.tempo{grid-template-columns:1fr}
+  .grade-3,.grade-pac,.quem,.duas,.tempo,.compara{grid-template-columns:1fr}
   .tempo{gap:22px}
   .pac.destaque{order:-1}
   .caminhos{grid-template-columns:1fr}
@@ -283,6 +302,31 @@ footer a:hover{text-decoration:underline}
   </div>
 </section>
 
+<!-- === BLOCO B2: QUEM COMPRA SÃO OS QUENTES === -->
+<section id="quentes">
+  <div class="wrap">
+    <span class="eyebrow">O que quase ninguém sabe</span>
+    <h2>Quem compra não é a multidão.<br><span class="verde">São os clientes prontos.</span></h2>
+    <p class="sub">Na Black chega uma enxurrada de gente. Parece muito movimento, mas só uma pequena parte compra. O resto consome o tempo do seu atendimento.</p>
+    <div class="compara">
+      <div class="comp-card">
+        <div class="comp-tag ruim">Enxurrada de visitantes</div>
+        <div class="pontos" id="pontos-100"></div>
+        <p class="comp-num"><b>1 a 2</b> de cada <b>100</b> compram</p>
+        <p>É a média das lojas online no Brasil. Com 300 pessoas na sua página, isso dá de <b>3 a 6 vendas</b>, e alguém precisou responder todo mundo.</p>
+      </div>
+      <div class="comp-card bom">
+        <div class="comp-tag">Só clientes prontos</div>
+        <div class="pontos" id="pontos-10"></div>
+        <p class="comp-num"><b>2 a 4</b> de cada <b>10</b> compram</p>
+        <p>Quem já disse que quer, tem orçamento e vai comprar agora está a um passo da compra: <b>de 10 a 20 vezes mais</b> que o visitante comum. Com 30 clientes prontos, isso dá de <b>6 a 12 vendas</b>, e o seu atendimento só fala com quem vai comprar.</p>
+      </div>
+    </div>
+    <p class="comp-fecho">O que faz vender não é a quantidade de gente. <b>É a quantidade de clientes prontos.</b> E é isso que a gente entrega pra você.</p>
+    <p class="legenda">Visitantes: média de conversão do e-commerce brasileiro segundo levantamentos de mercado (Experian Hitwise), cerca de 1,5% a 2%. Clientes prontos: estimativa da Acelera Aí; o número real depende da sua oferta e do seu atendimento.</p>
+  </div>
+</section>
+
 <!-- === BLOCO C: COMO FUNCIONA (5 PASSOS) === -->
 <section id="como">
   <div class="wrap">
@@ -327,13 +371,12 @@ footer a:hover{text-decoration:underline}
   <div class="wrap">
     <div class="entradas">
       <div class="campo"><label for="sim-ticket">1. Preço do produto na Black (R$)</label><input id="sim-ticket" type="number" min="0" step="10" value="500" inputmode="numeric"></div>
-      <div class="campo"><label for="sim-taxa">2. De cada 10 clientes prontos, quantos compram?</label>
-        <select id="sim-taxa"><option value="1">1 de cada 10</option><option value="2">2 de cada 10</option><option value="3" selected>3 de cada 10</option><option value="4">4 de cada 10</option><option value="5">5 de cada 10</option><option value="6">6 de cada 10</option><option value="7">7 de cada 10</option><option value="8">8 de cada 10</option><option value="9">9 de cada 10</option><option value="10">10 de cada 10</option></select>
-      </div>
-      <div class="campo"><label for="sim-margem">3. Quanto sobra de cada venda? (sua margem)</label>
+      <div class="campo"><label for="sim-margem">2. Quanto sobra de cada venda? (sua margem)</label>
         <select id="sim-margem"><option value="20">20% do preço</option><option value="30">30% do preço</option><option value="40">40% do preço</option><option value="50" selected>50% do preço</option><option value="60">60% do preço</option><option value="70">70% do preço</option><option value="80">80% do preço</option></select>
       </div>
     </div>
+
+    <p class="estimativa">📊 A conta usa a nossa estimativa: <b>3 de cada 10 clientes prontos compram</b> (o meio da faixa de 2 a 4 de cada 10).</p>
 
     <h3 class="titulo-bloco">Seus lucros em cada plano</h3>
     <div style="overflow-x:auto"><table class="res" id="sim-tabela"></table></div>
@@ -507,6 +550,7 @@ footer a:hover{text-decoration:underline}
 // === BLOCO 1: CONFIGURAÇÃO (editar aqui) ===
 const CONFIG = {
   whatsapp: "5551982276577",
+  taxaQuentes: 0.3, // de cada 10 clientes prontos, 3 compram (estimativa)
   vagas: 5,
   blackFriday: "2026-11-27T00:00:00-03:00",
   pacotes: [
@@ -560,6 +604,14 @@ function animarConversa() {
 }
 animarConversa();
 
+// === BLOCO 5B: BOLINHAS (100 VISITANTES × 10 PRONTOS) ===
+function bolinhas(id, total, compram) {
+  $(id).innerHTML = Array.from({ length: total }, (_, i) =>
+    `<span class="pto${i < compram ? " compra" : ""}"></span>`).join("");
+}
+bolinhas("pontos-100", 100, 2);
+bolinhas("pontos-10", 10, 3);
+
 // === BLOCO 6: DESCUBRA SEU PLANO (LUCROS + PLANOS DISPONÍVEIS) ===
 function cartao(p, melhor) {
   return `
@@ -579,7 +631,7 @@ function cartao(p, melhor) {
 
 function simular() {
   const ticket = Math.max(0, Number($("sim-ticket").value) || 0);
-  const taxa = Number($("sim-taxa").value) / 10;
+  const taxa = CONFIG.taxaQuentes;
   const margem = Number($("sim-margem").value) / 100;
   const planos = CONFIG.pacotes.map(p => {
     const inv = p.valor + p.anuncio, vendas = Math.round(p.meta * taxa), fat = vendas * ticket;
@@ -621,7 +673,6 @@ function simular() {
       "Oi! Quero um orçamento personalizado pra Black da Acelera Aí.",
       "",
       `Preço do produto na Black: ${brl(ticket)}`,
-      `De cada 10 clientes prontos, compram: ${$("sim-taxa").value}`,
       `Margem: ${$("sim-margem").value}%`
     ].join("\n");
     window.open(`https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(msg)}`, "_blank");
@@ -632,7 +683,7 @@ function simular() {
     if (r) r.checked = true;
   }));
 }
-["sim-ticket", "sim-taxa", "sim-margem"].forEach(id => {
+["sim-ticket", "sim-margem"].forEach(id => {
   $(id).addEventListener("input", simular);
   $(id).addEventListener("change", simular);
 });
