@@ -148,6 +148,8 @@ p{margin:0 0 14px}
 .entradas{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:34px;background:var(--tinta);border:1px solid var(--linha);border-radius:var(--raio);padding:22px 22px 6px}
 .titulo-bloco{margin:38px 0 16px;font-size:22px}
 .grade-pac{margin-top:26px}
+.kit-aviso{margin:0 0 16px;background:rgba(37,211,102,.07);border:1px solid rgba(37,211,102,.35);border-radius:14px;padding:16px 18px;color:var(--cinza);font-size:15px}
+.kit-aviso b{color:var(--gelo)}
 .indisp{margin-top:18px;background:rgba(255,90,90,.06);border:1px solid rgba(255,90,90,.3);border-radius:14px;padding:16px 18px;color:var(--cinza);font-size:15px}
 .indisp b{color:var(--gelo)}
 .indisp ul{margin:8px 0 0;padding-left:20px}
@@ -384,6 +386,7 @@ footer a:hover{text-decoration:underline}
     <p class="estimativa">📊 A conta usa a nossa estimativa: <b>3 de cada 10 clientes prontos compram</b> (o meio da faixa de 2 a 4 de cada 10).</p>
 
     <h3 class="titulo-bloco">Seus lucros em cada plano</h3>
+    <div id="kit-aviso"></div>
     <div style="overflow-x:auto"><table class="res" id="sim-tabela"></table></div>
     <p class="legenda">Simulação, não promessa: a venda depende da sua oferta e do seu atendimento. Anúncio já com os impostos que a Meta cobra na fatura.</p>
 
@@ -555,6 +558,8 @@ footer a:hover{text-decoration:underline}
 const CONFIG = {
   whatsapp: "5551982276577",
   taxaQuentes: 0.3, // de cada 10 clientes prontos, 3 compram (estimativa)
+  lucroAlvo: 1000, // lucro mínimo que a gente quer pro cliente, mesmo no plano mais barato
+  kit: { qtd: 3, desconto: 0.10 }, // ticket baixo: kit de 3 com 10% off em cada (pra ela + 1 ou 2 familiares)
   vagas: 5,
   blackFriday: "2026-11-27T00:00:00-03:00",
   pacotes: [
@@ -637,38 +642,50 @@ function simular() {
   const ticket = Math.max(0, Number($("sim-ticket").value) || 0);
   const taxa = CONFIG.taxaQuentes;
   const margem = Number($("sim-margem").value) / 100;
-  const planos = CONFIG.pacotes.map(p => {
-    const inv = p.valor + p.anuncio, vendas = Math.round(p.meta * taxa), fat = vendas * ticket;
-    const lucroVendas = fat * margem, lucro = lucroVendas - inv;
-    const precoMinimo = vendas > 0 ? Math.ceil(inv / (vendas * margem) / 10) * 10 : null;
+  const { qtd, desconto } = CONFIG.kit, alvo = CONFIG.lucroAlvo;
+  const calcular = (kit) => CONFIG.pacotes.map(p => {
+    // por venda: produto avulso, ou kit de 3 com desconto (o desconto sai da margem)
+    const precoVenda = kit ? qtd * ticket * (1 - desconto) : ticket;
+    const fator = kit ? qtd * (margem - desconto) : margem; // lucro por venda ÷ preço do produto
+    const inv = p.valor + p.anuncio, vendas = Math.round(p.meta * taxa), fat = vendas * precoVenda;
+    const lucroVendas = vendas * ticket * fator, lucro = lucroVendas - inv;
+    const precoMinimo = vendas > 0 && fator > 0 ? Math.ceil((inv + alvo) / (vendas * fator) / 10) * 10 : null;
     return { ...p, inv, vendas, fat, lucroVendas, lucro, precoMinimo };
   });
+  let planos = calcular(false), kit = false;
+  const maisBarato = (lista) => lista.reduce((a, b) => (b.inv < a.inv ? b : a));
+  // Se nem o plano mais barato deixa o lucro mínimo com o produto avulso, a oferta vira kit
+  if (ticket > 0 && maisBarato(planos).lucro < alvo && margem > desconto) { planos = calcular(true); kit = true; }
+
+  $("kit-aviso").innerHTML = kit
+    ? `<div class="kit-aviso">💡 <b>Com esse preço, a gente monta um kit de ${qtd} pra Black</b>, com ${Math.round(desconto * 100)}% off em cada: ${brl(qtd * ticket * (1 - desconto))} o kit (em vez de ${brl(qtd * ticket)}). A cliente leva pra ela e pra mais 1 ou 2 familiares, sente que vale a pena, e cada venda deixa mais lucro. A conta abaixo já usa o kit.</div>`
+    : "";
 
   // Tabela de lucros
   $("sim-tabela").innerHTML = `
     <thead><tr><th></th>${planos.map(c => `<th>${c.nome}</th>`).join("")}</tr></thead>
     <tbody>
-      <tr><td>Vendas estimadas</td>${planos.map(c => `<td>${c.vendas}</td>`).join("")}</tr>
+      <tr><td>${kit ? `Vendas estimadas (kits de ${qtd})` : "Vendas estimadas"}</td>${planos.map(c => `<td>${c.vendas}</td>`).join("")}</tr>
       <tr><td>Faturamento</td>${planos.map(c => `<td>${brl(c.fat)}</td>`).join("")}</tr>
       <tr><td>Lucro das vendas (com a sua margem)</td>${planos.map(c => `<td>${brl(c.lucroVendas)}</td>`).join("")}</tr>
       <tr><td>Investimento total</td>${planos.map(c => `<td>− ${brl(c.inv)}</td>`).join("")}</tr>
       <tr class="forte"><td>Lucro final</td>${planos.map(c => `<td class="${c.lucro >= 0 ? "pos" : "neg"}">${brl(c.lucro)}</td>`).join("")}</tr>
     </tbody>`;
 
-  // Planos disponíveis = os que dão lucro
-  const ok = planos.filter(p => p.lucro > 0);
-  const fora = planos.filter(p => p.lucro <= 0);
+  // Planos disponíveis = os que deixam pelo menos o lucro mínimo
+  const ok = planos.filter(p => p.lucro >= alvo);
+  const fora = planos.filter(p => p.lucro < alvo);
   const melhor = ok.length ? ok.reduce((a, b) => (b.lucro > a.lucro ? b : a)) : null;
 
   $("grade-pac").innerHTML = ok.length
     ? ok.map(p => cartao(p, p === melhor)).join("")
     : `<div class="nenhum"><h3>Seu produto pede um orçamento personalizado.</h3>
-       <p>Com esse preço, os planos prontos não se pagam só na Black. A gente monta um plano sob medida pro seu caso: outro volume de clientes, foco na sua página de vendas ou na recompra (mensalidade, assinatura, cliente que volta). Se precisar, incluímos página de vendas, checkout ou diagnóstico da página que você já tem.</p>
+       <p>Com esse preço, os planos prontos não deixam pelo menos R$ 1.000 de lucro só na Black. A gente monta um plano sob medida pro seu caso: outro volume de clientes, foco na sua página de vendas ou na recompra (mensalidade, assinatura, cliente que volta). Se precisar, incluímos página de vendas, checkout ou diagnóstico da página que você já tem.</p>
        <a class="btn" href="#" data-orcamento>Pedir orçamento personalizado</a></div>`;
 
   $("indisponiveis").innerHTML = fora.length && ok.length
     ? `<div class="indisp"><b>Não recomendados pro seu produto agora:</b><ul>${fora.map(p =>
-        `<li>${p.nome}: pra se pagar, o produto precisaria custar a partir de ${p.precoMinimo ? brl(p.precoMinimo) : "—"} (com a mesma taxa de compra e margem).</li>`).join("")}</ul></div>`
+        `<li>${p.nome}: pra deixar pelo menos ${brl(alvo)} de lucro, o produto precisaria custar a partir de ${p.precoMinimo ? brl(p.precoMinimo) : "—"}${kit ? " (já no kit)" : ""}.</li>`).join("")}</ul></div>`
     : "";
 
   document.querySelectorAll("[data-orcamento]").forEach(b => b.addEventListener("click", e => {
