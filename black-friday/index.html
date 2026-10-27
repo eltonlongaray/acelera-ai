@@ -188,6 +188,10 @@ table.res tr.forte td.neg{color:var(--vermelho)}
 .pessoa{background:var(--tinta-2);border:1px solid var(--linha);border-radius:var(--raio);padding:24px;text-align:center}
 .foto{width:96px;height:96px;border-radius:50%;margin:0 auto 14px;object-fit:cover;background:var(--tinta-3);display:grid;place-items:center;font-weight:900;font-size:30px;color:var(--verde);border:2px solid var(--linha)}
 .pessoa p{color:var(--cinza);font-size:15px;margin:0}
+.cred{list-style:none;padding:0;margin:14px 0 0;text-align:left;color:var(--cinza);font-size:14px}
+.cred li{padding:6px 0 6px 22px;position:relative;border-top:1px dashed var(--linha)}
+.cred li:before{content:"✓";position:absolute;left:0;color:var(--verde);font-weight:900}
+.cred b{color:var(--gelo)}
 
 /* === BLOCO 12: DIAGNÓSTICO === */
 .diag{background:var(--tinta-2)}
@@ -438,15 +442,13 @@ footer a:hover{text-decoration:underline}
     <div class="duas">
       <div class="lista sim-l"><h3>É pra você</h3><ul>
         <li>Já vende um produto ou serviço e quer vender mais na Black.</li>
-        <li>Consegue fazer uma oferta de verdade, sem perder dinheiro.</li>
-        <li>Tem alguém pra atender em até 1 hora, ou uma página de vendas pronta.</li>
-        <li>Pode investir no anúncio a partir de R$ 500 por semana.</li>
+        <li>Quer fazer uma oferta de verdade, sem perder dinheiro.</li>
+        <li>Tem alguém pra fechar a venda em até 1 hora, ou uma página de vendas pronta.</li>
       </ul></div>
       <div class="lista nao-l"><h3>Não é pra você</h3><ul>
-        <li>Quer só disparar mensagem pra uma lista comprada.</li>
-        <li>Não tem margem pra fazer uma oferta.</li>
-        <li>Não tem como atender os clientes na semana da Black.</li>
-        <li>Espera venda garantida sem fazer a parte do atendimento.</li>
+        <li>Não quer mexer no preço nem dar nenhuma condição especial na Black.</li>
+        <li>Vai deixar o cliente pronto esperando horas por uma resposta.</li>
+        <li>Quer só seguidor e curtida, e não venda.</li>
       </ul></div>
     </div>
   </div>
@@ -458,7 +460,8 @@ footer a:hover{text-decoration:underline}
     <span class="eyebrow">Quem faz</span>
     <h2>Três especialistas cuidando da sua Black.</h2>
     <div class="quem">
-      <div class="pessoa"><img class="foto" src="img/elton.jpg" alt="Elton Longaray"><h3>Elton Longaray</h3><p>Tecnologia e atendimento inteligente. Desenvolvedor do app Falcon e aluno da FIAP.</p></div>
+      <div class="pessoa"><img class="foto" src="img/elton.jpg" alt="Elton Longaray"><h3>Elton Longaray</h3><p>Tecnologia e inteligência artificial. Monta o atendimento inteligente que responde o seu cliente na hora, 24 horas.</p>
+        <ul class="cred"><li>Líder da comunidade <b>Falcon Hunters</b></li><li>Desenvolvedor do <b>Falcon.app</b>, o app mais completo de organização e desenvolvimento pessoal</li><li>Aluno da <b>FIAP</b>, a maior faculdade de tecnologia do Brasil</li><li>Formado no <b>Dale Carnegie Course</b>, o maior curso de comunicação e liderança do mundo</li></ul></div>
       <div class="pessoa"><div class="foto">T</div><h3>Taimara Marcon</h3><p>Conteúdo e anúncios. Cria a isca que traz o cliente certo.</p></div>
       <div class="pessoa"><div class="foto">E</div><h3>Everton</h3><p>Estratégia de oferta e vendas. Define o que faz o cliente decidir.</p></div>
     </div>
@@ -470,7 +473,6 @@ footer a:hover{text-decoration:underline}
   <div class="wrap centro">
     <span class="eyebrow">Garanta sua vaga</span>
     <h2>Responda em 1 minuto e fale com a gente.</h2>
-    <p class="sub">Suas respostas vão prontas pro nosso WhatsApp. A gente já chega na conversa sabendo do seu negócio.</p>
   </div>
   <div class="wrap">
     <form class="form" id="form-diag">
@@ -565,7 +567,7 @@ const CONFIG = {
   taxaQuentes: 0.3, // de cada 10 clientes prontos, 3 compram (estimativa)
   parcelas: 12, // Acelera Aí no cartão (o anúncio é pago direto na plataforma)
   lucroAlvo: 1000, // lucro mínimo que a gente quer pro cliente, mesmo no plano mais barato
-  kit: { qtd: 3, desconto: 0.10 }, // ticket baixo: kit de 3 com 10% off em cada (pra ela + 1 ou 2 familiares)
+  kit: { qtd: 2, desconto: 0.10 }, // ticket baixo: kit de 2 com 10% off em cada (pra ela + alguém da família)
   vagas: 5,
   blackFriday: "2026-11-27T00:00:00-03:00",
   pacotes: [
@@ -664,7 +666,7 @@ function simular() {
   if (ticket > 0 && maisBarato(planos).lucro < alvo && margem > desconto) { planos = calcular(true); kit = true; }
 
   $("kit-aviso").innerHTML = kit
-    ? `<div class="kit-aviso">💡 <b>Com esse preço, a gente monta um kit de ${qtd} pra Black</b>, com ${Math.round(desconto * 100)}% off em cada: ${brl(qtd * ticket * (1 - desconto))} o kit (em vez de ${brl(qtd * ticket)}). A cliente leva pra ela e pra mais 1 ou 2 familiares, sente que vale a pena, e cada venda deixa mais lucro. A conta abaixo já usa o kit.</div>`
+    ? `<div class="kit-aviso">💡 <b>Com esse preço, a gente monta um kit de ${qtd} pra Black</b>, com ${Math.round(desconto * 100)}% off em cada: ${brl(qtd * ticket * (1 - desconto))} o kit (em vez de ${brl(qtd * ticket)}). A cliente leva pra ela e pra alguém da família, sente que vale a pena, e cada venda deixa mais lucro. A conta abaixo já usa o kit.</div>`
     : "";
 
   // Tabela de lucros
@@ -691,8 +693,8 @@ function simular() {
        <a class="btn" href="#" data-orcamento>Pedir orçamento personalizado</a></div>`;
 
   $("indisponiveis").innerHTML = fora.length && ok.length
-    ? `<div class="indisp"><b>Não recomendados pro seu produto agora:</b><ul>${fora.map(p =>
-        `<li>${p.nome}: pra deixar pelo menos ${brl(alvo)} de lucro, o produto precisaria custar a partir de ${p.precoMinimo ? brl(p.precoMinimo) : "—"}${kit ? " (já no kit)" : ""}.</li>`).join("")}</ul></div>`
+    ? `<div class="indisp"><b>No seu caso, o ${fora.map(p => p.nome).join(" e o ")} não ${fora.length > 1 ? "aparecem" : "aparece"}</b> porque o ticket do seu produto é mais baixo e não chegaria a ${brl(alvo)} de lucro. Você pode pedir um <b>orçamento personalizado pra produtos de ticket baixo</b>, com preço ajustado.
+       <a class="btn sec" href="#" data-orcamento style="margin-top:14px;width:100%">Pedir orçamento personalizado</a></div>`
     : "";
 
   document.querySelectorAll("[data-orcamento]").forEach(b => b.addEventListener("click", e => {
