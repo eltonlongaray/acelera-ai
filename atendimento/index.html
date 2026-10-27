@@ -52,7 +52,18 @@ p{margin:0 0 14px}
 .btn.sec{background:transparent;color:var(--gelo);border:1.5px solid var(--linha);box-shadow:none}
 .btn.sec:hover{border-color:var(--verde)}
 .selo{display:inline-flex;align-items:center;gap:8px;background:rgba(37,211,102,.1);color:var(--verde);border:1px solid rgba(37,211,102,.35);font-weight:700;font-size:14px;padding:7px 14px;border-radius:999px}
-.tarja{display:block;width:max-content;max-width:100%;background:#000;color:#fff;text-transform:uppercase;letter-spacing:.04em;font-size:.62em;line-height:1;padding:.32em .7em .36em;margin:0 0 .45em -.2em;transform:rotate(-4deg);transform-origin:left bottom;border-top:3px solid var(--amarelo);border-bottom:3px solid var(--amarelo);box-shadow:0 10px 30px rgba(0,0,0,.45)}
+.faixa{--h:clamp(84px,10vw,128px);position:relative;height:var(--h);margin:6px 0 -26px;z-index:3;pointer-events:none}
+.faixa svg{position:absolute;inset:0;display:block;width:100%;height:100%;filter:drop-shadow(0 16px 18px rgba(0,0,0,.6)) drop-shadow(0 3px 3px rgba(0,0,0,.7))}
+.faixa .brilho{animation:brilho 4.5s ease-in-out infinite}
+@keyframes brilho{0%{transform:translateX(-160px)}65%,100%{transform:translateX(1000px)}}
+.faixa .wrap{position:relative;height:100%;display:flex;align-items:center;padding-top:calc(var(--h) * .34)}
+.faixa .fx-m{display:none}
+@media (max-width:700px){.faixa .fx-d{display:none}.faixa .fx-m{display:block}}
+.faixa-texto{color:#fff;text-transform:uppercase;letter-spacing:.06em;font-weight:900;font-size:clamp(20px,2.7vw,32px);line-height:1;text-shadow:0 1px 0 rgba(255,255,255,.3),0 -1px 0 rgba(0,0,0,.9),0 5px 12px rgba(0,0,0,.8)}
+.faixa-texto b{color:var(--amarelo)}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.celular{position:relative;z-index:4}
+@media (prefers-reduced-motion:reduce){.faixa .brilho{animation:none;opacity:0}}
 .ponto{width:8px;height:8px;border-radius:50%;background:var(--verde);animation:pisca 1.4s infinite}
 @keyframes pisca{50%{opacity:.25}}
 
@@ -234,9 +245,44 @@ footer a{color:var(--verde);text-decoration:none;font-weight:600}
     <div class="barra">
       <div class="logo">Acelera <span>Aí</span></div>
     </div>
+  </div>
+  <div class="faixa" aria-hidden="true">
+    <svg class="fx-d" viewBox="0 0 1000 100" preserveAspectRatio="none">
+      <defs>
+        <linearGradient id="fx-v-fx-d" x1="0" y1="0" x2="0" y2="1"><stop offset=".02" stop-color="#3d3d3d"/><stop offset=".3" stop-color="#151515"/><stop offset=".6" stop-color="#000"/><stop offset=".85" stop-color="#0b0b0b"/><stop offset=".98" stop-color="#2c2c2c"/></linearGradient>
+        <linearGradient id="fx-h-fx-d" x1="0" y1="0" x2="1" y2="0"><stop offset=".4" stop-color="#000" stop-opacity="0"/><stop offset=".5" stop-color="#fff" stop-opacity=".12"/><stop offset=".62" stop-color="#000" stop-opacity=".5"/><stop offset=".72" stop-color="#fff" stop-opacity=".14"/><stop offset=".84" stop-color="#000" stop-opacity=".45"/><stop offset=".94" stop-color="#fff" stop-opacity=".12"/><stop offset="1" stop-color="#000" stop-opacity=".3"/></linearGradient>
+        <linearGradient id="fx-b-fx-d" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset=".5" stop-color="#fff" stop-opacity=".18"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>
+        <clipPath id="fx-c-fx-d"><path d="M0,40 C150,38 300,36 420,34 C540,32 600,14 700,18 C800,22 860,4 1000,2 L1000,52 C860,56 800,74 700,70 C600,66 540,86 420,88 C300,90 150,92 0,94 Z"/></clipPath>
+      </defs>
+      <g clip-path="url(#fx-c-fx-d)">
+        <rect width="1000" height="100" fill="url(#fx-v-fx-d)"/>
+        <rect width="1000" height="100" fill="url(#fx-h-fx-d)"/>
+        <rect class="brilho" width="140" height="100" fill="url(#fx-b-fx-d)"/>
+      </g>
+      <path d="M0,40 C150,38 300,36 420,34 C540,32 600,14 700,18 C800,22 860,4 1000,2" fill="none" stroke="#FFC814" stroke-width="3" vector-effect="non-scaling-stroke"/>
+      <path d="M0,94 C150,92 300,90 420,88 C540,86 600,66 700,70 C800,74 860,56 1000,52" fill="none" stroke="#FFC814" stroke-width="3" vector-effect="non-scaling-stroke"/>
+    </svg>
+    <svg class="fx-m" viewBox="0 0 1000 100" preserveAspectRatio="none">
+      <defs>
+        <linearGradient id="fx-v-fx-m" x1="0" y1="0" x2="0" y2="1"><stop offset=".02" stop-color="#3d3d3d"/><stop offset=".3" stop-color="#151515"/><stop offset=".6" stop-color="#000"/><stop offset=".85" stop-color="#0b0b0b"/><stop offset=".98" stop-color="#2c2c2c"/></linearGradient>
+        <linearGradient id="fx-h-fx-m" x1="0" y1="0" x2="1" y2="0"><stop offset=".7" stop-color="#000" stop-opacity="0"/><stop offset=".82" stop-color="#fff" stop-opacity=".12"/><stop offset=".92" stop-color="#000" stop-opacity=".45"/><stop offset="1" stop-color="#fff" stop-opacity=".1"/></linearGradient>
+        <linearGradient id="fx-b-fx-m" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset=".5" stop-color="#fff" stop-opacity=".18"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>
+        <clipPath id="fx-c-fx-m"><path d="M0,40 C300,38 600,36 780,34 C860,33 900,16 1000,10 L1000,64 C900,70 860,87 780,88 C600,90 300,92 0,94 Z"/></clipPath>
+      </defs>
+      <g clip-path="url(#fx-c-fx-m)">
+        <rect width="1000" height="100" fill="url(#fx-v-fx-m)"/>
+        <rect width="1000" height="100" fill="url(#fx-h-fx-m)"/>
+        <rect class="brilho" width="140" height="100" fill="url(#fx-b-fx-m)"/>
+      </g>
+      <path d="M0,40 C300,38 600,36 780,34 C860,33 900,16 1000,10" fill="none" stroke="#FFC814" stroke-width="3" vector-effect="non-scaling-stroke"/>
+      <path d="M0,94 C300,92 600,90 780,88 C860,87 900,70 1000,64" fill="none" stroke="#FFC814" stroke-width="3" vector-effect="non-scaling-stroke"/>
+    </svg>
+    <div class="wrap"><span class="faixa-texto">Super Oferta <b>Black</b></span></div>
+  </div>
+  <div class="wrap">
     <div class="hero">
       <div>
-        <h1><span class="tarja">Super Oferta Black</span> Automação de Atendimento <span class="verde">Rápido 24h/7</span></h1>
+        <h1><span class="sr">Super Oferta Black: </span>Automação de Atendimento Rápido <span class="verde">no WhatsApp 24h/7</span></h1>
         <p class="sub">Na Black Friday o atendimento lota: a&nbsp;IA atende todo mundo na mesma hora, sem perder tempo com gente curiosa. A&nbsp;gente implanta e acompanha com você. Cancele quando&nbsp;quiser.</p>
         <div class="acoes">
           <a class="btn" href="#contratar">Quero Meu Atendente</a>
