@@ -64,6 +64,12 @@ p{margin:0 0 14px}
 .msg.on{opacity:1;transform:none}
 .msg.ele{background:var(--tinta-3);align-self:flex-start;border-top-left-radius:4px}
 .msg.ia{background:#1F5F3B;align-self:flex-end;border-top-right-radius:4px}
+.digitando{display:inline-flex;gap:4px;padding:4px 2px}
+.digitando i{width:7px;height:7px;border-radius:50%;background:var(--cinza);opacity:.4;animation:pulo 1.2s infinite}
+.digitando i:nth-child(2){animation-delay:.2s}
+.digitando i:nth-child(3){animation-delay:.4s}
+@keyframes pulo{0%,60%,100%{opacity:.4;transform:none}30%{opacity:1;transform:translateY(-3px)}}
+@media (prefers-reduced-motion:reduce){.digitando i{animation:none;opacity:.8}}
 .msg.sistema{align-self:center;background:rgba(255,200,20,.14);color:var(--amarelo);font-weight:700;font-size:13px;border:1px solid rgba(255,200,20,.35)}
 
 /* === BLOCO 5: PROBLEMA === */
@@ -209,7 +215,7 @@ footer a{color:var(--verde);text-decoration:none;font-weight:600}
       <div class="celular" aria-hidden="true">
         <div class="cel-topo">
           <div class="avatar">A</div>
-          <div><b>Atendimento · Sua Empresa</b><small>online agora</small></div>
+          <div><b>Atendimento · Sua Empresa</b><small id="status">online agora</small></div>
         </div>
         <div class="conversa" id="conversa"></div>
       </div>
@@ -413,16 +419,35 @@ const roteiro = [
   ["ia", "Quinta às 15h está livre. Já deixei reservado pra você ✅"],
   ["sistema", "📅 Marcado no Google Agenda · resumo enviado pra equipe"]
 ];
-function animarConversa() {
-  const box = $("conversa"); box.innerHTML = "";
-  roteiro.forEach(([quem, texto], i) => {
-    setTimeout(() => {
-      const el = document.createElement("div");
-      el.className = "msg " + quem; el.textContent = texto; box.appendChild(el);
-      requestAnimationFrame(() => el.classList.add("on"));
-    }, 900 + i * 1600);
-  });
-  setTimeout(animarConversa, 900 + roteiro.length * 1600 + 4000);
+// Cada mensagem: pausa de leitura, "digitando..." (tempo pelo tamanho do texto) e só então a mensagem
+const espera = ms => new Promise(r => setTimeout(r, ms));
+function mostrar(box, quem, texto) {
+  const el = document.createElement("div");
+  el.className = "msg " + quem;
+  if (texto) el.textContent = texto;
+  else el.innerHTML = '<span class="digitando"><i></i><i></i><i></i></span>';
+  box.appendChild(el);
+  requestAnimationFrame(() => el.classList.add("on"));
+  return el;
+}
+async function animarConversa() {
+  const box = $("conversa");
+  while (true) {
+    box.innerHTML = "";
+    await espera(1200);
+    for (const [quem, texto] of roteiro) {
+      if (quem !== "sistema") {
+        const pontos = mostrar(box, quem, null);
+        if (quem === "ia") $("status").textContent = "digitando...";
+        await espera(Math.min(3500, 1200 + texto.length * 25));
+        pontos.remove();
+        $("status").textContent = "online agora";
+      }
+      mostrar(box, quem, texto);
+      await espera(quem === "sistema" ? 1000 : 1800 + texto.length * 15);
+    }
+    await espera(5000);
+  }
 }
 animarConversa();
 
