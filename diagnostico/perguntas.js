@@ -19,7 +19,7 @@ window.DIAG = {
     // Seu trabalho
     {id:"servicos", grupo:"Seu trabalho", tipo:"longo", q:"Quais serviços e produtos você oferece, e o valor de cada um?",
       ajuda:"Ex.: Massagem relaxante R$ 150 · Kit de óleos R$ 70"},
-    {id:"custo", grupo:"Seu trabalho", tipo:"longo", q:"Quanto custa, mais ou menos, pra você fazer cada um?",
+    {id:"custo", grupo:"Seu trabalho", tipo:"longo", q:"Quanto custa, mais ou menos, pra você fazer cada atendimento?",
       ajuda:"Material, produto, óleo, embalagem… Pode ser um valor aproximado."},
     {id:"avulso", grupo:"Seu trabalho", tipo:"escolha", q:"Você vende produto sem atendimento, pra levar ou mandar?",
       ops:["Sim, já vendo","Ainda não, mas quero","Não"]},
