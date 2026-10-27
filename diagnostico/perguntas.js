@@ -39,8 +39,8 @@ window.DIAG = {
     {id:"ano_passado", grupo:"Sua agenda", tipo:"longo", q:"No ano passado, você fez alguma promoção de Black Friday ou de Natal? Como foi?", opcional:true},
 
     // A campanha
-    {id:"vender_agora", grupo:"A campanha", tipo:"longo", q:"Qual serviço ou produto você mais quer vender agora?",
-      ajuda:"Pode ser uma oferta especial pra campanha. Ex.: um pacote de sessões, um kit de produtos ou um valor promocional."},
+    {id:"vender_agora", grupo:"A campanha", tipo:"longo", q:"Qual serviço ou produto você acha que mais vale a pena vender nessa temporada de Black Friday?",
+      ajuda:"Pode ser uma oferta especial pra Black Friday. Ex.: um pacote de sessões, um kit de produtos ou um valor promocional."},
     {id:"origem", grupo:"A campanha", tipo:"escolha", outro:true, q:"Hoje, de onde vem a maioria das suas clientes?",
       ops:["Indicação","Instagram","Passam em frente ao espaço"]},
     {id:"anuncio", grupo:"A campanha", tipo:"escolha", q:"Você já fez anúncio pago?",
