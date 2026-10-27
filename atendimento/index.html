@@ -347,9 +347,9 @@ footer a{color:var(--verde);text-decoration:none;font-weight:600}
         <label><input type="radio" name="atende" value="1 pessoa da equipe"><span>1 pessoa da equipe</span></label>
         <label><input type="radio" name="atende" value="2 ou mais pessoas"><span>2 ou mais pessoas</span></label>
       </div></div>
-      <div class="campo"><label>Tem um chip sobrando pro número da IA?</label><div class="opcoes col-2">
-        <label><input type="radio" name="chip" value="sim, tenho um chip sobrando"><span>Sim, tenho</span></label>
-        <label><input type="radio" name="chip" value="não, quero o chip de vocês"><span>Não, quero o de vocês</span></label>
+      <div class="campo"><label>Já tem um número pra usar na IA?</label><div class="opcoes col-2">
+        <label><input type="radio" name="chip" value="sim, já tenho (fazer a portabilidade pro chip de vocês)"><span>Sim, já tenho</span></label>
+        <label><input type="radio" name="chip" value="não, quero um chip novo de vocês"><span>Não, preciso de um</span></label>
       </div></div>
       <button class="btn" type="submit">Quero Meu Atendente</button>
       <p class="aviso">Abre o WhatsApp com a mensagem pronta. Nada é enviado sem você apertar enviar.</p>
@@ -366,7 +366,7 @@ footer a{color:var(--verde);text-decoration:none;font-weight:600}
   <div class="wrap faq">
     <details><summary>Preciso configurar alguma&nbsp;coisa?</summary><p>Não. Você manda seus produtos, preços, dúvidas mais comuns e o jeito de falar com o cliente. O resto é com a gente.</p></details>
     <details><summary>Em quanto tempo fica pronto?</summary><p>Em até 5 dias úteis depois que você manda as informações da&nbsp;empresa.</p></details>
-    <details><summary>Preciso de um número novo?</summary><p>Sim, e a gente resolve. Se você tiver um chip sobrando, a gente usa ele na hora. Se não, você pega o chip com a gente.</p></details>
+    <details><summary>Preciso de um número novo?</summary><p>A IA atende num número só dela, e a gente resolve isso pra você. Se você já tem um número, a gente faz a portabilidade dele pro nosso chip, que traz benefícios pro titular: incentiva fontes de energia limpa e pode até reduzir a conta de luz, tanto residencial quanto comercial. Se não tiver, você pega um chip novo com a gente. O plano do chip é pago à&nbsp;parte.</p></details>
     <details><summary>Meu número corre risco?</summary><p>O seu número principal nem entra na automação. A IA atende os clientes novos num número só pra ela, e os seus clientes antigos continuam no número de sempre. Ela só responde quem chama, sem disparo em massa, e todo contato e conversa fica registrado com a gente: se algo acontecer com o número da IA, você não perde nenhum cliente nem&nbsp;conversa.</p></details>
     <details><summary>Tem limite de mensagens?</summary><p>Até 3 mil mensagens enviadas pela IA por mês.</p></details>
     <details><summary>E se o cliente quiser falar com uma pessoa?</summary><p>A IA passa a conversa pra você na hora, ou pra quem você escolher, e para de responder só naquele&nbsp;contato.</p></details>
@@ -487,7 +487,7 @@ $("form-contratar").addEventListener("submit", e => {
     `Empresa: ${$("f-empresa").value.trim()}`,
     `Vendemos: ${$("f-segmento").value.trim()}`,
     `Quem atende o WhatsApp hoje: ${v("atende")}`,
-    `Chip: ${v("chip")}`
+    `Número pra IA: ${v("chip")}`
   ];
   window.open(`https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(linhas.join("\n"))}`, "_blank");
 });
