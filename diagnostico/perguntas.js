@@ -25,14 +25,14 @@ window.DIAG = {
       ajuda:"Ex.: um óleo ou kit que ela compra e retira no espaço, ou recebe em casa.",
       ops:["Sim, já vendo","Ainda não, mas quero","Não"]},
     {id:"retorno", grupo:"Seu trabalho", tipo:"escolha", q:"A cliente costuma voltar?",
-      ops:["Sim, todo mês ou mais","A cada 2 ou 3 meses","De vez em quando","Quase não volta"]},
+      ops:["Sim, todo mês","A cada 2 ou 3 meses","De vez em quando","Quase não volta"]},
 
     // Sua agenda e seus números
     {id:"horarios", grupo:"Sua agenda", tipo:"texto", q:"Quais dias e horários você atende?", ph:"Ex.: terça a sábado, das 9h às 18h"},
     {id:"atend_semana", grupo:"Sua agenda", tipo:"escolha", q:"Quantos atendimentos você faz por dia, em média?",
       ops:["Até 1","De 2 a 3","De 4 a 5","Mais de 5"]},
-    {id:"vagos", grupo:"Sua agenda", tipo:"escolha", q:"Quantos horários costumam ficar vagos por semana?",
-      ops:["Quase nenhum","Até 5","De 6 a 10","Mais de 10"]},
+    {id:"vagos", grupo:"Sua agenda", tipo:"escolha", q:"Quantos horários costumam ficar vagos por dia?",
+      ops:["Quase nenhum","1 ou 2","3 ou 4","5 ou mais"]},
     {id:"faturamento", grupo:"Sua agenda", tipo:"escolha", q:"Quanto você fatura por semana, em média?", opcional:true,
       ajuda:"Fica só entre nós. É pra eu montar uma proposta que caiba no seu bolso.",
       ops:["Até R$ 300","De R$ 300 a 800","De R$ 800 a 1.500","Mais de R$ 1.500"]},
@@ -41,8 +41,6 @@ window.DIAG = {
     // A campanha
     {id:"vender_agora", grupo:"A campanha", tipo:"longo", q:"Qual serviço ou produto você mais quer vender agora?",
       ajuda:"Pode ser uma oferta especial pra campanha. Ex.: um pacote de sessões, um kit de produtos ou um valor promocional."},
-    {id:"cliente_pronta", grupo:"A campanha", tipo:"escolha", q:"Quando chegar uma cliente interessada, o que você prefere?",
-      ops:["Que ela fale comigo no WhatsApp pra agendar","Que ela já pague direto por um link","Os dois"]},
     {id:"origem", grupo:"A campanha", tipo:"escolha", outro:true, q:"Hoje, de onde vem a maioria das suas clientes?",
       ops:["Indicação","Instagram","Passam em frente ao espaço"]},
     {id:"anuncio", grupo:"A campanha", tipo:"escolha", q:"Você já fez anúncio pago?",
