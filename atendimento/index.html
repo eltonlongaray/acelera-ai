@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Automação de Atendimento Rápido · Acelera Aí</title>
-<meta name="description" content="Um atendente com inteligência artificial no seu WhatsApp, implantado e operado pela Acelera Aí. R$ 500 por mês, sem fidelidade.">
+<meta name="description" content="Um atendente com inteligência artificial no seu WhatsApp, implantado e operado pela Acelera Aí. Mês a mês, sem fidelidade.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -126,6 +126,14 @@ table.comp tr:last-child td{border-bottom:0}
 .dep-item b{display:block;font-size:17px;margin-bottom:6px}
 .dep-item p{color:var(--cinza);margin:0;font-size:15px}
 .nota{color:var(--cinza-2);font-size:14px;margin-top:22px}
+[hidden]{display:none!important}
+.titulo-bloco{margin:44px 0 18px;font-size:22px}
+.nem-metade{text-align:center;font-size:19px;color:var(--cinza);margin:22px 0 16px}
+.nem-metade b{display:block;color:var(--gelo);font-size:22px}
+#revelar{width:100%;background:var(--amarelo);color:#231a00;box-shadow:0 10px 30px rgba(255,200,20,.25)}
+#revelado{animation:revela .6s ease-out}
+@keyframes revela{from{opacity:0;transform:scale(.92)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){#revelado{animation:none}}
 
 /* === BLOCO 9: QUEM FAZ === */
 .quem{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:34px}
@@ -238,21 +246,8 @@ footer a{color:var(--verde);text-decoration:none;font-weight:600}
   </div>
 </section>
 
-<!-- === BLOCO C: O QUE VOCÊ RECEBE (COM O VALOR DE CADA ITEM) === -->
-<section id="recebe">
-  <div class="wrap">
-    <span class="eyebrow">O que você recebe</span>
-    <h2>Um Vendedor no WhatsApp, Não Um&nbsp;Tira-Dúvidas.</h2>
-    <div class="grade-3" id="beneficios"></div>
-    <div class="chip">
-      <div class="ico">🌱</div>
-      <div><h3>Chip da sua IA</h3><p>A gente fornece o chip do número que a IA vai usar. É um chip ligado a energia limpa: além de apoiar a sustentabilidade do planeta, ele pode reduzir a sua conta de luz, em casa e na&nbsp;empresa.</p><small>O plano do chip é pago à parte.</small></div>
-    </div>
-  </div>
-</section>
-
-<!-- === BLOCO D: COMPARAÇÃO === -->
-<section class="dor">
+<!-- === BLOCO C: COMPARAÇÃO === -->
+<section>
   <div class="wrap">
     <span class="eyebrow">Comparação</span>
     <h2>Parece Mais Caro. Na Conta, Sai Mais&nbsp;Barato.</h2>
@@ -263,32 +258,56 @@ footer a{color:var(--verde);text-decoration:none;font-weight:600}
           <tr><td>Quem implanta</td><td>Você, com vídeo tutorial</td><td>A gente</td></tr>
           <tr><td>Quem opera no dia a dia</td><td>Você</td><td>A gente</td></tr>
           <tr><td>Contrato</td><td>Anual, em&nbsp;geral</td><td>Mês a mês</td></tr>
-          <tr><td>Compromisso mínimo</td><td>Cerca de R$&nbsp;2.400 por um&nbsp;ano</td><td>R$&nbsp;500 por um&nbsp;mês</td></tr>
+          <tr><td>Compromisso mínimo</td><td>Um ano, cerca de R$&nbsp;2.400</td><td>Um mês</td></tr>
           <tr><td>Suporte</td><td>Robô ou&nbsp;chamado</td><td>Pessoas, pelo&nbsp;WhatsApp</td></tr>
           <tr><td>O que chega pra você</td><td>Mensagens soltas</td><td>Cliente qualificado, com&nbsp;resumo</td></tr>
         </tbody>
       </table>
     </div>
-    <p class="comp-fecho">Um plano de R$ 199 por mês no anual é um compromisso de R$ 2.388, antes de saber se funciona. <b>Aqui você paga mês a mês, com tudo feito, e cancela quando&nbsp;quiser.</b></p>
+    <p class="comp-fecho">Um plano de R$ 199 por mês no anual é um compromisso de R$ 2.388, antes de saber se funciona. <b>Aqui o contrato é mês a mês, com tudo feito, e você cancela quando&nbsp;quiser.</b></p>
   </div>
 </section>
 
-<!-- === BLOCO E: A OFERTA === -->
+<!-- === BLOCO D: QUANTO ISSO VALE PRA VOCÊ (VALOR DE CADA ENTREGA) === -->
+<section class="dor" id="recebe">
+  <div class="wrap">
+    <span class="eyebrow">Oferta especial</span>
+    <h2>Temos Uma Oferta Especial Pra&nbsp;Você.</h2>
+    <p class="sub">Mas antes, pensando no valor de cada coisa: quanto isso vale pra&nbsp;você?</p>
+    <div class="grade-3">
+      <div class="card"><div class="ico">⏱️</div><h3>O seu tempo</h3><p>Cada "quanto custa?" respondido à mão é tempo que você tira da venda, da família e do descanso. A IA responde na hora, 24h, inclusive de madrugada e no fim de&nbsp;semana.</p></div>
+      <div class="card"><div class="ico">💰</div><h3>Um atendente</h3><p>Contratar alguém pra responder o WhatsApp custa salário, encargos e benefícios, todo mês. Com carteira assinada, passa fácil de R$&nbsp;2.500 por&nbsp;mês.</p></div>
+      <div class="card"><div class="ico">🎓</div><h3>O treinamento</h3><p>Antes de vender, essa pessoa precisa aprender seus produtos, preços e como contornar objeções. São semanas ensinando, e se ela sai, você começa tudo de&nbsp;novo.</p></div>
+    </div>
+    <h3 class="titulo-bloco">Poderíamos cobrar exatamente esse preço por cada entrega&nbsp;nossa:</h3>
+    <div class="grade-3" id="beneficios" style="margin-top:0"></div>
+    <div class="chip">
+      <div class="ico">🌱</div>
+      <div><h3>Chip da sua IA</h3><p>A gente fornece o chip do número que a IA vai usar. É um chip ligado a energia limpa: além de apoiar a sustentabilidade do planeta, ele pode reduzir a sua conta de luz, em casa e na&nbsp;empresa.</p><small>O plano do chip é pago à parte.</small></div>
+    </div>
+  </div>
+</section>
+
+<!-- === BLOCO E: A OFERTA (O VALOR SÓ APARECE NO BOTÃO) === -->
 <section id="oferta">
   <div class="wrap centro">
     <span class="eyebrow">A oferta</span>
-    <h2>Tudo Isso Por <span class="verde">R$ 500 Por&nbsp;Mês.</span></h2>
+    <h2>Somando Tudo, Esse Seria o&nbsp;Valor.</h2>
   </div>
   <div class="wrap">
     <div class="oferta">
       <h3>Automação de Atendimento Rápido</h3>
       <div class="dur">Mês a mês · sem fidelidade</div>
       <div id="lista-preco"></div>
-      <div class="preco-final"><small>Hoje</small><b id="preco-final">R$ 500</b><span>por mês · implantação inclusa</span></div>
-      <p class="extra">Chip da sua IA: plano próprio, pago à&nbsp;parte.</p>
-      <a class="btn" href="#contratar">Quero Meu Atendente</a>
+      <p class="nem-metade">Mas a gente não vai cobrar&nbsp;isso. <b>Na verdade, nem metade&nbsp;disso.</b></p>
+      <button class="btn" type="button" id="revelar">Revelar Minha Oferta</button>
+      <div id="revelado" hidden>
+        <div class="preco-final"><small>Sua oferta</small><b id="preco-final"></b><span>por mês · implantação inclusa</span></div>
+        <p class="extra">Chip da sua IA: plano próprio, pago à&nbsp;parte.</p>
+        <a class="btn" href="#contratar">Quero Meu Atendente</a>
+      </div>
     </div>
-    <div class="compromisso">
+    <div class="compromisso" id="revelado-2" hidden>
       <div class="dep-item"><div class="ico">🤝</div><div><b>Nosso compromisso</b><p>A gente não liga a automação e some. Todo mês a gente acompanha os resultados com você, mostra quem chegou e quem ficou pronto pra comprar, e ajusta as conversas com estratégias feitas pro seu negócio. A automação fica mais eficiente a cada&nbsp;mês.</p></div></div>
       <div class="dep-item"><div class="ico">💡</div><div><b>Por que tão barato?</b><p>Porque a gente prefere te mostrar na prática. Se o cliente chega pronto pra comprar e a venda não fecha, o relatório mostra onde ela trava, e a gente te diz o que dá pra&nbsp;melhorar.</p></div></div>
     </div>
@@ -359,7 +378,7 @@ footer a{color:var(--verde);text-decoration:none;font-weight:600}
 <section class="final dor">
   <div class="wrap">
     <h2>Seu Atendente No Ar Em Até <span class="verde">5 Dias&nbsp;Úteis.</span></h2>
-    <p class="sub" style="margin:0 auto 26px">R$ 500 por mês, sem fidelidade.</p>
+    <p class="sub" style="margin:0 auto 26px">Mês a mês, sem fidelidade.</p>
     <a class="btn" href="#contratar">Quero Meu Atendente</a>
   </div>
 </section>
@@ -380,7 +399,7 @@ const CONFIG = {
   beneficios: [
     { ico: "🎯", nome: "Atendente vendedor", texto: "Tira a dúvida, contorna a objeção com base no seu catálogo e conduz pra venda, pro orçamento ou pro agendamento.", valor: 600 },
     { ico: "🔎", nome: "Qualificação do cliente", texto: "Faz as perguntas que separam o curioso do comprador. Você recebe o resumo, com o que quer, orçamento e prazo, dedicando tempo apenas com quem realmente importa.", valor: 300 },
-    { ico: "📈", nome: "Acompanhamento e otimização", texto: "A gente acompanha os resultados da automação com você e ajusta as conversas com estratégias feitas pro seu negócio, pra vender cada vez mais.", valor: 500 },
+    { ico: "📈", nome: "Acompanhamento e otimização", texto: "A gente acompanha os resultados da automação com você e ajusta as conversas com estratégias feitas pro seu negócio, pra vender cada vez mais.", valor: 450 },
     { ico: "💬", nome: "Conversa de gente", texto: "Entende áudio, responde em mensagens curtas e digita no ritmo de uma pessoa. Nada de textão de robô.", valor: 250 },
     { ico: "📅", nome: "Agenda automática", texto: "Marca o horário direto no seu Google Agenda.", valor: 150 },
     { ico: "🙋", nome: "Passa pro humano na hora certa", texto: "Se o cliente pede uma pessoa, a IA pausa só naquela conversa e te avisa. Respeita o seu horário de atendimento.", valor: 250 },
@@ -407,7 +426,13 @@ $("lista-preco").innerHTML = CONFIG.beneficios.map(b => `
   <div class="item-preco"><span>${nb(b.nome)}</span>${b.valor ? `<s>${brl(b.valor)}/mês</s>` : "<b>incluído</b>"}</div>`).join("") + `
   <div class="item-preco"><span>Implantação feita pela&nbsp;gente</span><s>${brl(CONFIG.implantacao)}</s></div>
   <div class="soma"><span>Tudo somado</span><s>${brl(somaMes)}/mês</s></div>`;
-$("preco-final").textContent = brl(CONFIG.preco);
+// O valor só aparece quando a pessoa toca no botão (nunca rolando a tela)
+$("revelar").addEventListener("click", () => {
+  $("preco-final").textContent = brl(CONFIG.preco);
+  $("revelar").hidden = true;
+  $("revelado").hidden = false;
+  $("revelado-2").hidden = false;
+});
 
 // === BLOCO 4: CONVERSA ANIMADA ===
 const roteiro = [
