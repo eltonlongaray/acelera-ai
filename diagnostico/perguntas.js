@@ -51,7 +51,7 @@ window.DIAG = {
     {id:"cartao", grupo:"A campanha", tipo:"escolha", q:"Você tem cartão de crédito pra pagar o anúncio direto no Instagram e no Google?",
       ajuda:"O dinheiro do anúncio não passa pela gente: você paga direto pra plataforma.",
       ops:["Sim","Não, só Pix ou boleto","Não sei"]},
-    {id:"investimento", grupo:"A campanha", tipo:"texto", q:"Tirando seus gastos fixos, quanto sobra pra você investir no seu negócio por mês?", ph:"Ex.: R$ 400"},
+    {id:"investimento", grupo:"A campanha", tipo:"texto", q:"Tirando seus gastos fixos, quanto sobra por mês pra você investir no seu negócio e aumentar suas vendas?", ph:"Ex.: R$ 400"},
     {id:"obs", grupo:"A campanha", tipo:"longo", q:"Quer me contar mais alguma coisa?", opcional:true}
   ]
 };
