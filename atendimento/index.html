@@ -59,7 +59,7 @@ p{margin:0 0 14px}
 .avatar{width:36px;height:36px;border-radius:50%;background:var(--verde);color:#062012;display:grid;place-items:center;font-weight:900}
 .cel-topo b{font-size:15px}
 .cel-topo small{display:block;color:var(--verde);font-size:12px}
-.conversa{height:400px;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;gap:8px;padding:14px 6px 4px}
+.conversa{height:400px;overflow:hidden;overflow-anchor:none;contain:strict;display:flex;flex-direction:column;justify-content:flex-end;gap:8px;padding:14px 6px 4px}
 .msg{max-width:84%;padding:9px 13px;border-radius:14px;font-size:14.5px;line-height:1.4;opacity:0;transform:translateY(8px);transition:all .35s}
 .msg.on{opacity:1;transform:none}
 .msg.ele{background:var(--tinta-3);align-self:flex-start;border-top-left-radius:4px}
@@ -209,7 +209,7 @@ footer a{color:var(--verde);text-decoration:none;font-weight:600}
         <h1>Seu WhatsApp Vendendo 24h, <span class="verde">Sem Você Configurar Nada.</span></h1>
         <p class="sub">Um atendente com inteligência artificial que tira dúvidas e contorna objeções, pronto para vender. A gente implanta e acompanha com você. Cancele quando&nbsp;quiser.</p>
         <div class="acoes">
-          <a class="btn" href="#contratar">Quero Testar Um Mês</a>
+          <a class="btn" href="#contratar">Quero Meu Atendente</a>
         </div>
       </div>
       <div class="celular" aria-hidden="true">
@@ -263,13 +263,13 @@ footer a{color:var(--verde);text-decoration:none;font-weight:600}
           <tr><td>Quem implanta</td><td>Você, com vídeo tutorial</td><td>A gente</td></tr>
           <tr><td>Quem opera no dia a dia</td><td>Você</td><td>A gente</td></tr>
           <tr><td>Contrato</td><td>Anual, em&nbsp;geral</td><td>Mês a mês</td></tr>
-          <tr><td>Compromisso pra testar</td><td>Cerca de R$&nbsp;2.400 por um&nbsp;ano</td><td>R$&nbsp;500 por um&nbsp;mês</td></tr>
+          <tr><td>Compromisso mínimo</td><td>Cerca de R$&nbsp;2.400 por um&nbsp;ano</td><td>R$&nbsp;500 por um&nbsp;mês</td></tr>
           <tr><td>Suporte</td><td>Robô ou&nbsp;chamado</td><td>Pessoas, pelo&nbsp;WhatsApp</td></tr>
           <tr><td>O que chega pro vendedor</td><td>Mensagens soltas</td><td>Cliente qualificado, com&nbsp;resumo</td></tr>
         </tbody>
       </table>
     </div>
-    <p class="comp-fecho">Um plano de R$ 199 por mês no anual é um compromisso de R$ 2.388, antes de saber se funciona. <b>Aqui você testa um mês, com tudo feito, e&nbsp;decide.</b></p>
+    <p class="comp-fecho">Um plano de R$ 199 por mês no anual é um compromisso de R$ 2.388, antes de saber se funciona. <b>Aqui você paga mês a mês, com tudo feito, e cancela quando&nbsp;quiser.</b></p>
   </div>
 </section>
 
@@ -286,7 +286,7 @@ footer a{color:var(--verde);text-decoration:none;font-weight:600}
       <div id="lista-preco"></div>
       <div class="preco-final"><small>Hoje</small><b id="preco-final">R$ 500</b><span>por mês · implantação inclusa</span></div>
       <p class="extra">Chip da sua IA: plano próprio, pago à&nbsp;parte.</p>
-      <a class="btn" href="#contratar">Quero Testar Um Mês</a>
+      <a class="btn" href="#contratar">Quero Meu Atendente</a>
     </div>
     <div class="compromisso">
       <div class="dep-item"><div class="ico">🤝</div><div><b>Nosso compromisso</b><p>A gente não liga a automação e some. Todo mês a gente acompanha os resultados com você, mostra quem chegou e quem ficou pronto pra comprar, e ajusta as conversas com estratégias feitas pro seu negócio. A automação fica mais eficiente a cada&nbsp;mês.</p></div></div>
@@ -313,7 +313,7 @@ footer a{color:var(--verde);text-decoration:none;font-weight:600}
 <!-- === BLOCO G: FORMULÁRIO → WHATSAPP === -->
 <section class="diag" id="contratar">
   <div class="wrap centro">
-    <span class="eyebrow">Teste um mês</span>
+    <span class="eyebrow">Comece agora</span>
     <h2>Responda Em 30 Segundos e Fale Com a&nbsp;Gente.</h2>
   </div>
   <div class="wrap">
@@ -331,7 +331,7 @@ footer a{color:var(--verde);text-decoration:none;font-weight:600}
         <label><input type="radio" name="chip" value="sim, tenho um chip sobrando"><span>Sim, tenho</span></label>
         <label><input type="radio" name="chip" value="não, quero o chip de vocês"><span>Não, quero o de vocês</span></label>
       </div></div>
-      <button class="btn" type="submit">Quero Testar Um Mês</button>
+      <button class="btn" type="submit">Quero Meu Atendente</button>
       <p class="aviso">Abre o WhatsApp com a mensagem pronta. Nada é enviado sem você apertar enviar.</p>
     </form>
   </div>
@@ -358,9 +358,9 @@ footer a{color:var(--verde);text-decoration:none;font-weight:600}
 <!-- === BLOCO I: CHAMADA FINAL E RODAPÉ === -->
 <section class="final dor">
   <div class="wrap">
-    <h2>Teste Um Mês Com Tudo <span class="verde">Feito Pela&nbsp;Gente.</span></h2>
+    <h2>Seu Atendente No Ar Em Até <span class="verde">5 Dias&nbsp;Úteis.</span></h2>
     <p class="sub" style="margin:0 auto 26px">R$ 500 por mês, sem fidelidade.</p>
-    <a class="btn" href="#contratar">Quero Testar Um Mês</a>
+    <a class="btn" href="#contratar">Quero Meu Atendente</a>
   </div>
 </section>
 <footer><div class="wrap">
@@ -456,7 +456,7 @@ $("form-contratar").addEventListener("submit", e => {
   e.preventDefault();
   const v = n => (document.querySelector(`input[name="${n}"]:checked`) || {}).value || "não informado";
   const linhas = [
-    "Oi! Quero testar um mês da Automação de Atendimento Rápido.",
+    "Oi! Quero contratar a Automação de Atendimento Rápido.",
     "",
     `Empresa: ${$("f-empresa").value.trim()}`,
     `Vendemos: ${$("f-segmento").value.trim()}`,
