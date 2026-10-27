@@ -240,7 +240,6 @@ footer a:hover{text-decoration:underline}
   .celular{margin:0 auto}
   .grade-3,.grade-pac,.quem,.duas,.tempo,.compara,.depende{grid-template-columns:1fr}
   .tempo{gap:22px}
-  .pac.destaque{order:-1}
   .caminhos{grid-template-columns:1fr}
   .garantia{grid-template-columns:1fr;text-align:center}
   .escudo{margin:0 auto}
@@ -625,7 +624,7 @@ bolinhas("pontos-10", 10, 3);
 function cartao(p, melhor) {
   return `
   <div class="pac${melhor ? " destaque" : ""}">
-    ${melhor ? '<span class="tag">Melhor pra você</span>' : ""}
+    ${melhor ? '<span class="tag">Recomendado</span>' : ""}
     <h3>${p.nome}</h3>
     <div class="dur">${p.duracao}</div>
     <div class="linha-preco"><span>Acelera Aí (valor único)</span><b>${brl(p.valor)}</b></div>
@@ -675,7 +674,8 @@ function simular() {
   // Planos disponíveis = os que deixam pelo menos o lucro mínimo
   const ok = planos.filter(p => p.lucro >= alvo);
   const fora = planos.filter(p => p.lucro < alvo);
-  const melhor = ok.length ? ok.reduce((a, b) => (b.lucro > a.lucro ? b : a)) : null;
+  // Do mais simples ao mais completo; o Turbo é o recomendado (se não estiver disponível, o de maior lucro)
+  const melhor = ok.find(p => p.destaque) || (ok.length ? ok.reduce((a, b) => (b.lucro > a.lucro ? b : a)) : null);
 
   $("grade-pac").innerHTML = ok.length
     ? ok.map(p => cartao(p, p === melhor)).join("")
