@@ -95,7 +95,7 @@ input:focus,textarea:focus{outline:none;border-color:var(--verde);box-shadow:0 0
 <main class="wrap" id="app" aria-live="polite"><p class="lead">Carregando…</p></main>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="perguntas.js?v=5"></script>
+<script src="perguntas.js?v=6"></script>
 <script>
 // ═══════════════════════════════════════════════════════════════
 // BLOCO 5: CONFIG E ESTADO
@@ -104,7 +104,9 @@ input:focus,textarea:focus{outline:none;border-color:var(--verde);box-shadow:0 0
 // ═══════════════════════════════════════════════════════════════
 const sb = window.supabase.createClient(DIAG.supabaseUrl, DIAG.supabaseKey);
 const TOKEN = new URLSearchParams(location.search).get("c") || "";
-const CHAVE = "acelera-diag-v1" + (TOKEN ? "-" + TOKEN : "");
+// Modo teste (&teste=1): passa sem responder e NÃO envia nada
+const TESTE = new URLSearchParams(location.search).has("teste");
+const CHAVE = "acelera-diag-v1" + (TOKEN ? "-" + TOKEN : "") + (new URLSearchParams(location.search).has("teste") ? "-teste" : "");
 let P = DIAG.perguntas.slice();
 let nomeConhecido = "";
 let st = {i:-1, r:{}};
@@ -116,7 +118,7 @@ const esc = s => String(s??"").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",
 function progresso(){
   const pct = st.i < 0 ? 0 : Math.round((st.i/P.length)*100);
   document.getElementById("barra").style.width = pct + "%";
-  document.getElementById("contador").textContent = st.i >= 0 ? `Pergunta ${st.i+1} de ${P.length}` : "";
+  document.getElementById("contador").textContent = (TESTE ? "TESTE · " : "") + (st.i >= 0 ? `Pergunta ${st.i+1} de ${P.length}` : "");
 }
 
 // ═══════════════════════════════════════════════════════════════
@@ -189,6 +191,7 @@ function mascara(v){
 }
 
 function valido(p){
+  if(TESTE) return "";
   const v = String(st.r[p.id]??"").trim();
   if(p.opcional) return "";
   if(!v) return p.tipo==="escolha" ? "Escolhe uma opção pra continuar." : "Responde essa pra gente continuar.";
@@ -207,6 +210,7 @@ function avancar(){
 // BLOCO 7: ENVIO (a proposta NÃO aparece aqui: só o Élton vê no painel)
 // ═══════════════════════════════════════════════════════════════
 async function enviar(){
+  if(TESTE) return telaFinal(nomeConhecido || st.r.nome);
   const b = document.getElementById("seg"); b.disabled = true; b.textContent = "Enviando…";
   const resp = {}; P.forEach(p => { const v = String(st.r[p.id]??"").trim(); if(v) resp[p.id] = v; });
   if(resp.instagram && !resp.instagram.startsWith("@")) resp.instagram = "@" + resp.instagram;
