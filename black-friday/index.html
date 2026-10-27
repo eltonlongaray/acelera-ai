@@ -135,6 +135,13 @@ p{margin:0 0 14px}
 .linha-preco.total{border-bottom:0;padding-top:14px}
 .linha-preco.total span{color:var(--gelo);font-weight:700}
 .linha-preco.total b{font-size:26px;color:var(--verde)}
+.lucro-est{background:rgba(37,211,102,.1);border:1px solid rgba(37,211,102,.35);border-radius:14px;padding:14px 16px;margin-bottom:14px}
+.lucro-est span,.parcela span{display:block;color:var(--cinza);font-size:14px;font-weight:700}
+.lucro-est b{display:block;font-size:36px;line-height:1.15;color:var(--verde);font-weight:900}
+.lucro-est small,.parcela small{display:block;color:var(--cinza);font-size:13px}
+.parcela{padding:4px 2px 10px}
+.parcela b{display:block;font-size:26px;line-height:1.2;color:var(--gelo);font-weight:800}
+.inv-total{color:var(--cinza-2);font-size:13px;padding:0 2px 16px;border-bottom:1px dashed var(--linha);margin-bottom:16px}
 .meta{margin:16px 0 18px;background:rgba(37,211,102,.08);border-radius:12px;padding:12px 14px;font-size:15px}
 .meta b{font-size:22px;color:var(--verde)}
 .pac ul{list-style:none;padding:0;margin:0 0 22px;color:var(--cinza);font-size:15px}
@@ -557,6 +564,7 @@ footer a:hover{text-decoration:underline}
 const CONFIG = {
   whatsapp: "5551982276577",
   taxaQuentes: 0.3, // de cada 10 clientes prontos, 3 compram (estimativa)
+  parcelas: 12, // Acelera Aí no cartão (o anúncio é pago direto na plataforma)
   lucroAlvo: 1000, // lucro mínimo que a gente quer pro cliente, mesmo no plano mais barato
   kit: { qtd: 3, desconto: 0.10 }, // ticket baixo: kit de 3 com 10% off em cada (pra ela + 1 ou 2 familiares)
   vagas: 5,
@@ -573,6 +581,7 @@ const CONFIG = {
 
 // === BLOCO 2: UTILITÁRIOS ===
 const brl = v => v.toLocaleString("pt-BR", { style: "currency", currency: "BRL", maximumFractionDigits: 0 });
+const brl2 = v => v.toLocaleString("pt-BR", { style: "currency", currency: "BRL", minimumFractionDigits: 2, maximumFractionDigits: 2 });
 const $ = id => document.getElementById(id);
 
 // === BLOCO 3: VAGAS ===
@@ -627,10 +636,9 @@ function cartao(p, melhor) {
     ${melhor ? '<span class="tag">Recomendado</span>' : ""}
     <h3>${p.nome}</h3>
     <div class="dur">${p.duracao}</div>
-    <div class="linha-preco"><span>Acelera Aí (valor único)</span><b>${brl(p.valor)}</b></div>
-    <div class="linha-preco"><span>Anúncio (pago direto no Instagram/Google)</span><b>${brl(p.anuncio)}</b></div>
-    <div class="linha-preco total"><span>Investimento total</span><b>${brl(p.inv)}</b></div>
-    <div class="meta">Meta: <b>${p.meta}</b> clientes prontos pra comprar<br><small style="color:var(--cinza)">Lucro estimado: <b style="font-size:15px;color:var(--verde)">${brl(p.lucro)}</b></small></div>
+    <div class="lucro-est"><span>Lucro estimado</span><b>${brl(p.lucro)}</b><small>Meta: ${p.meta} clientes prontos pra comprar</small></div>
+    <div class="parcela"><span>Acelera Aí</span><b>${CONFIG.parcelas}x de ${brl2(p.valor / CONFIG.parcelas)}</b><small>ou ${brl(p.valor)} à vista</small></div>
+    <div class="inv-total">+ Anúncio ${brl(p.anuncio)} (pago direto no Instagram/Google)<br>Investimento total: ${brl(p.inv)}</div>
     <ul>${p.itens.map(i => `<li>${i}</li>`).join("")}</ul>
     <div class="prazo">⏳ Novembro ou dezembro · começa em até 5 dias úteis</div>
     <a class="btn${melhor ? "" : " sec"}" href="#diagnostico" data-pacote="${p.id}">Quero o ${p.nome}</a>
