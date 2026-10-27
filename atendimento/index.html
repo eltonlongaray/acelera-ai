@@ -265,7 +265,7 @@ footer a{color:var(--verde);text-decoration:none;font-weight:600}
           <tr><td>Contrato</td><td>Anual, em&nbsp;geral</td><td>Mês a mês</td></tr>
           <tr><td>Compromisso mínimo</td><td>Cerca de R$&nbsp;2.400 por um&nbsp;ano</td><td>R$&nbsp;500 por um&nbsp;mês</td></tr>
           <tr><td>Suporte</td><td>Robô ou&nbsp;chamado</td><td>Pessoas, pelo&nbsp;WhatsApp</td></tr>
-          <tr><td>O que chega pro vendedor</td><td>Mensagens soltas</td><td>Cliente qualificado, com&nbsp;resumo</td></tr>
+          <tr><td>O que chega pra você</td><td>Mensagens soltas</td><td>Cliente qualificado, com&nbsp;resumo</td></tr>
         </tbody>
       </table>
     </div>
@@ -349,7 +349,7 @@ footer a{color:var(--verde);text-decoration:none;font-weight:600}
     <details><summary>Preciso de um número novo?</summary><p>Sim, e a gente resolve. Se você tiver um chip sobrando, a gente usa ele na hora. Se não, você pega o chip com a gente.</p></details>
     <details><summary>Meu número corre risco?</summary><p>O seu número principal nem entra na automação. A IA atende os clientes novos num número só pra ela, e os seus clientes antigos continuam no número de sempre. Ela só responde quem chama, sem disparo em massa, e todo contato e conversa fica registrado com a gente: se algo acontecer com o número da IA, você não perde nenhum cliente nem&nbsp;conversa.</p></details>
     <details><summary>Tem limite de mensagens?</summary><p>Até 3 mil mensagens enviadas pela IA por mês.</p></details>
-    <details><summary>E se o cliente quiser falar com uma pessoa?</summary><p>A IA passa a conversa pra sua equipe na hora e para de responder só naquele&nbsp;contato.</p></details>
+    <details><summary>E se o cliente quiser falar com uma pessoa?</summary><p>A IA passa a conversa pra você na hora, ou pra quem você escolher, e para de responder só naquele&nbsp;contato.</p></details>
     <details><summary>Tem fidelidade?</summary><p>Não. É mês a mês. Se não fizer sentido, você cancela.</p></details>
     <details><summary>Vocês garantem vendas?</summary><p>Não. A venda depende da sua oferta e de quem atende. O que a gente garante é o cliente chegando qualificado e o acompanhamento todo mês pra melhorar o resultado.</p></details>
   </div>
@@ -379,11 +379,11 @@ const CONFIG = {
   // Benefícios com o valor de cada um (somados e riscados na oferta). valor: null = incluído
   beneficios: [
     { ico: "🎯", nome: "Atendente vendedor", texto: "Tira a dúvida, contorna a objeção com base no seu catálogo e conduz pra venda, pro orçamento ou pro agendamento.", valor: 600 },
-    { ico: "🔎", nome: "Qualificação do cliente", texto: "Faz as perguntas que separam o curioso do comprador. Seu vendedor recebe o resumo: o que quer, orçamento e prazo.", valor: 300 },
+    { ico: "🔎", nome: "Qualificação do cliente", texto: "Faz as perguntas que separam o curioso do comprador. Você recebe o resumo, com o que quer, orçamento e prazo, e encaminha pra quem quiser.", valor: 300 },
     { ico: "📈", nome: "Acompanhamento e otimização", texto: "A gente acompanha os resultados da automação com você e ajusta as conversas com estratégias feitas pro seu negócio, pra vender cada vez mais.", valor: 500 },
     { ico: "💬", nome: "Conversa de gente", texto: "Entende áudio, responde em mensagens curtas e digita no ritmo de uma pessoa. Nada de textão de robô.", valor: 250 },
     { ico: "📅", nome: "Agenda automática", texto: "Marca o horário direto no seu Google Agenda.", valor: 150 },
-    { ico: "🙋", nome: "Passa pro humano na hora certa", texto: "Se o cliente pede uma pessoa, a IA pausa só naquela conversa e avisa sua equipe. Respeita o seu horário de atendimento.", valor: 250 },
+    { ico: "🙋", nome: "Passa pro humano na hora certa", texto: "Se o cliente pede uma pessoa, a IA pausa só naquela conversa e te avisa. Respeita o seu horário de atendimento.", valor: 250 },
     { ico: "☁️", nome: "No ar 24h, 7 dias", texto: "Roda na nuvem. Não depende de computador ligado nem de aba aberta.", valor: 200 },
     { ico: "📊", nome: "Relatório de qualificação", texto: "Quem chegou, o que perguntou e quem ficou pronto pra comprar.", valor: 300 },
     { ico: "👥", nome: "Suporte com gente de verdade", texto: "Você fala com a Taimara ou com o Everton, não com robô.", valor: null }
@@ -417,7 +417,7 @@ const roteiro = [
   ["ia", "Entendo! Ela já inclui extração e máscara calmante, e dá pra parcelar em 3x. Quer que eu veja um horário essa semana?"],
   ["ele", "Quero! Pode ser quinta à tarde?"],
   ["ia", "Quinta às 15h está livre. Já deixei reservado pra você ✅"],
-  ["sistema", "📅 Marcado no Google Agenda · resumo enviado pra equipe"]
+  ["sistema", "📅 Marcado no Google Agenda · resumo enviado pra você"]
 ];
 // Cada mensagem: pausa de leitura, "digitando..." (tempo pelo tamanho do texto) e só então a mensagem
 const espera = ms => new Promise(r => setTimeout(r, ms));
