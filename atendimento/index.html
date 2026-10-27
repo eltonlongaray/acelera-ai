@@ -52,6 +52,18 @@ p{margin:0 0 14px}
 .btn.sec{background:transparent;color:var(--gelo);border:1.5px solid var(--linha);box-shadow:none}
 .btn.sec:hover{border-color:var(--verde)}
 .selo{display:inline-flex;align-items:center;gap:8px;background:rgba(37,211,102,.1);color:var(--verde);border:1px solid rgba(37,211,102,.35);font-weight:700;font-size:14px;padding:7px 14px;border-radius:999px}
+.faixa{--h:clamp(84px,10vw,128px);position:relative;height:var(--h);margin:-14px 0 clamp(24px,3vw,32px);z-index:3;pointer-events:none}
+.faixa svg{position:absolute;inset:0;display:block;width:100%;height:100%;filter:drop-shadow(0 16px 18px rgba(0,0,0,.6)) drop-shadow(0 3px 3px rgba(0,0,0,.7))}
+.faixa .brilho{animation:brilho 4.5s ease-in-out infinite}
+@keyframes brilho{0%{transform:translateX(-160px)}65%,100%{transform:translateX(1000px)}}
+.faixa .wrap{position:relative;height:100%;display:flex;align-items:center;padding-top:calc(var(--h) * .34)}
+.faixa .fx-m{display:none}
+@media (max-width:700px){.faixa .fx-d{display:none}.faixa .fx-m{display:block}}
+.faixa-texto{color:#fff;text-transform:uppercase;letter-spacing:.06em;font-weight:900;font-size:clamp(20px,2.7vw,32px);line-height:1;text-shadow:0 1px 0 rgba(255,255,255,.3),0 -1px 0 rgba(0,0,0,.9),0 5px 12px rgba(0,0,0,.8)}
+.faixa-texto b{color:var(--amarelo)}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.celular{position:relative;z-index:4}
+@media (prefers-reduced-motion:reduce){.faixa .brilho{animation:none;opacity:0}}
 .ponto{width:8px;height:8px;border-radius:50%;background:var(--verde);animation:pisca 1.4s infinite}
 @keyframes pisca{50%{opacity:.25}}
 
@@ -61,7 +73,7 @@ p{margin:0 0 14px}
 .logo{font-weight:900;font-size:20px;letter-spacing:-.02em}
 .logo span{color:var(--verde)}
 .hero{display:grid;grid-template-columns:1.1fr .9fr;gap:48px;align-items:center}
-.hero h1{font-size:clamp(34px,5.6vw,58px);font-weight:900;margin:18px 0 18px}
+.hero h1{font-size:clamp(34px,5vw,52px);font-weight:900;margin:0 0 18px}
 .hero .sub{font-size:19px}
 .acoes{display:flex;flex-wrap:wrap;gap:12px;margin:26px 0 12px}
 .legenda{color:var(--cinza-2);font-size:14px;margin-top:10px}
@@ -210,6 +222,7 @@ footer a{color:var(--verde);text-decoration:none;font-weight:600}
 
 /* === BLOCO 13: CELULAR (RESPONSIVO) === */
 @media (max-width:860px){
+  .hero > div:first-child{min-height:calc(100vh - 200px);min-height:calc(100svh - 200px);display:flex;flex-direction:column;justify-content:center}
   section{padding:56px 0}
   .hero{grid-template-columns:1fr}
   .celular{margin:0 auto}
@@ -233,11 +246,45 @@ footer a{color:var(--verde);text-decoration:none;font-weight:600}
     <div class="barra">
       <div class="logo">Acelera <span>Aí</span></div>
     </div>
+  </div>
+  <div class="faixa" aria-hidden="true">
+    <svg class="fx-d" viewBox="0 0 1000 100" preserveAspectRatio="none">
+      <defs>
+        <linearGradient id="fx-v-fx-d" x1="0" y1="0" x2="0" y2="1"><stop offset=".02" stop-color="#3d3d3d"/><stop offset=".3" stop-color="#151515"/><stop offset=".6" stop-color="#000"/><stop offset=".85" stop-color="#0b0b0b"/><stop offset=".98" stop-color="#2c2c2c"/></linearGradient>
+        <linearGradient id="fx-h-fx-d" x1="0" y1="0" x2="1" y2="0"><stop offset=".4" stop-color="#000" stop-opacity="0"/><stop offset=".5" stop-color="#fff" stop-opacity=".12"/><stop offset=".62" stop-color="#000" stop-opacity=".5"/><stop offset=".72" stop-color="#fff" stop-opacity=".14"/><stop offset=".84" stop-color="#000" stop-opacity=".45"/><stop offset=".94" stop-color="#fff" stop-opacity=".12"/><stop offset="1" stop-color="#000" stop-opacity=".3"/></linearGradient>
+        <linearGradient id="fx-b-fx-d" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset=".5" stop-color="#fff" stop-opacity=".18"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>
+        <clipPath id="fx-c-fx-d"><path d="M0,40 C150,38 300,36 420,34 C540,32 600,14 700,18 C800,22 860,4 1000,2 L1000,52 C860,56 800,74 700,70 C600,66 540,86 420,88 C300,90 150,92 0,94 Z"/></clipPath>
+      </defs>
+      <g clip-path="url(#fx-c-fx-d)">
+        <rect width="1000" height="100" fill="url(#fx-v-fx-d)"/>
+        <rect width="1000" height="100" fill="url(#fx-h-fx-d)"/>
+        <rect class="brilho" width="140" height="100" fill="url(#fx-b-fx-d)"/>
+      </g>
+      <path d="M0,40 C150,38 300,36 420,34 C540,32 600,14 700,18 C800,22 860,4 1000,2" fill="none" stroke="#FFC814" stroke-width="3" vector-effect="non-scaling-stroke"/>
+      <path d="M0,94 C150,92 300,90 420,88 C540,86 600,66 700,70 C800,74 860,56 1000,52" fill="none" stroke="#FFC814" stroke-width="3" vector-effect="non-scaling-stroke"/>
+    </svg>
+    <svg class="fx-m" viewBox="0 0 1000 100" preserveAspectRatio="none">
+      <defs>
+        <linearGradient id="fx-v-fx-m" x1="0" y1="0" x2="0" y2="1"><stop offset=".02" stop-color="#3d3d3d"/><stop offset=".3" stop-color="#151515"/><stop offset=".6" stop-color="#000"/><stop offset=".85" stop-color="#0b0b0b"/><stop offset=".98" stop-color="#2c2c2c"/></linearGradient>
+        <linearGradient id="fx-h-fx-m" x1="0" y1="0" x2="1" y2="0"><stop offset=".7" stop-color="#000" stop-opacity="0"/><stop offset=".82" stop-color="#fff" stop-opacity=".12"/><stop offset=".92" stop-color="#000" stop-opacity=".45"/><stop offset="1" stop-color="#fff" stop-opacity=".1"/></linearGradient>
+        <linearGradient id="fx-b-fx-m" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset=".5" stop-color="#fff" stop-opacity=".18"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>
+        <clipPath id="fx-c-fx-m"><path d="M0,40 C300,38 600,36 780,34 C860,33 900,16 1000,10 L1000,64 C900,70 860,87 780,88 C600,90 300,92 0,94 Z"/></clipPath>
+      </defs>
+      <g clip-path="url(#fx-c-fx-m)">
+        <rect width="1000" height="100" fill="url(#fx-v-fx-m)"/>
+        <rect width="1000" height="100" fill="url(#fx-h-fx-m)"/>
+        <rect class="brilho" width="140" height="100" fill="url(#fx-b-fx-m)"/>
+      </g>
+      <path d="M0,40 C300,38 600,36 780,34 C860,33 900,16 1000,10" fill="none" stroke="#FFC814" stroke-width="3" vector-effect="non-scaling-stroke"/>
+      <path d="M0,94 C300,92 600,90 780,88 C860,87 900,70 1000,64" fill="none" stroke="#FFC814" stroke-width="3" vector-effect="non-scaling-stroke"/>
+    </svg>
+    <div class="wrap"><span class="faixa-texto">Super Oferta <b>Black</b></span></div>
+  </div>
+  <div class="wrap">
     <div class="hero">
       <div>
-        <span class="selo"><span class="ponto"></span>Automação de Atendimento Rápido</span>
-        <h1>Seu WhatsApp Vendendo 24h, <span class="verde">Sem Você Configurar Nada.</span></h1>
-        <p class="sub">Um atendente com inteligência artificial que tira dúvidas e contorna objeções, pronto para vender. A gente implanta e acompanha com você. Cancele quando&nbsp;quiser.</p>
+        <h1><span class="sr">Super Oferta Black: </span>Automação de Atendimento Rápido <span class="verde">no WhatsApp 24h/7</span></h1>
+        <p class="sub">Na Black Friday o atendimento lota: nossa&nbsp;IA atende todo mundo na mesma hora, sem perder tempo com gente curiosa. A&nbsp;gente implanta e acompanha com você. Cancele quando&nbsp;quiser.</p>
         <div class="acoes">
           <a class="btn" href="#contratar">Quero Meu Atendente</a>
         </div>
@@ -274,7 +321,7 @@ footer a{color:var(--verde);text-decoration:none;font-weight:600}
     <p class="sub">Mas antes, pensando no valor de cada&nbsp;coisa:</p>
     <p class="pergunta-valor">Quanto Isso Vale Pra&nbsp;Você?</p>
     <div class="grade-3">
-      <div class="card"><div class="ico">⏱️</div><h3>O seu tempo</h3><p>Cada "quanto custa?" respondido à mão é tempo que você tira da venda, da família e do descanso. A IA responde na hora, 24h, inclusive de madrugada e no fim de&nbsp;semana.</p></div>
+      <div class="card"><div class="ico">⏱️</div><h3>O seu tempo</h3><p>Cada "quanto custa?" respondido à mão é tempo que você tira da venda, da família e do descanso. Nossa IA responde na hora, 24h, inclusive de madrugada e no fim de&nbsp;semana.</p></div>
       <div class="card"><div class="ico">💰</div><h3>Um atendente</h3><p>Contratar alguém pra responder o WhatsApp custa salário, encargos e benefícios, todo mês. Com carteira assinada, passa fácil de R$&nbsp;2.500 por mês. E mesmo que seja freelancer, você sabe que, em qualquer problema, ele pode te deixar na&nbsp;mão.</p></div>
       <div class="card"><div class="ico">🎓</div><h3>O treinamento</h3><p>Antes de vender, essa pessoa precisa aprender seus produtos, preços e como contornar objeções. São semanas ensinando, e se ela sai, você começa tudo de&nbsp;novo.</p></div>
     </div>
@@ -299,7 +346,7 @@ footer a{color:var(--verde);text-decoration:none;font-weight:600}
     <p class="comp-fecho" style="margin-bottom:34px">Aqui a sua vantagem é <b>tempo, eficiência e acompanhamento de perto</b>: a gente pega na sua mão e anda junto com você na direção&nbsp;certa.</p>
     <div class="chip">
       <div class="ico">🛡️</div>
-      <div><h3>Sistema de segurança do seu número</h3><p>A IA atende num chip só dela, então o seu número principal nem entra na automação. Ela só responde quem chama, sem disparo em massa, que é o que leva ao bloqueio. E todo contato e conversa fica registrado com a gente: se algo acontecer com o número da IA, você não perde nenhum&nbsp;cliente.</p></div>
+      <div><h3>Sistema de segurança do seu número</h3><p>Nossa IA atende num chip só dela, então o seu número principal nem entra na automação. Ela só responde quem chama, sem disparo em massa, que é o que leva ao bloqueio. E todo contato e conversa fica registrado com a gente: se algo acontecer com o número da IA, você não perde nenhum&nbsp;cliente.</p></div>
     </div>
   </div>
 </section>
@@ -382,10 +429,10 @@ footer a{color:var(--verde);text-decoration:none;font-weight:600}
   <div class="wrap faq">
     <details><summary>Preciso configurar alguma&nbsp;coisa?</summary><p>Não. Você manda seus produtos, preços, dúvidas mais comuns e o jeito de falar com o cliente. O resto é com a gente.</p></details>
     <details><summary>Em quanto tempo fica pronto?</summary><p>Em até 5 dias úteis depois que você manda as informações da&nbsp;empresa.</p></details>
-    <details><summary>Preciso de um número novo?</summary><p>A IA atende num número só dela, e a gente resolve isso pra você. Se você já tem um número, a gente faz a portabilidade dele pro nosso chip, que traz benefícios pro titular: incentiva fontes de energia limpa e pode até reduzir a conta de luz, tanto residencial quanto comercial. Se não tiver, você pega um chip novo com a gente. O plano do chip é pago à&nbsp;parte.</p></details>
-    <details><summary>Meu número corre risco?</summary><p>O seu número principal nem entra na automação. A IA atende os clientes novos num número só pra ela, e os seus clientes antigos continuam no número de sempre. Ela só responde quem chama, sem disparo em massa, e todo contato e conversa fica registrado com a gente: se algo acontecer com o número da IA, você não perde nenhum cliente nem&nbsp;conversa.</p></details>
+    <details><summary>Preciso de um número novo?</summary><p>Nossa IA atende num número só dela, e a gente resolve isso pra você. Se você já tem um número, a gente faz a portabilidade dele pro nosso chip, que traz benefícios pro titular: incentiva fontes de energia limpa e pode até reduzir a conta de luz, tanto residencial quanto comercial. Se não tiver, você pega um chip novo com a gente. O plano do chip é pago à&nbsp;parte.</p></details>
+    <details><summary>Meu número corre risco?</summary><p>O seu número principal nem entra na automação. Nossa IA atende os clientes novos num número só pra ela, e os seus clientes antigos continuam no número de sempre. Ela só responde quem chama, sem disparo em massa, e todo contato e conversa fica registrado com a gente: se algo acontecer com o número da IA, você não perde nenhum cliente nem&nbsp;conversa.</p></details>
     <details><summary>Tem limite de mensagens?</summary><p>Até 3 mil mensagens enviadas pela IA por mês.</p></details>
-    <details><summary>E se o cliente quiser falar com uma pessoa?</summary><p>A IA passa a conversa pra você na hora, ou pra quem você escolher, e para de responder só naquele&nbsp;contato.</p></details>
+    <details><summary>E se o cliente quiser falar com uma pessoa?</summary><p>Nossa IA passa a conversa pra você na hora, ou pra quem você escolher, e para de responder só naquele&nbsp;contato.</p></details>
     <details><summary>Tem fidelidade?</summary><p>Não. É mês a mês. Se não fizer sentido, você cancela.</p></details>
     <details><summary>Vocês garantem vendas?</summary><p>Não. A venda depende da sua oferta e de quem atende. O que a gente garante é o cliente chegando qualificado e o acompanhamento todo mês pra melhorar o resultado.</p></details>
   </div>
@@ -420,7 +467,7 @@ const CONFIG = {
     { ico: "📈", nome: "Acompanhamento e otimização", texto: "A gente acompanha os resultados da automação com você e ajusta as conversas com estratégias feitas pro seu negócio, pra vender cada vez mais.", valor: 450 },
     { ico: "💬", nome: "Conversa de gente", texto: "Entende áudio, responde em mensagens curtas e digita no ritmo de uma pessoa. Nada de textão de robô.", valor: 250 },
     { ico: "📅", nome: "Agenda automática", texto: "Marca o horário direto no seu Google Agenda.", valor: 150 },
-    { ico: "🙋", nome: "Passa pro humano na hora certa", texto: "Se o cliente pede uma pessoa, a IA pausa só naquela conversa e te avisa. Respeita o seu horário de atendimento.", valor: 250 },
+    { ico: "🙋", nome: "Passa pro humano na hora certa", texto: "Se o cliente pede uma pessoa, nossa IA pausa só naquela conversa e te avisa. Respeita o seu horário de atendimento.", valor: 250 },
     { ico: "☁️", nome: "No ar 24h, 7 dias", texto: "Roda na nuvem. Não depende de computador ligado nem de aba aberta.", valor: 200 },
     { ico: "📊", nome: "Relatório de otimização do processo de vendas", texto: "Quem chegou, o que perguntou, quem ficou pronto pra comprar e o que ajustar pra vender mais.", valor: 300 },
     { ico: "👥", nome: "Suporte com gente de verdade", texto: "Você fala com a nossa equipe, não com robô.", valor: 400 }
