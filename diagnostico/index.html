@@ -129,7 +129,7 @@ function telaIntro(){
     <p class="eyebrow">Proposta sob medida</p>
     <h1>${oi}Vamos montar <em>a sua</em> proposta.</h1>
     <p class="lead">${nomeConhecido ? "O que você já me contou no WhatsApp está guardado. Faltam só estas perguntas" : "São perguntas rápidas"}: ${P.length} no total, uns ${Math.max(3, Math.round(P.length/3))} minutos.</p>
-    <p class="lead">Com elas eu calculo uma proposta que se paga e cabe no seu bolso. Não existe resposta certa.</p>
+    <p class="lead">Com elas eu calculo uma proposta que se paga e cabe no seu bolso.</p>
     <div class="nav"><span></span><button class="btn" id="go">${retomar ? "Continuar de onde parei" : "Começar"} →</button></div>
     <p class="rodape">Suas respostas ficam só entre nós.</p></section>`;
   document.getElementById("go").onclick = () => { st.i = retomar ? Math.min(Math.max(st.i,0), P.length-1) : 0; salvar(); telaPergunta(); };
