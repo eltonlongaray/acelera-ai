@@ -146,6 +146,11 @@ table.comp tr:last-child td{border-bottom:0}
 .nota{color:var(--cinza-2);font-size:14px;margin-top:22px}
 [hidden]{display:none!important}
 .titulo-bloco{margin:44px 0 18px;font-size:22px}
+.valor-normal{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-top:10px;padding:14px 0 0;border-top:1px dashed var(--linha);font-weight:700}
+.valor-normal span{white-space:nowrap}
+.valor-normal b{color:var(--gelo);font-size:24px;white-space:nowrap}
+.valor-normal.riscado b{text-decoration:line-through;color:var(--vermelho);font-size:20px}
+.preco-final small.bf{display:inline-block;background:var(--amarelo);color:#1a1300;font-weight:900;font-size:14px;letter-spacing:.06em;text-transform:uppercase;padding:6px 14px;border-radius:999px;margin-bottom:8px}
 .nem-metade{text-align:center;font-size:19px;color:var(--cinza);margin:22px 0 16px}
 .nem-metade b{display:block;color:var(--gelo);font-size:22px}
 #revelar{width:100%;background:var(--amarelo);color:#231a00;box-shadow:0 10px 30px rgba(255,200,20,.25)}
@@ -310,10 +315,11 @@ footer a{color:var(--verde);text-decoration:none;font-weight:600}
       <h3>Automação de Atendimento Rápido</h3>
       <div class="dur">Mês a mês · sem fidelidade</div>
       <div id="lista-preco"></div>
-      <p class="nem-metade">Mas a gente não vai cobrar&nbsp;isso. <b>Na verdade, nem metade&nbsp;disso.</b></p>
+      <div class="valor-normal" id="valor-normal"><span>Valor normal</span><b id="preco-normal"></b></div>
+      <p class="nem-metade">Mas hoje a gente não vai cobrar nem&nbsp;isso. <b>Na Super Oferta Black Friday, é menos da&nbsp;metade.</b></p>
       <button class="btn" type="button" id="revelar">Revelar Minha Oferta</button>
       <div id="revelado" hidden>
-        <div class="preco-final"><small>Sua oferta</small><b id="preco-final"></b><span>por mês · implantação inclusa</span></div>
+        <div class="preco-final"><small class="bf">Super Oferta Black Friday</small><b id="preco-final"></b><span>por mês · implantação inclusa</span></div>
         <p class="extra">Chip da sua IA: plano próprio, pago à&nbsp;parte.</p>
         <a class="btn" href="#contratar">Quero Meu Atendente</a>
       </div>
@@ -404,7 +410,8 @@ footer a{color:var(--verde);text-decoration:none;font-weight:600}
 // === BLOCO 1: CONFIGURAÇÃO (editar aqui) ===
 const CONFIG = {
   whatsapp: "5551982276577",
-  preco: 500, // por mês, sem fidelidade
+  preco: 500, // por mês, sem fidelidade (Super Oferta Black Friday)
+  precoNormal: 1500, // valor normal por mês, aparece antes do botão
   implantacao: 1200, // valor "cheio" da implantação, que sai de graça
   // Benefícios com o valor de cada um (somados e riscados na oferta). valor: null = incluído
   beneficios: [
@@ -437,9 +444,11 @@ $("lista-preco").innerHTML = CONFIG.beneficios.map(b => `
   <div class="item-preco"><span>${nb(b.nome)}</span>${b.valor ? `<s>${brl(b.valor)}/mês</s>` : "<b>incluído</b>"}</div>`).join("") + `
   <div class="item-preco"><span>Implantação feita pela&nbsp;gente</span><s>${brl(CONFIG.implantacao)}</s></div>
   <div class="soma"><span>Tudo somado</span><s>${brl(somaMes)}/mês</s></div>`;
+$("preco-normal").textContent = brl(CONFIG.precoNormal) + "/mês";
 // O valor só aparece quando a pessoa toca no botão (nunca rolando a tela)
 $("revelar").addEventListener("click", () => {
   $("preco-final").textContent = brl(CONFIG.preco);
+  $("valor-normal").classList.add("riscado");
   $("revelar").hidden = true;
   $("revelado").hidden = false;
   $("revelado-2").hidden = false;
