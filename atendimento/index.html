@@ -52,7 +52,7 @@ p{margin:0 0 14px}
 .btn.sec{background:transparent;color:var(--gelo);border:1.5px solid var(--linha);box-shadow:none}
 .btn.sec:hover{border-color:var(--verde)}
 .selo{display:inline-flex;align-items:center;gap:8px;background:rgba(37,211,102,.1);color:var(--verde);border:1px solid rgba(37,211,102,.35);font-weight:700;font-size:14px;padding:7px 14px;border-radius:999px}
-.faixa{--h:clamp(84px,10vw,128px);position:relative;height:var(--h);margin:6px 0 -26px;z-index:3;pointer-events:none}
+.faixa{--h:clamp(84px,10vw,128px);position:relative;height:var(--h);margin:-14px 0 clamp(24px,3vw,32px);z-index:3;pointer-events:none}
 .faixa svg{position:absolute;inset:0;display:block;width:100%;height:100%;filter:drop-shadow(0 16px 18px rgba(0,0,0,.6)) drop-shadow(0 3px 3px rgba(0,0,0,.7))}
 .faixa .brilho{animation:brilho 4.5s ease-in-out infinite}
 @keyframes brilho{0%{transform:translateX(-160px)}65%,100%{transform:translateX(1000px)}}
@@ -73,7 +73,7 @@ p{margin:0 0 14px}
 .logo{font-weight:900;font-size:20px;letter-spacing:-.02em}
 .logo span{color:var(--verde)}
 .hero{display:grid;grid-template-columns:1.1fr .9fr;gap:48px;align-items:center}
-.hero h1{font-size:clamp(34px,5.6vw,58px);font-weight:900;margin:18px 0 18px}
+.hero h1{font-size:clamp(34px,5vw,52px);font-weight:900;margin:0 0 18px}
 .hero .sub{font-size:19px}
 .acoes{display:flex;flex-wrap:wrap;gap:12px;margin:26px 0 12px}
 .legenda{color:var(--cinza-2);font-size:14px;margin-top:10px}
@@ -222,6 +222,7 @@ footer a{color:var(--verde);text-decoration:none;font-weight:600}
 
 /* === BLOCO 13: CELULAR (RESPONSIVO) === */
 @media (max-width:860px){
+  .hero > div:first-child{min-height:calc(100vh - 200px);min-height:calc(100svh - 200px);display:flex;flex-direction:column;justify-content:center}
   section{padding:56px 0}
   .hero{grid-template-columns:1fr}
   .celular{margin:0 auto}
