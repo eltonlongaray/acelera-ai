@@ -147,7 +147,7 @@ table.comp tr:last-child td{border-bottom:0}
 [hidden]{display:none!important}
 .titulo-bloco{margin:44px 0 18px;font-size:22px}
 .valor-normal{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-top:10px;padding:14px 0 0;border-top:1px dashed var(--linha);font-weight:700}
-.valor-normal span{white-space:nowrap}
+.valor-normal span{min-width:0}
 .valor-normal b{color:var(--gelo);font-size:24px;white-space:nowrap}
 .valor-normal.riscado b{text-decoration:line-through;color:var(--vermelho);font-size:20px}
 .preco-final small.bf{display:inline-block;background:var(--amarelo);color:#1a1300;font-weight:900;font-size:14px;letter-spacing:.06em;text-transform:uppercase;padding:6px 14px;border-radius:999px;margin-bottom:8px}
@@ -315,7 +315,7 @@ footer a{color:var(--verde);text-decoration:none;font-weight:600}
       <h3>Automação de Atendimento Rápido</h3>
       <div class="dur">Mês a mês · sem fidelidade</div>
       <div id="lista-preco"></div>
-      <div class="valor-normal" id="valor-normal"><span>Valor fora da Black</span><b id="preco-normal"></b></div>
+      <div class="valor-normal" id="valor-normal"><span>Valor fora da&nbsp;Black</span><b id="preco-normal"></b></div>
       <p class="nem-metade">Mas hoje a gente não vai cobrar nem&nbsp;isso. <b>Na Super Oferta Black Friday, é menos da&nbsp;metade.</b></p>
       <button class="btn" type="button" id="revelar">Revelar Minha Oferta</button>
       <div id="revelado" hidden>
