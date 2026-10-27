@@ -41,8 +41,6 @@ window.DIAG = {
     // A campanha
     {id:"vender_agora", grupo:"A campanha", tipo:"longo", q:"Qual serviço ou produto você mais quer vender agora?",
       ajuda:"Pode ser uma oferta especial pra campanha. Ex.: um pacote de sessões, um kit de produtos ou um valor promocional."},
-    {id:"cliente_pronta", grupo:"A campanha", tipo:"escolha", q:"Quando chegar uma cliente interessada, o que você prefere?",
-      ops:["Que ela fale comigo no WhatsApp pra agendar","Que ela agende sozinha e já pague pelo link","Os dois"]},
     {id:"origem", grupo:"A campanha", tipo:"escolha", outro:true, q:"Hoje, de onde vem a maioria das suas clientes?",
       ops:["Indicação","Instagram","Passam em frente ao espaço"]},
     {id:"anuncio", grupo:"A campanha", tipo:"escolha", q:"Você já fez anúncio pago?",
