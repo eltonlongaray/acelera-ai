@@ -79,6 +79,7 @@ p{margin:0 0 14px}
 .card{background:var(--tinta);border:1px solid var(--linha);border-radius:var(--raio);padding:24px}
 .card .ico{font-size:28px;margin-bottom:10px}
 .card p{color:var(--cinza);margin:0}
+#recebe .card{background:var(--tinta-2)}
 
 /* === BLOCO 6: BENEFÍCIOS COM VALOR === */
 .benef{position:relative;background:var(--tinta-2);border:1px solid var(--linha);border-radius:var(--raio);padding:24px;display:flex;flex-direction:column}
@@ -246,8 +247,28 @@ footer a{color:var(--verde);text-decoration:none;font-weight:600}
   </div>
 </section>
 
-<!-- === BLOCO C: COMPARAÇÃO === -->
-<section>
+<!-- === BLOCO C: QUANTO ISSO VALE PRA VOCÊ (VALOR DE CADA ENTREGA) === -->
+<section id="recebe">
+  <div class="wrap">
+    <span class="eyebrow">Oferta especial</span>
+    <h2>Temos Uma Oferta Especial Pra&nbsp;Você.</h2>
+    <p class="sub">Mas antes, pensando no valor de cada coisa: quanto isso vale pra&nbsp;você?</p>
+    <div class="grade-3">
+      <div class="card"><div class="ico">⏱️</div><h3>O seu tempo</h3><p>Cada "quanto custa?" respondido à mão é tempo que você tira da venda, da família e do descanso. A IA responde na hora, 24h, inclusive de madrugada e no fim de&nbsp;semana.</p></div>
+      <div class="card"><div class="ico">💰</div><h3>Um atendente</h3><p>Contratar alguém pra responder o WhatsApp custa salário, encargos e benefícios, todo mês. Com carteira assinada, passa fácil de R$&nbsp;2.500 por mês. E mesmo que seja freelancer, você vai precisar&nbsp;treiná-lo.</p></div>
+      <div class="card"><div class="ico">🎓</div><h3>O treinamento</h3><p>Antes de vender, essa pessoa precisa aprender seus produtos, preços e como contornar objeções. São semanas ensinando, e se ela sai, você começa tudo de&nbsp;novo.</p></div>
+    </div>
+    <h3 class="titulo-bloco">Poderíamos cobrar exatamente esse preço por cada entrega&nbsp;nossa:</h3>
+    <div class="grade-3" id="beneficios" style="margin-top:0"></div>
+    <div class="chip">
+      <div class="ico">🌱</div>
+      <div><h3>Chip da sua IA</h3><p>A gente fornece o chip do número que a IA vai usar, e ele traz muitos benefícios pra pessoa física titular do chip. Ele incentiva a sustentabilidade do planeta por meio de fontes de energia limpa, e o titular pode inclusive reduzir o custo da conta de luz, tanto residencial quanto&nbsp;comercial.</p><small>O plano do chip é pago à parte.</small></div>
+    </div>
+  </div>
+</section>
+
+<!-- === BLOCO D: COMPARAÇÃO (DEPOIS DE MOSTRAR TUDO O QUE A GENTE ENTREGA) === -->
+<section class="dor">
   <div class="wrap">
     <span class="eyebrow">Comparação</span>
     <h2>Na Ponta do Lápis, Sai Mais&nbsp;Barato.</h2>
@@ -265,26 +286,6 @@ footer a{color:var(--verde);text-decoration:none;font-weight:600}
       </table>
     </div>
     <p class="comp-fecho">Ferramentas comuns, que não fazem nem a metade disso, cobram em torno de R$ 199 por mês, mas no plano anual: são R$ 2.388 de compromisso antes de você saber se funciona. <b>Aqui o contrato é mês a mês, com tudo feito, e você cancela quando&nbsp;quiser.</b></p>
-  </div>
-</section>
-
-<!-- === BLOCO D: QUANTO ISSO VALE PRA VOCÊ (VALOR DE CADA ENTREGA) === -->
-<section class="dor" id="recebe">
-  <div class="wrap">
-    <span class="eyebrow">Oferta especial</span>
-    <h2>Temos Uma Oferta Especial Pra&nbsp;Você.</h2>
-    <p class="sub">Mas antes, pensando no valor de cada coisa: quanto isso vale pra&nbsp;você?</p>
-    <div class="grade-3">
-      <div class="card"><div class="ico">⏱️</div><h3>O seu tempo</h3><p>Cada "quanto custa?" respondido à mão é tempo que você tira da venda, da família e do descanso. A IA responde na hora, 24h, inclusive de madrugada e no fim de&nbsp;semana.</p></div>
-      <div class="card"><div class="ico">💰</div><h3>Um atendente</h3><p>Contratar alguém pra responder o WhatsApp custa salário, encargos e benefícios, todo mês. Com carteira assinada, passa fácil de R$&nbsp;2.500 por mês. E mesmo que seja freelancer, você vai precisar&nbsp;treiná-lo.</p></div>
-      <div class="card"><div class="ico">🎓</div><h3>O treinamento</h3><p>Antes de vender, essa pessoa precisa aprender seus produtos, preços e como contornar objeções. São semanas ensinando, e se ela sai, você começa tudo de&nbsp;novo.</p></div>
-    </div>
-    <h3 class="titulo-bloco">Poderíamos cobrar exatamente esse preço por cada entrega&nbsp;nossa:</h3>
-    <div class="grade-3" id="beneficios" style="margin-top:0"></div>
-    <div class="chip">
-      <div class="ico">🌱</div>
-      <div><h3>Chip da sua IA</h3><p>A gente fornece o chip do número que a IA vai usar, e ele traz muitos benefícios pra pessoa física titular do chip. Ele incentiva a sustentabilidade do planeta por meio de fontes de energia limpa, e o titular pode inclusive reduzir o custo da conta de luz, tanto residencial quanto&nbsp;comercial.</p><small>O plano do chip é pago à parte.</small></div>
-    </div>
   </div>
 </section>
 
