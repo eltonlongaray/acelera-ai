@@ -1,0 +1,447 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Automação de Atendimento Rápido · Acelera Aí</title>
+<meta name="description" content="Um atendente com inteligência artificial no seu WhatsApp, implantado e operado pela Acelera Aí. R$ 500 por mês, sem fidelidade.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+/* === BLOCO 1: CORES E BASE (mesmas da página da Black) === */
+:root{
+  --tinta:#0A1411;--tinta-2:#101F1A;--tinta-3:#16291F;--linha:#22382E;
+  --verde:#25D366;--verde-esc:#128C4A;--gelo:#F5F7F6;--cinza:#A9B8B0;--cinza-2:#6F8379;
+  --amarelo:#FFC814;--vermelho:#FF5A5A;
+  --raio:18px;--sombra:0 20px 50px rgba(0,0,0,.35);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--tinta);color:var(--gelo);font-family:Inter,"Segoe UI",Arial,sans-serif;font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+img{max-width:100%;display:block}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+section{padding:72px 0}
+h1,h2,h3{line-height:1.15;margin:0 0 14px;letter-spacing:-.02em}
+h2{font-size:clamp(28px,4.4vw,42px);font-weight:800}
+h3{font-size:20px;font-weight:700}
+p{margin:0 0 14px}
+.eyebrow{display:inline-block;font-size:13px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--verde);margin-bottom:12px}
+.sub{color:var(--cinza);font-size:18px;max-width:680px}
+.verde{color:var(--verde)}
+.centro{text-align:center}
+.centro .sub{margin-left:auto;margin-right:auto}
+
+/* === BLOCO 2: BOTÕES E SELOS === */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;background:var(--verde);color:#062012;font-weight:800;font-size:17px;padding:16px 26px;border-radius:999px;text-decoration:none;border:0;font-family:inherit;cursor:pointer;transition:transform .15s,box-shadow .15s;box-shadow:0 10px 30px rgba(37,211,102,.25)}
+.btn:hover{transform:translateY(-2px);box-shadow:0 14px 36px rgba(37,211,102,.35)}
+.btn.sec{background:transparent;color:var(--gelo);border:1.5px solid var(--linha);box-shadow:none}
+.btn.sec:hover{border-color:var(--verde)}
+.selo{display:inline-flex;align-items:center;gap:8px;background:rgba(37,211,102,.1);color:var(--verde);border:1px solid rgba(37,211,102,.35);font-weight:700;font-size:14px;padding:7px 14px;border-radius:999px}
+.ponto{width:8px;height:8px;border-radius:50%;background:var(--verde);animation:pisca 1.4s infinite}
+@keyframes pisca{50%{opacity:.25}}
+
+/* === BLOCO 3: TOPO (HERO) === */
+.topo{padding:28px 0 64px;background:radial-gradient(900px 500px at 85% 0%,rgba(37,211,102,.12),transparent 60%)}
+.barra{display:flex;justify-content:space-between;align-items:center;margin-bottom:44px}
+.logo{font-weight:900;font-size:20px;letter-spacing:-.02em}
+.logo span{color:var(--verde)}
+.hero{display:grid;grid-template-columns:1.1fr .9fr;gap:48px;align-items:center}
+.hero h1{font-size:clamp(34px,5.6vw,58px);font-weight:900;margin:18px 0 18px}
+.hero .sub{font-size:19px}
+.acoes{display:flex;flex-wrap:wrap;gap:12px;margin:26px 0 12px}
+.legenda{color:var(--cinza-2);font-size:14px;margin-top:10px}
+
+/* === BLOCO 4: CELULAR COM A CONVERSA === */
+.celular{background:#0E1A16;border:1px solid var(--linha);border-radius:32px;padding:14px;box-shadow:var(--sombra);max-width:380px;margin-left:auto}
+.cel-topo{display:flex;align-items:center;gap:10px;padding:8px 10px 14px;border-bottom:1px solid var(--linha)}
+.avatar{width:36px;height:36px;border-radius:50%;background:var(--verde);color:#062012;display:grid;place-items:center;font-weight:900}
+.cel-topo b{font-size:15px}
+.cel-topo small{display:block;color:var(--verde);font-size:12px}
+.conversa{height:400px;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;gap:8px;padding:14px 6px 4px}
+.msg{max-width:84%;padding:9px 13px;border-radius:14px;font-size:14.5px;line-height:1.4;opacity:0;transform:translateY(8px);transition:all .35s}
+.msg.on{opacity:1;transform:none}
+.msg.ele{background:var(--tinta-3);align-self:flex-start;border-top-left-radius:4px}
+.msg.ia{background:#1F5F3B;align-self:flex-end;border-top-right-radius:4px}
+.msg.sistema{align-self:center;background:rgba(255,200,20,.14);color:var(--amarelo);font-weight:700;font-size:13px;border:1px solid rgba(255,200,20,.35)}
+
+/* === BLOCO 5: PROBLEMA === */
+.dor{background:var(--tinta-2)}
+.grade-2{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;margin-top:34px}
+.grade-3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:34px}
+.card{background:var(--tinta);border:1px solid var(--linha);border-radius:var(--raio);padding:24px}
+.card .ico{font-size:28px;margin-bottom:10px}
+.card p{color:var(--cinza);margin:0}
+
+/* === BLOCO 6: BENEFÍCIOS COM VALOR === */
+.benef{position:relative;background:var(--tinta-2);border:1px solid var(--linha);border-radius:var(--raio);padding:24px;display:flex;flex-direction:column}
+.benef .ico{font-size:28px;margin-bottom:10px}
+.benef p{color:var(--cinza);margin:0 0 16px;flex:1}
+.benef .valor{align-self:flex-start;font-size:14px;font-weight:800;color:var(--amarelo);background:rgba(255,200,20,.1);border:1px solid rgba(255,200,20,.3);border-radius:999px;padding:5px 12px}
+.benef .valor.incluso{color:var(--verde);background:rgba(37,211,102,.1);border-color:rgba(37,211,102,.35)}
+.chip{display:grid;grid-template-columns:auto 1fr;gap:20px;align-items:center;margin-top:18px;background:linear-gradient(135deg,rgba(37,211,102,.1),rgba(37,211,102,.02));border:1px solid rgba(37,211,102,.35);border-radius:var(--raio);padding:24px}
+.chip .ico{font-size:40px}
+.chip p{color:var(--cinza);margin:0}
+.chip small{display:block;color:var(--cinza-2);font-size:14px;margin-top:8px}
+
+/* === BLOCO 7: COMPARAÇÃO === */
+.tabela-wrap{overflow-x:auto;margin-top:30px}
+table.comp{width:100%;border-collapse:collapse;background:var(--tinta);border-radius:var(--raio);overflow:hidden;font-size:16px}
+table.comp th,table.comp td{padding:14px 16px;text-align:left;border-bottom:1px solid var(--linha);vertical-align:top}
+table.comp thead th{background:var(--tinta-3);font-size:15px}
+table.comp thead th:last-child{color:var(--verde)}
+table.comp td:first-child{color:var(--cinza);font-weight:600}
+table.comp td:nth-child(2){color:var(--cinza)}
+table.comp td:last-child{color:var(--gelo);font-weight:700}
+table.comp tr:last-child td{border-bottom:0}
+.comp-fecho{font-size:19px;margin:26px auto 0;max-width:760px;color:var(--cinza);text-align:center}
+.comp-fecho b{color:var(--gelo)}
+
+/* === BLOCO 8: OFERTA === */
+.oferta{max-width:620px;margin:34px auto 0;background:var(--tinta);border:2px solid var(--verde);box-shadow:0 0 0 6px rgba(37,211,102,.08);border-radius:24px;padding:30px}
+.oferta h3{font-size:24px;margin-bottom:4px}
+.oferta .dur{color:var(--cinza);font-size:15px;margin-bottom:16px}
+.item-preco{display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding:9px 0;border-bottom:1px dashed var(--linha);font-size:15px}
+.item-preco span{color:var(--cinza)}
+.item-preco s{color:var(--cinza-2);white-space:nowrap}
+.item-preco b{color:var(--verde);white-space:nowrap}
+.soma{display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding:16px 0 6px;font-weight:700}
+.soma s{color:var(--vermelho);font-size:20px;white-space:nowrap}
+.preco-final{text-align:center;margin:18px 0 6px}
+.preco-final small{display:block;color:var(--cinza);font-size:15px;font-weight:700}
+.preco-final b{display:block;font-size:56px;line-height:1.1;font-weight:900;color:var(--verde)}
+.preco-final span{color:var(--cinza);font-size:15px}
+.oferta .extra{color:var(--cinza-2);font-size:14px;text-align:center;margin:10px 0 20px}
+.oferta .btn{width:100%}
+.compromisso{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:26px}
+.dep-item{display:flex;gap:14px;background:var(--tinta);border:1px solid var(--linha);border-radius:var(--raio);padding:20px}
+.dep-item .ico{font-size:28px;line-height:1}
+.dep-item b{display:block;font-size:17px;margin-bottom:6px}
+.dep-item p{color:var(--cinza);margin:0;font-size:15px}
+.nota{color:var(--cinza-2);font-size:14px;margin-top:22px}
+
+/* === BLOCO 9: QUEM FAZ === */
+.quem{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:34px}
+.pessoa{background:var(--tinta-2);border:1px solid var(--linha);border-radius:var(--raio);padding:24px;text-align:center}
+.foto{width:96px;height:96px;border-radius:50%;margin:0 auto 14px;object-fit:cover;background:var(--tinta-3);display:grid;place-items:center;font-weight:900;font-size:30px;color:var(--verde);border:2px solid var(--linha)}
+.pessoa p{color:var(--cinza);font-size:15px;margin:0}
+.cred{list-style:none;padding:0;margin:14px 0 0;text-align:left;color:var(--cinza);font-size:14px}
+.cred li{padding:6px 0 6px 22px;position:relative;border-top:1px dashed var(--linha)}
+.cred li:before{content:"✓";position:absolute;left:0;color:var(--verde);font-weight:900}
+.cred b{color:var(--gelo)}
+
+/* === BLOCO 10: FORMULÁRIO === */
+.diag{background:var(--tinta-2)}
+.form{max-width:760px;margin:30px auto 0;background:var(--tinta);border:1px solid var(--linha);border-radius:24px;padding:30px}
+.campo{margin-bottom:18px}
+.campo label{display:block;font-weight:600;font-size:15px;margin-bottom:8px;color:var(--gelo)}
+.campo input:not([type=radio]){width:100%;background:var(--tinta-2);border:1.5px solid var(--linha);color:var(--gelo);border-radius:12px;padding:14px 15px;font:inherit;font-size:16px;transition:border-color .15s}
+.campo input::placeholder{color:var(--cinza-2)}
+.campo input:focus{outline:none;border-color:var(--verde);box-shadow:0 0 0 4px rgba(37,211,102,.12)}
+.campos-2{display:grid;grid-template-columns:1fr 1fr;gap:0 14px}
+.opcoes{display:grid;gap:10px}
+.opcoes.col-2{grid-template-columns:repeat(2,1fr)}
+.opcoes.col-3{grid-template-columns:repeat(3,1fr)}
+.opcoes label{margin:0;font-weight:500}
+.opcoes input{position:absolute;opacity:0;pointer-events:none}
+.opcoes span{display:flex;align-items:center;justify-content:center;text-align:center;min-height:52px;height:100%;background:var(--tinta-2);border:1.5px solid var(--linha);border-radius:12px;padding:10px 12px;font-size:15px;line-height:1.25;cursor:pointer;transition:all .15s}
+.opcoes span:hover{border-color:var(--cinza-2)}
+.opcoes input:checked+span{background:rgba(37,211,102,.12);border-color:var(--verde);color:var(--gelo);font-weight:700;box-shadow:inset 0 0 0 1px var(--verde)}
+.opcoes input:focus-visible+span{outline:2px solid var(--verde);outline-offset:2px}
+.form .btn{width:100%;margin-top:4px}
+.aviso{color:var(--cinza-2);font-size:13px;text-align:center;margin-top:12px}
+
+/* === BLOCO 11: PERGUNTAS === */
+details{background:var(--tinta-2);border:1px solid var(--linha);border-radius:14px;padding:18px 20px;margin-bottom:10px}
+summary{font-weight:700;cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:12px}
+summary::-webkit-details-marker{display:none}
+summary:after{content:"+";color:var(--verde);font-size:22px;line-height:1}
+details[open] summary:after{content:"–"}
+details p{color:var(--cinza);margin:12px 0 0}
+.faq{max-width:780px;margin:30px auto 0}
+
+/* === BLOCO 12: FINAL E RODAPÉ === */
+.final{text-align:center;padding:80px 0}
+footer{border-top:1px solid var(--linha);padding:34px 0;color:var(--cinza-2);font-size:14px;text-align:center}
+footer p{margin:0 0 8px}
+footer a{color:var(--verde);text-decoration:none;font-weight:600}
+.rod-marca{font-weight:900;font-size:20px;color:var(--gelo);margin-bottom:8px}
+.rod-marca span{color:var(--verde)}
+.rod-assina{margin-top:14px !important;font-size:13px}
+.rod-assina b{color:var(--cinza)}
+
+/* === BLOCO 13: CELULAR (RESPONSIVO) === */
+@media (max-width:860px){
+  section{padding:56px 0}
+  .hero{grid-template-columns:1fr}
+  .celular{margin:0 auto}
+  .grade-2,.grade-3,.quem,.compromisso,.campos-2{grid-template-columns:1fr}
+  .opcoes.col-3{grid-template-columns:1fr}
+}
+@media (max-width:420px){
+  .form,.oferta{padding:22px}
+  .chip{grid-template-columns:1fr;text-align:center}
+  table.comp{font-size:14px}
+  table.comp th,table.comp td{padding:11px 10px}
+  .preco-final b{font-size:48px}
+}
+</style>
+</head>
+<body>
+
+<!-- === BLOCO A: TOPO === -->
+<header class="topo">
+  <div class="wrap">
+    <div class="barra">
+      <div class="logo">Acelera <span>Aí</span></div>
+      <a class="btn sec" href="#oferta">Ver Oferta</a>
+    </div>
+    <div class="hero">
+      <div>
+        <span class="selo"><span class="ponto"></span>Automação de Atendimento Rápido</span>
+        <h1>Seu WhatsApp Vendendo 24h, <span class="verde">Sem Você Configurar Nada.</span></h1>
+        <p class="sub">Um atendente com inteligência artificial que tira dúvidas, contorna objeções e entrega pro seu vendedor só quem está pronto pra comprar. A gente implanta, opera e acompanha com&nbsp;você.</p>
+        <div class="acoes">
+          <a class="btn" href="#contratar">Quero Testar Um Mês</a>
+          <a class="btn sec" href="#recebe">O Que Eu Recebo</a>
+        </div>
+        <p class="legenda">R$ 500 por mês · Implantação feita pela gente · Cancela quando&nbsp;quiser</p>
+      </div>
+      <div class="celular" aria-hidden="true">
+        <div class="cel-topo">
+          <div class="avatar">A</div>
+          <div><b>Atendimento · Sua Empresa</b><small>online agora</small></div>
+        </div>
+        <div class="conversa" id="conversa"></div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- === BLOCO B: O PROBLEMA === -->
+<section class="dor">
+  <div class="wrap">
+    <span class="eyebrow">O problema</span>
+    <h2>Automação Que Só Responde Não&nbsp;Vende.</h2>
+    <p class="sub">A maioria das ferramentas de WhatsApp te entrega um login e um vídeo tutorial. O resto é com&nbsp;você.</p>
+    <div class="grade-2">
+      <div class="card"><div class="ico">🤖</div><h3>Robô que só responde</h3><p>Responde o óbvio ou empurra um menu de números. O cliente cansa e vai comprar em outro&nbsp;lugar.</p></div>
+      <div class="card"><div class="ico">🧩</div><h3>Você vira o técnico</h3><p>Fluxograma de blocos e setas pra montar sozinho. Quando trava, quem te atende no suporte é outro&nbsp;robô.</p></div>
+      <div class="card"><div class="ico">⚠️</div><h3>Seu número em risco</h3><p>Muita ferramenta coloca a automação no número principal da empresa. Se o WhatsApp bloquear, junto vai todo o histórico com os seus clientes. Aqui a IA trabalha num número só dela, e o seu continua&nbsp;intocado.</p></div>
+      <div class="card"><div class="ico">📄</div><h3>Um ano de contrato pra&nbsp;testar</h3><p>Plano anual: você se compromete antes de saber se funciona, e ainda pode precisar contratar alguém pra&nbsp;implantar.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- === BLOCO C: O QUE VOCÊ RECEBE (COM O VALOR DE CADA ITEM) === -->
+<section id="recebe">
+  <div class="wrap">
+    <span class="eyebrow">O que você recebe</span>
+    <h2>Um Vendedor no WhatsApp, Não Um&nbsp;Tira-Dúvidas.</h2>
+    <div class="grade-3" id="beneficios"></div>
+    <div class="chip">
+      <div class="ico">🌱</div>
+      <div><h3>Chip da sua IA</h3><p>A gente fornece o chip do número que a IA vai usar. É um chip ligado a energia limpa: além de apoiar a sustentabilidade do planeta, ele pode reduzir a sua conta de luz, em casa e na&nbsp;empresa.</p><small>O plano do chip é pago à parte.</small></div>
+    </div>
+  </div>
+</section>
+
+<!-- === BLOCO D: COMPARAÇÃO === -->
+<section class="dor">
+  <div class="wrap">
+    <span class="eyebrow">Comparação</span>
+    <h2>Parece Mais Caro. Na Conta, Sai Mais&nbsp;Barato.</h2>
+    <div class="tabela-wrap">
+      <table class="comp">
+        <thead><tr><th></th><th>Ferramentas comuns</th><th>Acelera Aí</th></tr></thead>
+        <tbody>
+          <tr><td>Quem implanta</td><td>Você, com vídeo tutorial</td><td>A gente</td></tr>
+          <tr><td>Quem opera no dia a dia</td><td>Você</td><td>A gente</td></tr>
+          <tr><td>Contrato</td><td>Anual, em&nbsp;geral</td><td>Mês a mês</td></tr>
+          <tr><td>Compromisso pra testar</td><td>Cerca de R$&nbsp;2.400 por um&nbsp;ano</td><td>R$&nbsp;500 por um&nbsp;mês</td></tr>
+          <tr><td>Suporte</td><td>Robô ou&nbsp;chamado</td><td>Pessoas, pelo&nbsp;WhatsApp</td></tr>
+          <tr><td>O que chega pro vendedor</td><td>Mensagens soltas</td><td>Cliente qualificado, com&nbsp;resumo</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="comp-fecho">Um plano de R$ 199 por mês no anual é um compromisso de R$ 2.388, antes de saber se funciona. <b>Aqui você testa um mês, com tudo feito, e&nbsp;decide.</b></p>
+  </div>
+</section>
+
+<!-- === BLOCO E: A OFERTA === -->
+<section id="oferta">
+  <div class="wrap centro">
+    <span class="eyebrow">A oferta</span>
+    <h2>Tudo Isso Por <span class="verde">R$ 500 Por&nbsp;Mês.</span></h2>
+  </div>
+  <div class="wrap">
+    <div class="oferta">
+      <h3>Automação de Atendimento Rápido</h3>
+      <div class="dur">Mês a mês · sem fidelidade</div>
+      <div id="lista-preco"></div>
+      <div class="preco-final"><small>Hoje</small><b id="preco-final">R$ 500</b><span>por mês · implantação inclusa</span></div>
+      <p class="extra">Chip da sua IA: plano próprio, pago à&nbsp;parte.</p>
+      <a class="btn" href="#contratar">Quero Testar Um Mês</a>
+    </div>
+    <div class="compromisso">
+      <div class="dep-item"><div class="ico">🤝</div><div><b>Nosso compromisso</b><p>A gente não liga a automação e some. Todo mês a gente acompanha os resultados com você, mostra quem chegou e quem ficou pronto pra comprar, e ajusta as conversas com estratégias feitas pro seu negócio. A automação fica mais eficiente a cada&nbsp;mês.</p></div></div>
+      <div class="dep-item"><div class="ico">💡</div><div><b>Por que tão barato?</b><p>Porque a gente prefere te mostrar na prática. Se o cliente chega pronto pra comprar e a venda não fecha, o relatório mostra onde ela trava, e a gente te diz o que dá pra&nbsp;melhorar.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- === BLOCO F: QUEM FAZ === -->
+<section class="dor">
+  <div class="wrap centro">
+    <span class="eyebrow">Quem faz</span>
+    <h2>Uma Empresa de Verdade, Com Gente de&nbsp;Verdade.</h2>
+    <p class="sub">Somos de Porto Alegre. Se preferir, a gente marca um&nbsp;café.</p>
+    <div class="quem">
+      <div class="pessoa"><img class="foto" src="../black-friday/img/elton.jpg" alt="Elton Longaray"><h3>Elton Longaray</h3><p>Tecnologia e inteligência artificial. Monta o atendimento inteligente que responde o seu cliente na hora, 24&nbsp;horas.</p>
+        <ul class="cred"><li>Líder da comunidade <b>Falcon Hunters</b></li><li>Desenvolvedor do <b>Falcon.app</b>, o app mais completo de organização e desenvolvimento pessoal</li><li>Aluno da <b>FIAP</b>, a maior faculdade de tecnologia do Brasil</li><li>Formado no <b>Dale Carnegie Course</b>, o maior curso de comunicação e liderança do mundo</li></ul></div>
+      <div class="pessoa"><div class="foto">T</div><h3>Taimara Marcon</h3><p>Conteúdo e anúncios. Cria a isca que traz o cliente certo.</p></div>
+      <div class="pessoa"><div class="foto">E</div><h3>Everton</h3><p>Estratégia de oferta e vendas. Define o que faz o cliente decidir.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- === BLOCO G: FORMULÁRIO → WHATSAPP === -->
+<section class="diag" id="contratar">
+  <div class="wrap centro">
+    <span class="eyebrow">Teste um mês</span>
+    <h2>Responda Em 30 Segundos e Fale Com a&nbsp;Gente.</h2>
+  </div>
+  <div class="wrap">
+    <form class="form" id="form-contratar">
+      <div class="campos-2">
+        <div class="campo"><label for="f-empresa">Nome da empresa</label><input id="f-empresa" required placeholder="Ex.: Clínica Bem Estar"></div>
+        <div class="campo"><label for="f-segmento">O que vocês vendem?</label><input id="f-segmento" required placeholder="Ex.: tratamentos estéticos"></div>
+      </div>
+      <div class="campo"><label>Quem atende o WhatsApp hoje?</label><div class="opcoes col-3">
+        <label><input type="radio" name="atende" value="eu mesmo"><span>Eu mesmo</span></label>
+        <label><input type="radio" name="atende" value="1 pessoa da equipe"><span>1 pessoa da equipe</span></label>
+        <label><input type="radio" name="atende" value="2 ou mais pessoas"><span>2 ou mais pessoas</span></label>
+      </div></div>
+      <div class="campo"><label>Tem um chip sobrando pro número da IA?</label><div class="opcoes col-2">
+        <label><input type="radio" name="chip" value="sim, tenho um chip sobrando"><span>Sim, tenho</span></label>
+        <label><input type="radio" name="chip" value="não, quero o chip de vocês"><span>Não, quero o de vocês</span></label>
+      </div></div>
+      <button class="btn" type="submit">Quero Testar Um Mês</button>
+      <p class="aviso">Abre o WhatsApp com a mensagem pronta. Nada é enviado sem você apertar enviar.</p>
+    </form>
+  </div>
+</section>
+
+<!-- === BLOCO H: PERGUNTAS FREQUENTES === -->
+<section>
+  <div class="wrap centro">
+    <span class="eyebrow">Dúvidas</span>
+    <h2>Perguntas Frequentes</h2>
+  </div>
+  <div class="wrap faq">
+    <details><summary>Preciso configurar alguma&nbsp;coisa?</summary><p>Não. Você manda seus produtos, preços, dúvidas mais comuns e o jeito de falar com o cliente. O resto é com a gente.</p></details>
+    <details><summary>Em quanto tempo fica pronto?</summary><p>Em até 5 dias úteis depois que você manda as informações da&nbsp;empresa.</p></details>
+    <details><summary>Preciso de um número novo?</summary><p>Sim, e a gente resolve. Se você tiver um chip sobrando, a gente usa ele na hora. Se não, você pega o chip com a gente.</p></details>
+    <details><summary>Meu número corre risco?</summary><p>O seu número principal nem entra na automação. A IA atende os clientes novos num número só pra ela, e os seus clientes antigos continuam no número de sempre. Ela só responde quem chama, sem disparo em massa, e todo contato e conversa fica registrado com a gente: se algo acontecer com o número da IA, você não perde nenhum cliente nem&nbsp;conversa.</p></details>
+    <details><summary>Tem limite de mensagens?</summary><p>Até 3 mil mensagens enviadas pela IA por mês.</p></details>
+    <details><summary>E se o cliente quiser falar com uma pessoa?</summary><p>A IA passa a conversa pra sua equipe na hora e para de responder só naquele&nbsp;contato.</p></details>
+    <details><summary>Tem fidelidade?</summary><p>Não. É mês a mês. Se não fizer sentido, você cancela.</p></details>
+    <details><summary>Vocês garantem vendas?</summary><p>Não. A venda depende da sua oferta e de quem atende. O que a gente garante é o cliente chegando qualificado e o acompanhamento todo mês pra melhorar o resultado.</p></details>
+  </div>
+</section>
+
+<!-- === BLOCO I: CHAMADA FINAL E RODAPÉ === -->
+<section class="final dor">
+  <div class="wrap">
+    <h2>Teste Um Mês Com Tudo <span class="verde">Feito Pela&nbsp;Gente.</span></h2>
+    <p class="sub" style="margin:0 auto 26px">R$ 500 por mês, sem fidelidade.</p>
+    <a class="btn" href="#contratar">Quero Testar Um Mês</a>
+  </div>
+</section>
+<footer><div class="wrap">
+  <div class="rod-marca">Acelera <span>Aí</span></div>
+  <p>Consultoria de planejamento estratégico e aceleradora de vendas · Porto Alegre/RS</p>
+  <p><a href="../privacidade.html">Política de privacidade</a></p>
+  <p class="rod-assina">Página desenvolvida por <b>Elton Longaray</b></p>
+</div></footer>
+
+<script>
+// === BLOCO 1: CONFIGURAÇÃO (editar aqui) ===
+const CONFIG = {
+  whatsapp: "5551982276577",
+  preco: 500, // por mês, sem fidelidade
+  implantacao: 1200, // valor "cheio" da implantação, que sai de graça
+  // Benefícios com o valor de cada um (somados e riscados na oferta). valor: null = incluído
+  beneficios: [
+    { ico: "🎯", nome: "Atendente vendedor", texto: "Tira a dúvida, contorna a objeção com base no seu catálogo e conduz pra venda, pro orçamento ou pro agendamento.", valor: 600 },
+    { ico: "🔎", nome: "Qualificação do cliente", texto: "Faz as perguntas que separam o curioso do comprador. Seu vendedor recebe o resumo: o que quer, orçamento e prazo.", valor: 300 },
+    { ico: "📈", nome: "Acompanhamento e otimização", texto: "A gente acompanha os resultados da automação com você e ajusta as conversas com estratégias feitas pro seu negócio, pra vender cada vez mais.", valor: 500 },
+    { ico: "💬", nome: "Conversa de gente", texto: "Entende áudio, responde em mensagens curtas e digita no ritmo de uma pessoa. Nada de textão de robô.", valor: 250 },
+    { ico: "📅", nome: "Agenda automática", texto: "Marca o horário direto no seu Google Agenda.", valor: 150 },
+    { ico: "🙋", nome: "Passa pro humano na hora certa", texto: "Se o cliente pede uma pessoa, a IA pausa só naquela conversa e avisa sua equipe. Respeita o seu horário de atendimento.", valor: 250 },
+    { ico: "☁️", nome: "No ar 24h, 7 dias", texto: "Roda na nuvem. Não depende de computador ligado nem de aba aberta.", valor: 200 },
+    { ico: "📊", nome: "Relatório de qualificação", texto: "Quem chegou, o que perguntou e quem ficou pronto pra comprar.", valor: 300 },
+    { ico: "👥", nome: "Suporte com gente de verdade", texto: "Você fala com a Taimara ou com o Everton, não com robô.", valor: null }
+  ]
+};
+
+// === BLOCO 2: UTILITÁRIOS ===
+const brl = v => v.toLocaleString("pt-BR", { style: "currency", currency: "BRL", maximumFractionDigits: 0 });
+const $ = id => document.getElementById(id);
+const nb = s => s.split(" ").length > 2 ? s.replace(/ (\S+)$/, "\u00a0$1") : s; // última palavra nunca sozinha na linha
+
+// === BLOCO 3: CARTÕES DOS BENEFÍCIOS + LISTA RISCADA DA OFERTA ===
+$("beneficios").innerHTML = CONFIG.beneficios.map(b => `
+  <div class="benef"><div class="ico">${b.ico}</div><h3>${nb(b.nome)}</h3><p>${nb(b.texto)}</p>
+    <span class="valor${b.valor ? "" : " incluso"}">${b.valor ? `Vale ${brl(b.valor)}/mês` : "Incluído"}</span></div>`).join("") + `
+  <div class="benef"><div class="ico">🛠️</div><h3>Implantação feita pela&nbsp;gente</h3><p>Você manda produtos, preços e jeito de falar. A gente monta, testa e coloca no ar.</p>
+    <span class="valor">Vale ${brl(CONFIG.implantacao)}</span></div>`;
+
+const somaMes = CONFIG.beneficios.reduce((t, b) => t + (b.valor || 0), 0);
+$("lista-preco").innerHTML = CONFIG.beneficios.map(b => `
+  <div class="item-preco"><span>${nb(b.nome)}</span>${b.valor ? `<s>${brl(b.valor)}/mês</s>` : "<b>incluído</b>"}</div>`).join("") + `
+  <div class="item-preco"><span>Implantação feita pela&nbsp;gente</span><s>${brl(CONFIG.implantacao)}</s></div>
+  <div class="soma"><span>Tudo somado</span><s>${brl(somaMes)}/mês</s></div>`;
+$("preco-final").textContent = brl(CONFIG.preco);
+
+// === BLOCO 4: CONVERSA ANIMADA ===
+const roteiro = [
+  ["ele", "Oi! Vocês fazem limpeza de pele? Quanto custa?"],
+  ["ia", "Oi! Fazemos sim 😊 A limpeza completa sai R$ 180. É pra tirar cravos ou mais pra manutenção?"],
+  ["ele", "Tenho bastante cravo no nariz. Mas tá meio caro..."],
+  ["ia", "Entendo! Ela já inclui extração e máscara calmante, e dá pra parcelar em 3x. Quer que eu veja um horário essa semana?"],
+  ["ele", "Quero! Pode ser quinta à tarde?"],
+  ["ia", "Quinta às 15h está livre. Já deixei reservado pra você ✅"],
+  ["sistema", "📅 Marcado no Google Agenda · resumo enviado pra equipe"]
+];
+function animarConversa() {
+  const box = $("conversa"); box.innerHTML = "";
+  roteiro.forEach(([quem, texto], i) => {
+    setTimeout(() => {
+      const el = document.createElement("div");
+      el.className = "msg " + quem; el.textContent = texto; box.appendChild(el);
+      requestAnimationFrame(() => el.classList.add("on"));
+    }, 900 + i * 1600);
+  });
+  setTimeout(animarConversa, 900 + roteiro.length * 1600 + 4000);
+}
+animarConversa();
+
+// === BLOCO 5: FORMULÁRIO → WHATSAPP ===
+$("form-contratar").addEventListener("submit", e => {
+  e.preventDefault();
+  const v = n => (document.querySelector(`input[name="${n}"]:checked`) || {}).value || "não informado";
+  const linhas = [
+    "Oi! Quero testar um mês da Automação de Atendimento Rápido.",
+    "",
+    `Empresa: ${$("f-empresa").value.trim()}`,
+    `Vendemos: ${$("f-segmento").value.trim()}`,
+    `Quem atende o WhatsApp hoje: ${v("atende")}`,
+    `Chip: ${v("chip")}`
+  ];
+  window.open(`https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(linhas.join("\n"))}`, "_blank");
+});
+</script>
+</body>
+</html>
