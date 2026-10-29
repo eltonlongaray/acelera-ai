@@ -71,11 +71,27 @@ main{padding-bottom:60px}
 .aviso{color:var(--cinza-2);font-size:13px;text-align:center;margin:12px 0 0}
 footer{border-top:1px solid var(--linha);padding:26px 0;color:var(--cinza-2);font-size:14px;text-align:center}
 
+
+/* === BLOCO 4B: PIX === */
+.pix{display:none;margin-top:22px;border-top:1px solid var(--linha);padding-top:22px}
+.pix.on{display:block}
+.pix h3{margin:0 0 6px;font-size:21px}
+.pix > p{color:var(--cinza);margin:0 0 16px}
+.pix-caixa{display:grid;grid-template-columns:auto minmax(0,1fr);gap:20px;align-items:center;background:var(--tinta);border:1.5px solid var(--linha);border-radius:16px;padding:18px}
+#qr{background:#fff;padding:10px;border-radius:10px;line-height:0}
+#qr img,#qr canvas{width:170px;height:170px}
+.pix-valor{font-size:30px;font-weight:900;color:var(--verde);line-height:1.1}
+.pix-info{color:var(--cinza);font-size:14px;margin:4px 0 12px}
+.copia{width:100%;background:var(--tinta-2);border:1.5px solid var(--linha);color:var(--cinza);border-radius:10px;padding:10px 12px;font:inherit;font-size:12px;resize:none;height:64px}
+.btn.sec{background:transparent;color:var(--gelo);border:1.5px solid var(--verde);box-shadow:none;margin-top:10px;padding:12px 20px;font-size:15px}
+.passos-pix{margin:16px 0 0;padding-left:22px;color:var(--cinza);font-size:15px}
+.passos-pix li{margin-bottom:6px}
 /* === BLOCO 5: CELULAR === */
 @media (max-width:640px){
   .duas,.campos-2{grid-template-columns:minmax(0,1fr)}
   .sec{padding:18px}
   .aceite{padding:22px}
+  .pix-caixa{grid-template-columns:minmax(0,1fr);justify-items:center;text-align:center}
 }
 </style>
 </head>
@@ -172,6 +188,24 @@ footer{border-top:1px solid var(--linha);padding:26px 0;color:var(--cinza-2);fon
   </div>
   <div class="campo"><label for="f-doc">CPF ou CNPJ <span style="color:var(--cinza-2);font-weight:400;font-size:13px">opcional</span></label><input id="f-doc" inputmode="numeric" placeholder="Só números"></div>
   <label class="check"><input type="checkbox" id="f-ok"><span>Li o documento de entrega e <b>concordo</b> com o que está escrito.</span></label>
+  <div class="pix" id="pix">
+    <h3>Pague a primeira recarga pelo Pix</h3>
+    <p>Com o pagamento confirmado, a gente começa a implantação.</p>
+    <div class="pix-caixa">
+      <div id="qr"></div>
+      <div>
+        <div class="pix-valor" id="pix-valor"></div>
+        <div class="pix-info" id="pix-info"></div>
+        <textarea class="copia" id="pix-copia" readonly hidden></textarea>
+        <button class="btn sec" type="button" id="btn-copia">Copiar código Pix</button>
+      </div>
+    </div>
+    <ol class="passos-pix">
+      <li>Abra o app do seu banco, escolha <b>Pix → Ler QR Code</b> ou <b>Pix Copia e Cola</b>.</li>
+      <li>Confira o valor e o nome do recebedor e pague.</li>
+      <li>Toque em <b>Confirmar pelo WhatsApp</b> aqui embaixo e mande o comprovante na conversa.</li>
+    </ol>
+  </div>
   <button class="btn" type="submit" id="btn-ok" disabled>Confirmar pelo WhatsApp</button>
   <p class="aviso">Abre o WhatsApp com a confirmação pronta. Nada é enviado sem você apertar enviar.</p>
   <div class="links">
@@ -184,9 +218,16 @@ footer{border-top:1px solid var(--linha);padding:26px 0;color:var(--cinza-2);fon
 
 <footer><div class="wrap">AltasVendas AI · Consultoria de planejamento estratégico e aceleradora de vendas · Porto Alegre/RS</div></footer>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <script>
 // === BLOCO 1: CONFIGURAÇÃO ===
-const CONFIG = { whatsapp: "5551982276577", versao: "29/10/2026", recarga: "R$ 500 (Super Oferta Black Friday)" };
+const CONFIG = {
+  whatsapp: "5551982276577",
+  versao: "29/10/2026",
+  recarga: "R$ 500 (Super Oferta Black Friday)",
+  // Pix: preencher a chave pra liberar o QR Code. Sem chave, o bloco do Pix não aparece.
+  pix: { chave: "+5551982276577", nome: "ELTON DE OLIVEIRA LONGARAY", cidade: "PORTO ALEGRE", valor: 500.00, id: "RECARGA1" }
+};
 
 // === BLOCO 2: UTILITÁRIOS ===
 const $ = id => document.getElementById(id);
@@ -196,8 +237,43 @@ const zap = msg => window.open(`https://wa.me/${CONFIG.whatsapp}?text=${encodeUR
 const qs = new URLSearchParams(location.search);
 ["nome", "empresa"].forEach(k => { if (qs.get(k)) $("f-" + k).value = qs.get(k); });
 
-// === BLOCO 4: SÓ LIBERA O BOTÃO COM O "CONCORDO" MARCADO ===
-$("f-ok").addEventListener("change", e => { $("btn-ok").disabled = !e.target.checked; });
+// === BLOCO 4: CÓDIGO PIX (Copia e Cola, padrão do Banco Central) ===
+const campo = (id, v) => id + String(v.length).padStart(2, "0") + v;
+const semAcento = t => t.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toUpperCase();
+function crc16(t) {
+  let c = 0xFFFF;
+  for (let i = 0; i < t.length; i++) {
+    c ^= t.charCodeAt(i) << 8;
+    for (let j = 0; j < 8; j++) c = c & 0x8000 ? (c << 1) ^ 0x1021 : c << 1;
+  }
+  return (c & 0xFFFF).toString(16).toUpperCase().padStart(4, "0");
+}
+function codigoPix({ chave, nome, cidade, valor, id }) {
+  const corpo = campo("00", "01") +
+    campo("26", campo("00", "br.gov.bcb.pix") + campo("01", chave)) +
+    campo("52", "0000") + campo("53", "986") + campo("54", valor.toFixed(2)) +
+    campo("58", "BR") + campo("59", semAcento(nome).slice(0, 25)) + campo("60", semAcento(cidade).slice(0, 15)) +
+    campo("62", campo("05", id)) + "6304";
+  return corpo + crc16(corpo);
+}
+const temPix = !!CONFIG.pix.chave;
+if (temPix) {
+  const cod = codigoPix(CONFIG.pix);
+  $("pix-valor").textContent = CONFIG.pix.valor.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
+  $("pix-info").textContent = "Recebedor: " + CONFIG.pix.nome;
+  $("pix-copia").value = cod;
+  if (window.QRCode) new QRCode($("qr"), { text: cod, width: 170, height: 170, correctLevel: QRCode.CorrectLevel.M });
+  $("btn-copia").addEventListener("click", async () => {
+    try { await navigator.clipboard.writeText(cod); } catch (_) { const t = $("pix-copia"); t.hidden = false; t.select(); document.execCommand("copy"); t.hidden = true; }
+    $("btn-copia").textContent = "Código copiado ✓";
+  });
+}
+
+// === BLOCO 4B: SÓ LIBERA O BOTÃO (E O PIX) COM O "CONCORDO" MARCADO ===
+$("f-ok").addEventListener("change", e => {
+  $("btn-ok").disabled = !e.target.checked;
+  if (temPix) $("pix").classList.toggle("on", e.target.checked);
+});
 
 // === BLOCO 5: ACEITE → WHATSAPP ===
 $("form-aceite").addEventListener("submit", e => {
@@ -215,7 +291,8 @@ $("form-aceite").addEventListener("submit", e => {
     `Recarga mensal: ${CONFIG.recarga}`,
     `Versão do documento: ${CONFIG.versao}`,
     `Confirmado em: ${agora}`,
-    `Documento: ${location.origin}${location.pathname}`
+    `Documento: ${location.origin}${location.pathname}`,
+    ...(temPix ? ["", "Fiz o Pix da primeira recarga e envio o comprovante aqui."] : [])
   ].join("\n"));
 });
 $("duvida").addEventListener("click", e => { e.preventDefault(); zap("Oi! Li o documento de entrega e ainda tenho dúvidas."); });
